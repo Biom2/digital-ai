@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital & AI Strategy — Month 1 Review | Masdar UK</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --ink: #1A1916;
+    --muted: #7A7870;
+    --faint: #F0EEE8;
+    --border: #E2E0D8;
+
+    --blue-dark: #4668b3;
+    --blue-medium: #2A406E;
+    --blue-light: #3D5A99;
+
+    --accent: var(--blue-dark);
+    --accent2: #2E7FCF;
+    --accent3: #6B5FD4;
+    --accent4: #D4860A;
+    --accent5: #B84C7A;
+    --accent6: #C4440E;
+    --red: #D44;
+    --green: #1D9E75;
+
+    /* Gantt colours */
+    --c-foundations: #1D9E75;
+    --c-bess:        #2E7FCF;
+    --c-finance:     #D4860A;
+    --c-ai:          #6B5FD4;
+    --c-governance:  #B84C7A;
+    --c-commercial:  #C4440E;
+    --c-enablement:  #5F5E5A;
+    --c-specialist:  #1A1916;
+    --c-resource:    #888780;
+    --col-w: 68px;
+    --label-w: 290px;
+    --row-h: 28px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,247,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-brand { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    font-size: 12px; color: var(--muted); text-decoration: none;
+    padding: 6px 14px; border-radius: 6px; transition: all .15s;
+    font-weight: 500; letter-spacing: -.01em;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--faint); }
+  .nav-links a.active { color: var(--ink); background: var(--faint); }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 40px 60px; max-width: 1100px; margin: 0 auto; }
+  section:first-of-type { padding-top: 120px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 85vh; display: flex; flex-direction: column; justify-content: center;
+    max-width: 1100px; margin: 0 auto; padding: 120px 40px 80px;
+  }
+  .hero-overline {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: .12em; margin-bottom: 20px;
+    opacity: 0; animation: fadeUp .6s ease forwards;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(38px, 5vw, 58px); font-weight: 400; line-height: 1.12;
+    letter-spacing: -.03em; max-width: 780px;
+    opacity: 0; animation: fadeUp .6s ease .1s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); max-width: 560px; margin-top: 24px;
+    font-weight: 300; line-height: 1.7;
+    opacity: 0; animation: fadeUp .6s ease .2s forwards;
+  }
+  .hero-meta {
+    display: flex; gap: 32px; margin-top: 48px;
+    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
+    opacity: 0; animation: fadeUp .6s ease .3s forwards;
+  }
+  .hero-meta span { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta .val { font-size: 26px; font-weight: 600; color: var(--ink); font-family: 'DM Sans', sans-serif; letter-spacing: -.02em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION HEADERS ── */
+  .s-head {
+    border-top: 2px solid var(--ink); padding-top: 16px; margin-bottom: 40px;
+  }
+  .s-head .s-num {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
+  }
+  .s-head h2 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 40px); font-weight: 400; letter-spacing: -.02em;
+    line-height: 1.15;
+  }
+  .s-head h2 em { font-style: italic; color: var(--accent); }
+
+  /* ── SIGNAL CARDS ── */
+  .signals { display: grid; grid-template-columns: 1fr; gap: 2px; margin-bottom: 40px; }
+  .signal {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 28px 32px; display: grid; grid-template-columns: 48px 1fr;
+    gap: 20px; align-items: start; transition: background .15s;
+  }
+  .signal:first-child { border-radius: 12px 12px 0 0; }
+  .signal:last-child { border-radius: 0 0 12px 12px; }
+  .signal:hover { background: var(--faint); }
+  .signal-num {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 32px; color: var(--accent); line-height: 1;
+  }
+  .signal h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; letter-spacing: -.01em; }
+  .signal p { font-size: 14px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+  .signal .quote {
+    margin-top: 10px; font-size: 12px; font-style: italic; color: var(--accent);
+    border-left: 2px solid var(--accent); padding-left: 10px;
+  }
+
+  /* ── KPI STRIP ── */
+  .kpi-strip {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px; margin-bottom: 48px;
+  }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 18px; text-align: center;
+  }
+  .kpi-card .kv {
+    font-size: 32px; font-weight: 700; letter-spacing: -.03em; line-height: 1;
+  }
+  .kpi-card .kl {
+    font-size: 11px; color: var(--muted); margin-top: 6px;
+    text-transform: uppercase; letter-spacing: .06em; font-weight: 500;
+  }
+  .kpi-card .ksub {
+    font-size: 11px; color: var(--muted); margin-top: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+  .kpi-card.accent .kv { color: var(--accent); }
+  .kpi-card.accent2 .kv { color: var(--accent2); }
+  .kpi-card.accent3 .kv { color: var(--accent3); }
+  .kpi-card.accent4 .kv { color: var(--accent4); }
+
+  /* ── DELIVERABLES TABLE ── */
+  .del-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; margin-bottom: 40px;
+  }
+  .del-table th {
+    background: var(--faint); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .del-table td {
+    padding: 10px 16px; border-bottom: 1px solid var(--faint); vertical-align: top;
+  }
+  .del-table tr:last-child td { border-bottom: none; }
+  .del-table tr:hover td { background: #FAFAF7; }
+  .status-done { color: var(--green); font-weight: 600; font-size: 12px; }
+  .status-live { color: var(--accent2); font-weight: 600; font-size: 12px; }
+  .status-prog { color: var(--accent4); font-weight: 600; font-size: 12px; }
+
+  /* ── MATURITY BARS ── */
+  .maturity-grid {
+    display: grid; grid-template-columns: 1fr; gap: 6px;
+    margin-bottom: 40px;
+  }
+  .mat-row {
+    display: grid; grid-template-columns: 180px 1fr 40px; gap: 12px;
+    align-items: center; padding: 8px 0;
+  }
+  .mat-label { font-size: 13px; font-weight: 500; }
+  .mat-bar-bg {
+    height: 20px; background: var(--faint); border-radius: 4px; overflow: hidden;
+    position: relative;
+  }
+  .mat-bar {
+    height: 100%; border-radius: 4px; transition: width .8s ease;
+  }
+  .mat-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); text-align: right; }
+
+  /* ── ROADMAP SECTION ── */
+  .roadmap-outer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  /* Scenario selector header */
+  .sc-selector {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--faint);
+  }
+  .sc-btn {
+    flex: 1;
+    padding: 20px 24px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    text-align: left;
+    transition: all .15s;
+    border-right: 1px solid var(--border);
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .sc-btn:last-child { border-right: none; }
+  .sc-btn:hover { background: rgba(255,255,255,.5); }
+  .sc-btn.active { background: var(--ink); color: var(--bg); }
+  .sc-btn .sc-name { font-size: 14px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 4px; }
+  .sc-btn .sc-meta { font-size: 11px; opacity: .6; font-family: 'DM Mono', monospace; }
+  .sc-btn.recommended::after {
+    content: '★ RECOMMENDED';
+    position: absolute; top: -1px; right: 12px;
+    background: var(--accent); color: white; font-size: 9px; font-weight: 700;
+    padding: 3px 8px; border-radius: 0 0 6px 6px;
+    letter-spacing: .06em; font-family: 'DM Mono', monospace;
+  }
+  .sc-btn.active.recommended::after { background: var(--accent); }
+
+  /* Scenario body */
+  .sc-body { padding: 28px 32px; display: none; }
+  .sc-body.active { display: block; }
+
+  .sc-desc-row {
+    display: grid; grid-template-columns: 1fr auto; gap: 16px;
+    align-items: start; margin-bottom: 20px;
+  }
+  .sc-desc-text {
+    font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300;
+    border-left: 2px solid var(--border); padding-left: 14px; max-width: 620px;
+  }
+  .sc-kpis { display: flex; gap: 10px; flex-shrink: 0; }
+  .sc-kpi {
+    background: var(--faint); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; text-align: right; min-width: 78px;
+  }
+  .sc-kpi .kl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+  .sc-kpi .kv { font-size: 19px; font-weight: 600; letter-spacing: -.02em; line-height: 1; }
+  .sc-kpi .ks { font-size: 10px; color: var(--muted); margin-top: 2px; font-family: 'DM Mono', monospace; }
+  .sc-kpi.budget .kv { color: var(--green); }
+
+  /* Budget toggle inside scenario */
+  .budget-toggle-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--muted); cursor: pointer; user-select: none;
+    margin-bottom: 10px; padding: 8px 0;
+    border-top: 1px solid var(--border);
+  }
+  .budget-toggle-row:hover { color: var(--ink); }
+  .chev-inline { display: inline-block; transition: transform .2s; font-style: normal; font-size: 11px; }
+  .chev-inline.open { transform: rotate(90deg); }
+  .budget-detail { display: none; margin-bottom: 16px; }
+  .budget-detail.open { display: block; }
+
+  .budget-tbl {
+    width: 100%; border-collapse: collapse; font-size: 12px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .budget-tbl th {
+    background: var(--faint); font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--muted); padding: 8px 14px;
+    text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .budget-tbl th:not(:first-child) { text-align: right; }
+  .budget-tbl td { padding: 7px 14px; border-bottom: 1px solid var(--faint); vertical-align: middle; }
+  .budget-tbl td:not(:first-child) { text-align: right; font-family: 'DM Mono', monospace; font-size: 11px; }
+  .budget-tbl tr:last-child td { border-bottom: none; font-weight: 600; background: var(--faint); }
+  .budget-tbl tr:last-child td:not(:first-child) { color: var(--green); }
+  .budget-tbl .na { color: var(--muted); font-style: italic; }
+  .budget-note { font-size: 11px; color: var(--muted); margin-top: 8px; font-style: italic; line-height: 1.5; }
+
+  /* Gantt table */
+  .gantt-wrap {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    overflow-x: auto;
+  }
+  .gantt-tbl { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 700px; }
+  .gantt-tbl col.lc { width: var(--label-w); }
+  .gantt-tbl col.mc { width: var(--col-w); }
+  .gantt-tbl thead th {
+    padding: 10px 0; font-size: 11px; font-weight: 500; color: var(--muted);
+    text-align: center; border-bottom: 1px solid var(--border);
+    background: var(--faint); font-family: 'DM Mono', monospace; letter-spacing: .04em;
+  }
+  .gantt-tbl thead th:first-child {
+    text-align: left; padding-left: 18px;
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .gantt-tbl tr.gsec td {
+    background: var(--faint); font-size: 10px; font-weight: 600;
+    color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+    padding: 8px 0 8px 18px;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .gantt-tbl tr.gsec.specialist td { background: #ECEAE4; color: var(--ink); border-top: 2px solid var(--ink); }
+  .gantt-tbl tr.gsec.resourcing td { background: #F5F3EE; color: var(--ink); border-top: 2px solid var(--c-resource); }
+  .gantt-tbl tr.gitem td { height: var(--row-h); border-bottom: 1px solid var(--faint); vertical-align: middle; }
+  .gantt-tbl tr.gitem:last-child td { border-bottom: none; }
+  .gantt-tbl tr.gitem:hover td { background: #FAFAF7; cursor: default; }
+  .gantt-tbl td.lcell {
+    padding: 0 12px 0 18px; font-size: 12px; color: var(--ink);
+    font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .gantt-tbl td.lcell .gid { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-right: 6px; }
+  .gantt-tbl td.lcell .ind { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; margin-left: 6px; text-transform: uppercase; letter-spacing: .04em; }
+  .gantt-tbl td.lcell .hq  { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--accent6); border: 1px solid var(--accent6); border-radius: 3px; padding: 1px 5px; margin-left: 6px; text-transform: uppercase; letter-spacing: .04em; opacity: .8; }
+  .gantt-tbl td.gcell { padding: 4px 3px; vertical-align: middle; }
+  .g-bar { height: 16px; width: 100%; display: block; opacity: .85; }
+  .g-left  { border-radius: 4px 0 0 4px; }
+  .g-mid   { border-radius: 0; }
+  .g-right { border-radius: 0 4px 4px 0; }
+  .g-solo  { border-radius: 4px; }
+
+  .disclaimer {
+    margin-top: 16px; padding: 10px 14px; background: var(--faint);
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 11px; color: var(--muted); line-height: 1.6; font-style: italic;
+  }
+  .disclaimer strong { font-style: normal; font-weight: 500; color: var(--ink); }
+
+  .gantt-legend {
+    display: flex; flex-wrap: wrap; gap: 6px 20px;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+  .leg-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── ASKS / DECISIONS ── */
+  .ask-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .ask-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 24px; border-left: 4px solid var(--accent);
+  }
+  .ask-card.urgent { border-left-color: var(--red); }
+  .ask-card.info { border-left-color: var(--accent2); }
+  .ask-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .ask-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .ask-card .ask-meta {
+    margin-top: 10px; font-size: 11px; font-family: 'DM Mono', monospace;
+    color: var(--muted); display: flex; gap: 16px;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .big-quote {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(22px, 3vw, 32px); font-style: italic;
+    line-height: 1.4; color: var(--ink); max-width: 700px;
+    margin: 48px 0; padding-left: 24px;
+    border-left: 3px solid var(--accent);
+  }
+  .big-quote cite {
+    display: block; font-size: 14px; font-style: normal;
+    font-family: 'DM Sans', sans-serif; color: var(--muted);
+    margin-top: 12px; font-weight: 400;
+  }
+
+  /* ── PROSE ── */
+  .prose { max-width: 680px; }
+  .prose p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; font-weight: 300; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .footer {
+    max-width: 1100px; margin: 0 auto; padding: 40px 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-left { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; line-height: 1.8; }
+  .footer-right { font-size: 11px; color: var(--muted); }
+
+  /* ── COLLAPSIBLE ANNEXES ── */
+  .annex-toggle {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; font-size: 14px; font-weight: 600;
+    color: var(--ink); padding: 16px 0; border-top: 1px solid var(--border);
+    user-select: none;
+  }
+  .annex-toggle:hover { color: var(--accent); }
+  .annex-toggle .chev { transition: transform .2s; font-style: normal; font-size: 12px; }
+  .annex-toggle .chev.open { transform: rotate(90deg); }
+  .annex-body { display: none; padding-bottom: 32px; }
+  .annex-body.open { display: block; }
+
+  /* ── INTERVIEW TABLE ── */
+  .interview-table {
+    width: 100%; border-collapse: collapse; font-size: 12px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .interview-table th {
+    background: var(--faint); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .interview-table td {
+    padding: 8px 12px; border-bottom: 1px solid var(--faint); vertical-align: top; line-height: 1.5;
+  }
+  .interview-table tr:last-child td { border-bottom: none; }
+
+  /* ── TOOLTIP ── */
+  #gantt-tooltip {
+    position: fixed; background: var(--ink); color: var(--bg);
+    border-radius: 8px; padding: 10px 14px; font-size: 11px;
+    max-width: 280px; line-height: 1.55; z-index: 9999;
+    pointer-events: none; display: none; font-family: 'DM Sans', sans-serif;
+  }
+  #gantt-tooltip strong { display: block; font-weight: 600; font-size: 12px; margin-bottom: 4px; }
+  #gantt-tooltip .tt-note { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.2); font-size: 10px; opacity: .75; font-style: italic; }
+
+  /* ── PRINT ── */
+  @media print {
+    .nav { display: none; }
+    section { padding: 40px 20px; }
+    .hero { min-height: auto; padding: 60px 20px 40px; }
+    .signal, .kpi-card, .ask-card, .sc-body { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-brand">MASDAR UK · DIGITAL & AI</div>
+  <div class="nav-links">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#signals">Signals</a>
+    <a href="#delivered">Delivered</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#asks">Next Steps</a>
+    <a href="#annexes">Annexes</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="overview">
+  <div class="hero-overline">Month 1 Review · March 2026</div>
+  <h1>Digital & AI Strategy:<br>the UK is <em>ready to accelerate</em></h1>
+  <p class="hero-sub">
+    One month in. 16 stakeholder interviews across every function. 
+    92 use cases identified. A data platform already more mature than most teams realise. 
+    This is where we stand — and where we go next.
+  </p>
+  <div class="hero-meta">
+    <span><div class="val">16</div>interviews</span>
+    <span><div class="val">11</div>pillars covered</span>
+    <span><div class="val">92</div>use cases</span>
+    <span><div class="val">8</div>deliverables</span>
+  </div>
+</div>
+
+<!-- SECTION 1: SIGNALS -->
+<section id="signals">
+  <div class="s-head">
+    <div class="s-num">01 · What we heard</div>
+    <h2>Five signals emerged <em>independently</em>,<br>across every function</h2>
+  </div>
+
+  <div class="prose" style="margin-bottom: 32px;">
+    <p>No prompting. No leading questions. The same pain points surfaced in conversation after conversation — from Asset Management to Legal, from Finance to BESS Delivery. That convergence is the strongest possible signal that these are <strong>systemic issues, not individual complaints</strong>.</p>
+  </div>
+
+  <div class="signals">
+    <div class="signal">
+      <div class="signal-num">1</div>
+      <div>
+        <h3>Manual reporting is a universal pain point</h3>
+        <p>Every single team assembles monthly reports by hand. No shared data layer, no automation, no single source of truth. Asset Management, BESS Delivery, Internal Audit, Finance — the same root cause everywhere.</p>
+        <div class="quote">Stephen (VP BESS Delivery): his team loses one full Monday per person per month assembling reports.</div>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">2</div>
+      <div>
+        <h3>MasdarMind is more mature than most teams realise</h3>
+        <p>Five people from five different functions independently named MasdarMind as the right platform — without coordination. Pouyan has anomaly detection in production. Tim has built the Medallion architecture. The risk is not starting from zero. The risk is that these assets stay invisible and ungoverned.</p>
+        <div class="quote">Lars (Commercial): endorsed MasdarMind as a "global lighthouse project".</div>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">3</div>
+      <div>
+        <h3>BI governance window is closing</h3>
+        <p>Simon is building Power BI dashboards independently. Pouyan wants Databricks Apps. Without a standard set now, every team will have its own disconnected tools within 6 months. Sahil flagged this risk explicitly before it was even mentioned.</p>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">4</div>
+      <div>
+        <h3>Core workflows run on email and Excel, not systems</h3>
+        <p>Approval chains, contract routing, employee onboarding, payment authorisations — none are digitised. Every workflow relies on someone manually identifying the right approvers and tracking progress in a spreadsheet. As the portfolio grows, operational risk grows proportionally.</p>
+        <div class="quote">Simon (FP&A): a £20M cash request takes half a day of manual processing.</div>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">5</div>
+      <div>
+        <h3>Business-facing digital tools are the untapped opportunity</h3>
+        <p>A significant gap exists between the digital tools Masdar UK has today and what the business needs: a project management platform for BESS construction, asset performance tools for offshore wind, predictive maintenance with JV partners. The gap is real, identified, and addressable.</p>
+        <div class="quote">Lars: BESS dispatch optimisation is "the biggest AI lever" — indicative ROI: 2.7–10.9× over 5 years.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: DELIVERED -->
+<section id="delivered">
+  <div class="s-head">
+    <div class="s-num">02 · What we delivered</div>
+    <h2>Phase 1 is <em>complete</em></h2>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi-card accent">
+      <div class="kv">16</div>
+      <div class="kl">Interviews</div>
+      <div class="ksub">all pillars</div>
+    </div>
+    <div class="kpi-card accent2">
+      <div class="kv">92</div>
+      <div class="kl">Use Cases</div>
+      <div class="ksub">66 internal + 26 McKinsey</div>
+    </div>
+    <div class="kpi-card accent3">
+      <div class="kv">27</div>
+      <div class="kl">Scored</div>
+      <div class="ksub">impact × feasibility</div>
+    </div>
+    <div class="kpi-card accent4">
+      <div class="kv">8</div>
+      <div class="kl">Deliverables</div>
+      <div class="ksub">complete</div>
+    </div>
+  </div>
+
+  <table class="del-table">
+    <thead>
+      <tr><th>Deliverable</th><th>Status</th><th>Detail</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Stakeholder Listening Tour</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>16 interviews across all 11 functional pillars. Transcribed, synthesised, and patterns documented.</td>
+      </tr>
+      <tr>
+        <td><strong>Tool & Systems Landscape Map</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>30+ tools mapped across 11 pillars with gap analysis and integration opportunities.</td>
+      </tr>
+      <tr>
+        <td><strong>Use Case Bank v8</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>92 use cases. 66 from interviews (named owners, pain points, solution outlines) + 26 McKinsey/Endeavour.</td>
+      </tr>
+      <tr>
+        <td><strong>Use Case Scoring & Prioritisation</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>Top 27 scored using Impact/Feasibility framework. 5 waves sequenced. McKinsey-style matrix.</td>
+      </tr>
+      <tr>
+        <td><strong>Digital Maturity Assessment</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>Function-by-function scoring across 5 dimensions. UK at Level 1–2 overall, Data Science at Level 3.</td>
+      </tr>
+      <tr>
+        <td><strong>HQ Alignment Note</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>UK work mapped to One Masdar AI Strategy 2030 and ExCom deck. Shared with Kate.</td>
+      </tr>
+      <tr>
+        <td><strong>Data Governance Framework</strong></td>
+        <td><span class="status-done">✓ Complete</span></td>
+        <td>Classification, access controls, quality KPIs, Data Council structure — aligned to HQ data governance project.</td>
+      </tr>
+      <tr>
+        <td><strong>HR Policy AI Agent (Quick Win #1)</strong></td>
+        <td><span class="status-live">● LIVE</span></td>
+        <td>Copilot Studio agent on SharePoint HR docs, integrated with Teams. Demonstrated to 4+ stakeholders. Built in under 1 day.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Maturity snapshot -->
+  <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 20px;">Digital Maturity Snapshot</h3>
+  <div class="prose" style="margin-bottom: 20px;">
+    <p>Most functions sit at Level 1–2 on the group's 1–5 maturity scale. The exception is <strong>Data Science (Pouyan/Tim)</strong>, already operating at Level 3 with AI in production.</p>
+  </div>
+  <div class="maturity-grid">
+    <div class="mat-row">
+      <div class="mat-label">Data Science</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:60%; background: var(--accent);"></div></div>
+      <div class="mat-val">3.0</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Finance & Accounting</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:36%; background: var(--accent4);"></div></div>
+      <div class="mat-val">1.8</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">BESS Delivery</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:30%; background: var(--accent2);"></div></div>
+      <div class="mat-val">1.5</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Asset Management (OW)</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:30%; background: var(--accent2);"></div></div>
+      <div class="mat-val">1.5</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Business Support & Audit</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:28%; background: var(--accent5);"></div></div>
+      <div class="mat-val">1.4</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">People & Culture</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:22%; background: var(--accent6);"></div></div>
+      <div class="mat-val">1.1</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Legal & Contracts</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:20%; background: var(--accent6);"></div></div>
+      <div class="mat-val">1.0</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: ROADMAP — FULL GANTT V4 INTEGRATED -->
+<section id="roadmap">
+  <div class="s-head">
+    <div class="s-num">03 · Where we go</div>
+    <h2>The <em>Roadmap</em>: April → September 2026</h2>
+  </div>
+
+  <div class="prose" style="margin-bottom: 32px;">
+    <p>Three scenarios built to match three levels of investment and ambition. Each is self-contained and deliverable. <strong>The Realistic scenario is recommended</strong> — it balances quick wins with foundational investment, adds targeted external capacity, and positions the UK as the most advanced entity in the group within 6 months.</p>
+  </div>
+
+  <!-- FULL GANTT ROADMAP -->
+  <div class="roadmap-outer">
+    <!-- Scenario selector -->
+    <div class="sc-selector">
+      <button class="sc-btn active" onclick="setGanttTab(0)" id="gsc-0">
+        <div class="sc-name">Conservative</div>
+        <div class="sc-meta">14 UC · ~£20k · 0 contractors</div>
+      </button>
+      <button class="sc-btn recommended" onclick="setGanttTab(1)" id="gsc-1">
+        <div class="sc-name">Realistic</div>
+        <div class="sc-meta">24 UC · ~£95k · 1 contractor</div>
+      </button>
+      <button class="sc-btn" onclick="setGanttTab(2)" id="gsc-2">
+        <div class="sc-name">Ambitious</div>
+        <div class="sc-meta">32 UC · ~£140k · 1-2 contractors</div>
+      </button>
+    </div>
+
+    <!-- Scenario bodies rendered by JS -->
+    <div id="gantt-sc-0" class="sc-body active"></div>
+    <div id="gantt-sc-1" class="sc-body"></div>
+    <div id="gantt-sc-2" class="sc-body"></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="gantt-legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-foundations)"></div>Data foundations</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-bess)"></div>BESS delivery</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-finance)"></div>Finance & reporting</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-ai)"></div>AI & RAG</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-governance)"></div>Governance & audit</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-commercial)"></div>Commercial</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-enablement)"></div>Enablement</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-specialist)"></div>Specialist tools</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-resource)"></div>Resourcing</div>
+  </div>
+
+  <div class="big-quote" style="margin-top: 48px;">
+    "We're drowning in operations."
+    <cite>— Signal from the Listening Tour</cite>
+  </div>
+</section>
+
+<!-- SECTION 4: NEXT STEPS -->
+<section id="asks">
+  <div class="s-head">
+    <div class="s-num">04 · What we need</div>
+    <h2>Key enablers & <em>next steps</em></h2>
+  </div>
+
+  <div class="prose" style="margin-bottom: 32px;">
+    <p>The roadmap is ready. The use cases are scored. The foundations are mapped. What follows are the <strong>enablers that determine pace</strong> — each one unlocks a set of downstream deliverables.</p>
+  </div>
+
+  <div class="ask-cards">
+    <div class="ask-card urgent">
+      <h4>Activate Databricks Apps</h4>
+      <p>The UK data centre is hosted in UAE. Databricks Apps is blocked by a configuration issue — not a technical rebuild. Unblocking this single item unlocks front-end delivery for every Databricks-based tool across the organisation.</p>
+      <div class="ask-meta"><span>Owner: Mohamed / HQ IT / Tim</span><span>Impact: HIGH</span></div>
+    </div>
+    <div class="ask-card">
+      <h4>Approve Xero Paid API Plan</h4>
+      <p>Scale financial data pipeline from 1 entity (PoC) to 30+ entities. Without this, Finance data stays manual and Power BI dashboards are fed by copy-paste.</p>
+      <div class="ask-meta"><span>Owner: Andy / Tim</span><span>Cost: &lt;£1,000/yr</span></div>
+    </div>
+    <div class="ask-card">
+      <h4>Data Engineer Contractor</h4>
+      <p>Cross-functional ETL orchestration. Frees Pouyan for ML/insights and Tim for data availability. Progressively insources HyperQ. Critical to sustaining delivery pace beyond quick wins.</p>
+      <div class="ask-meta"><span>Est: £40–50k (6 months)</span><span>Scenario: Realistic+</span></div>
+    </div>
+    <div class="ask-card info">
+      <h4>UK Representation in AI SteerCo</h4>
+      <p>Confirm who attends, how UK use cases are submitted, and how prioritisation decisions flow back. Pending formal setup of HQ AI SteerCo.</p>
+      <div class="ask-meta"><span>Owner: Mohamed / Kate / Husain</span><span>Timing: pending HQ</span></div>
+    </div>
+    <div class="ask-card info">
+      <h4>Oracle Fusion / ERP Path</h4>
+      <p>HQ tendering SAP vs Fusion — update expected early May. No action from UK currently. Finance team needs clarity to avoid investing in interim solutions that may be replaced.</p>
+      <div class="ask-meta"><span>Owner: Kate / HQ</span><span>Timing: May 2026</span></div>
+    </div>
+    <div class="ask-card">
+      <h4>Scenario Selection & Budget Approval</h4>
+      <p>Align on Conservative / Realistic / Ambitious. The recommended Realistic scenario requires ~£95k incremental investment over 6 months, delivering 24 use cases with 2 AI models in production.</p>
+      <div class="ask-meta"><span>Decision: Husain + Kate</span><span>Needed: April 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Quick next actions -->
+  <h3 style="font-size: 16px; font-weight: 600; margin: 40px 0 20px;">Immediate Next Steps (April 2026)</h3>
+  <table class="del-table">
+    <thead><tr><th>Action</th><th>Owner</th><th>Timeline</th></tr></thead>
+    <tbody>
+      <tr><td>Align on roadmap scenario selection</td><td>Husain / Kate / Mohamed</td><td>Early April</td></tr>
+      <tr><td>Escalate Databricks Apps activation to HQ IT</td><td>Mohamed / Tim</td><td>April</td></tr>
+      <tr><td>Begin BI governance standard with Simon</td><td>Mohamed / Simon</td><td>April</td></tr>
+      <tr><td>Launch BESS meeting action tracker (BD-05)</td><td>Mohamed / Joel</td><td>Week 1 April</td></tr>
+      <tr><td>Kick off PDN BESS project dashboard (BD-01)</td><td>Mohamed / Stephen</td><td>April</td></tr>
+      <tr><td>Launch first Digital & AI newsletter</td><td>Mohamed</td><td>May</td></tr>
+      <tr><td>First Lunch & Learn session</td><td>Mohamed</td><td>June</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 5: ANNEXES -->
+<section id="annexes">
+  <div class="s-head">
+    <div class="s-num">Annexes</div>
+    <h2>Deep dives & <em>supporting detail</em></h2>
+  </div>
+
+  <!-- Annex A: Listening Tour -->
+  <div class="annex-toggle" onclick="toggleAnnex('a')">
+    <span class="chev" id="chev-a">▶</span>
+    A · Listening Tour — All 16 Interviews
+  </div>
+  <div class="annex-body" id="annex-a">
+    <table class="interview-table">
+      <thead><tr><th>Function</th><th>Interviewees</th><th>Key Themes</th><th>Use Cases</th></tr></thead>
+      <tbody>
+        <tr><td>Data Science / Commercial</td><td>Tim Burke</td><td>MasdarMind architecture, Databricks pipelines, Grafana, Power BI. Foundation layer.</td><td>Foundation</td></tr>
+        <tr><td>BESS Asset Performance</td><td>Dr. Pouyan</td><td>Anomaly detection in production. LLM summaries (Gemma). Databricks Apps blocked.</td><td>6</td></tr>
+        <tr><td>BESS Delivery</td><td>Stephen, Joel, Henry</td><td>No PM tool. Reporting burden (~6 man-days/month). Aconex pending. SafetyCulture.</td><td>7</td></tr>
+        <tr><td>Offshore Wind AM & OpEx</td><td>Katie, Alexey</td><td>JV data fragmentation, no modelling tools, manual reporting.</td><td>9</td></tr>
+        <tr><td>Finance & Accounting</td><td>Andy, Simon</td><td>Xero API, Power BI rollout, cash request process, no ERP.</td><td>6</td></tr>
+        <tr><td>People & Culture</td><td>Sara, Konadu</td><td>No HRIS, manual onboarding, payroll provider selection.</td><td>8</td></tr>
+        <tr><td>Business Support & Audit</td><td>Sahil, Lamees</td><td>Audit dashboard need, cyber gaps, BI governance risk flagged.</td><td>4</td></tr>
+        <tr><td>Engineering (OW)</td><td>Tom</td><td>Document management, Alice AI pilot, partner interface. Eager to trial RAG.</td><td>3</td></tr>
+        <tr><td>Legal & Contracts</td><td>Lindsey, Sheeraz</td><td>Contract bottlenecks (DOA/CRS/DocuSign), no contract repository, manual NDAs.</td><td>5</td></tr>
+        <tr><td>Commercial</td><td>Lars</td><td>BESS dispatch = "biggest AI lever". MasdarMind = "lighthouse project". No manual entry principle.</td><td>4</td></tr>
+        <tr><td>Strategy & Transformation</td><td>Kate</td><td>Market intel aggregation, CEO talking points, KPI dashboard for Husain, steering committee dashboards.</td><td>6</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Annex B: Use Case Bank Summary -->
+  <div class="annex-toggle" onclick="toggleAnnex('b')">
+    <span class="chev" id="chev-b">▶</span>
+    B · Use Case Bank — 92 Items (Summary)
+  </div>
+  <div class="annex-body" id="annex-b">
+    <div class="prose">
+      <p>The full Use Case Bank contains 92 items: <strong>66 internal use cases</strong> identified through stakeholder interviews (each with a named business owner, documented pain point, and technical solution outline) and <strong>26 McKinsey/Endeavour use cases</strong> from the original long-list, assessed for UK applicability.</p>
+      <p>The top 27 have been scored using the group's Impact/Feasibility quadrant framework and sequenced into 5 delivery waves. The scored shortlist maps cleanly onto the group's 18-month roadmap for AI SteerCo submission.</p>
+    </div>
+    <div class="kpi-strip" style="margin-top: 20px;">
+      <div class="kpi-card"><div class="kv">66</div><div class="kl">Internal UCs</div><div class="ksub">from interviews</div></div>
+      <div class="kpi-card"><div class="kv">26</div><div class="kl">McKinsey UCs</div><div class="ksub">assessed for UK</div></div>
+      <div class="kpi-card accent"><div class="kv">27</div><div class="kl">Scored</div><div class="ksub">top priority</div></div>
+      <div class="kpi-card accent2"><div class="kv">5</div><div class="kl">Waves</div><div class="ksub">sequenced</div></div>
+    </div>
+  </div>
+
+  <!-- Annex C: MasdarMind Architecture -->
+  <div class="annex-toggle" onclick="toggleAnnex('c')">
+    <span class="chev" id="chev-c">▶</span>
+    C · MasdarMind — Data Platform Architecture
+  </div>
+  <div class="annex-body" id="annex-c">
+    <div class="prose">
+      <p><strong>MasdarMind</strong> is the UK's Databricks/Azure data platform, already operational with:</p>
+      <p><strong>Architecture:</strong> Azure ADLS Gen2, Databricks with Unity Catalog, Medallion architecture (Bronze / Silver / Gold). Automated SCADA pipelines for 3 offshore wind assets. Power BI and Grafana dashboards.</p>
+      <p><strong>In production:</strong> BESS anomaly detection AI model with embedded LLM (Gemma) — no data leaves the secure workspace. SCADA ingestion for London Array, Dudgeon, and Race Bank.</p>
+      <p><strong>In progress:</strong> Xero API integration (PoC working for 1 entity, paid plan needed for 30+). HR policy AI agent on Copilot Studio (live), migration to MasdarMind RAG pipeline planned. Baltic Eagle SCADA connection.</p>
+      <p><strong>Key blocker:</strong> Databricks Apps blocked because data centre is hosted in UAE — configuration issue, not a technical rebuild, but requires HQ IT escalation.</p>
+    </div>
+  </div>
+
+  <!-- Annex D: Budget Breakdown -->
+  <div class="annex-toggle" onclick="toggleAnnex('d')">
+    <span class="chev" id="chev-d">▶</span>
+    D · Budget Breakdown by Scenario
+  </div>
+  <div class="annex-body" id="annex-d">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+      <div>
+        <h4 style="font-size: 14px; margin-bottom: 12px;">Conservative (~£20k)</h4>
+        <table class="interview-table" style="font-size: 11px;">
+          <tbody>
+            <tr><td>Xero API upgrade</td><td style="text-align:right">~£2–5k</td></tr>
+            <tr><td>SafetyCulture licence</td><td style="text-align:right">~£3–6k</td></tr>
+            <tr><td>Power BI Premium</td><td style="text-align:right">~£5–10k</td></tr>
+            <tr><td>Misc licences</td><td style="text-align:right">~£2–5k</td></tr>
+            <tr><td style="font-weight:600">Total</td><td style="text-align:right;font-weight:600;color:var(--accent)">~£15–25k</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="font-size: 14px; margin-bottom: 12px;">Realistic (~£95k) ★</h4>
+        <table class="interview-table" style="font-size: 11px;">
+          <tbody>
+            <tr><td>Licences & tools</td><td style="text-align:right">~£15–30k</td></tr>
+            <tr><td>Data engineer contractor</td><td style="text-align:right">~£40–50k</td></tr>
+            <tr><td>Run & capitalisation</td><td style="text-align:right">~£15–20k</td></tr>
+            <tr><td>Vendor evaluations</td><td style="text-align:right">~£10–15k</td></tr>
+            <tr><td style="font-weight:600">Total</td><td style="text-align:right;font-weight:600;color:var(--accent)">~£80–110k</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4 style="font-size: 14px; margin-bottom: 12px;">Ambitious (~£140k)</h4>
+        <table class="interview-table" style="font-size: 11px;">
+          <tbody>
+            <tr><td>Licences & tools</td><td style="text-align:right">~£15–30k</td></tr>
+            <tr><td>Senior data engineer</td><td style="text-align:right">~£60–70k</td></tr>
+            <tr><td>Run & capitalisation</td><td style="text-align:right">~£20–25k</td></tr>
+            <tr><td>Databricks compute</td><td style="text-align:right">~£10–15k</td></tr>
+            <tr><td>Vendor evaluations</td><td style="text-align:right">~£15–20k</td></tr>
+            <tr><td style="font-weight:600">Total</td><td style="text-align:right;font-weight:600;color:var(--accent)">~£120–160k</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p style="font-size: 12px; color: var(--muted); margin-top: 16px; font-style: italic;">Incremental costs only. Microsoft 365 licences and existing infrastructure already covered at group level.</p>
+  </div>
+
+  <!-- Annex E: HQ Alignment -->
+  <div class="annex-toggle" onclick="toggleAnnex('e')">
+    <span class="chev" id="chev-e">▶</span>
+    E · Alignment to One Masdar AI Strategy 2030
+  </div>
+  <div class="annex-body" id="annex-e">
+    <div class="prose">
+      <p>The UK's work maps directly onto the <strong>One Masdar AI Strategy 2030</strong> endorsed by ExCom in March 2026. The group strategy sets AED 30–32M of investment over 18 months, a centre-led CoE model, and 56 prioritised use cases.</p>
+      <p>The UK is explicitly referenced as an entity with <strong>early practical traction</strong> in data, reporting, and AI deployment. Three areas of direct alignment:</p>
+      <p><strong>1. Use case pipeline with cross-functional input</strong> — The 92-item bank was built through structured interviews with real business owners, not theoretical opportunities.</p>
+      <p><strong>2. Impact quantification grounded in operations</strong> — 6 man-days/month saved on BESS reporting, 60–80% reduction in monthly reporting time for OW, elimination of weekly Excel rebuild for audit tracking.</p>
+      <p><strong>3. Prioritisation compatible with the group framework</strong> — Same Impact/Feasibility quadrant logic. The UK shortlist maps cleanly onto the group's 18-month roadmap.</p>
+      <p>The UK has also already delivered the group's <strong>top quick win</strong> (Enterprise Internal GPT → HR Policy AI Agent, live in production).</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">
+    Digital & AI Strategy<br>
+    Mohamed · Masdar UK<br>
+    March 2026 · Internal Use Only
+  </div>
+  <div class="footer-right">
+    Prepared for Husain Al Meer, Director — Global OFSW & UK
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div id="gantt-tooltip"></div>
+
+<script>
+// ── GANTT DATA (from Roadmap v4) ──────────────────────────────────────────
+
+const MONTHS = ['Apr','May','Jun','Jul','Aug','Sep'];
+const C = {
+  foundations: 'var(--c-foundations)',
+  bess:        'var(--c-bess)',
+  finance:     'var(--c-finance)',
+  ai:          'var(--c-ai)',
+  governance:  'var(--c-governance)',
+  commercial:  'var(--c-commercial)',
+  enablement:  'var(--c-enablement)',
+  specialist:  'var(--c-specialist)',
+  resource:    'var(--c-resource)',
+};
+
+const SECTION_LABELS = {
+  foundations: 'Data foundations & infrastructure',
+  bess:        'BESS delivery',
+  finance:     'Finance & reporting',
+  ai:          'AI & RAG',
+  governance:  'Governance & audit',
+  commercial:  'Commercial',
+  enablement:  'Enablement & strategy',
+  specialist:  'Specialist tools',
+  resourcing:  'Resourcing',
+};
+
+const DOCTRINE = 'Selection criteria: (1) business owner identified outside Digital & AI, (2) clean integration with MasdarMind planned from day one, (3) justified vs existing Microsoft / Databricks stack.';
+
+const budgets = [
+  { // conservative
+    rows: [
+      { item: 'Xero API upgrade',               v: '~£2–5k'   },
+      { item: 'SafetyCulture licence',           v: '~£3–6k'   },
+      { item: 'Power BI Premium (if needed)',    v: '~£5–10k'  },
+      { item: 'Misc licences',                   v: '~£2–5k'   },
+      { item: 'Data engineer contractor',        v: '—'        },
+      { item: 'Run & capitalisation resource',   v: '—'        },
+      { item: 'Databricks compute (additional)', v: '—'        },
+      { item: 'Vendor evaluations',              v: '—'        },
+      { item: 'TOTAL (indicative)',              v: '~£15–25k', total: true },
+    ],
+    note: 'Incremental costs only. Microsoft 365 licences and existing infrastructure already covered at group level. HyperQ current spend (to confirm with Tim) may partially offset contractor cost in Scenarios 2 and 3.'
+  },
+  { // realistic
+    rows: [
+      { item: 'Xero API upgrade',               v: '~£2–5k'   },
+      { item: 'SafetyCulture licence',           v: '~£3–6k'   },
+      { item: 'Power BI Premium (if needed)',    v: '~£5–10k'  },
+      { item: 'DocuSign & misc licences',        v: '~£5–8k'   },
+      { item: 'Data engineer contractor',        v: '~£40–50k' },
+      { item: 'Run & capitalisation resource',   v: '~£15–20k' },
+      { item: 'Databricks compute (additional)', v: '—'        },
+      { item: 'Vendor evaluations (EPM…)',       v: '~£10–15k' },
+      { item: 'TOTAL (indicative)',              v: '~£80–110k', total: true },
+    ],
+    note: 'Incremental costs only. Microsoft 365 licences and existing infrastructure already covered at group level. HyperQ current spend (to confirm with Tim) may partially offset contractor cost.'
+  },
+  { // ambitious
+    rows: [
+      { item: 'Xero API upgrade',               v: '~£2–5k'    },
+      { item: 'SafetyCulture licence',           v: '~£3–6k'    },
+      { item: 'Power BI Premium (if needed)',    v: '~£5–10k'   },
+      { item: 'DocuSign & misc licences',        v: '~£5–8k'    },
+      { item: 'Data engineer contractor (senior)',v: '~£60–70k' },
+      { item: 'Run & capitalisation resource',   v: '~£20–25k'  },
+      { item: 'Databricks compute (additional)', v: '~£10–15k'  },
+      { item: 'Vendor evaluations (EPM, APM…)',  v: '~£15–20k'  },
+      { item: 'TOTAL (indicative)',              v: '~£120–160k', total: true },
+    ],
+    note: 'Incremental costs only. Microsoft 365 licences and existing infrastructure already covered at group level. HyperQ current spend (to confirm with Tim) may partially offset contractor cost.'
+  }
+];
+
+const scenarios = [
+  {
+    label: 'Conservative',
+    desc: 'Microsoft-only or near. Zero external contractors. High-visibility quick wins. Goal: rapid credibility, data foundations in place.',
+    kpis: [
+      {l:'Budget',    v:'~£20k',  s:'incremental', budget:true},
+      {l:'Use cases', v:'14',     s:'delivered'},
+      {l:'Contractors',v:'0',     s:'external'},
+      {l:'Data ready',v:'Q4',     s:'2026'}
+    ],
+    rows: [
+      {s:'foundations'},
+      {id:'DS-04',   label:'Unity Catalog — data governance',        color:C.foundations, m:[0,2], detail:'Data sensitivity classification, domain ownership, access controls. Enables safe onboarding of HR and Finance data into MasdarMind.'},
+      {id:'AM-05',   label:'SCADA Baltic Eagle — pipeline',          color:C.foundations, m:[0,1], detail:'Connect Baltic Eagle to existing Databricks pipeline. Tim already has the other 3 assets connected. Immediate impact for Asset Management.'},
+      {id:'FI-01',   label:'Xero API → Databricks (30+ entities)',  color:C.foundations, m:[1,3], detail:"Upgrade Xero to paid API plan. Extend Tim's PoC to all entities. Minimal cost, maximum leverage for all downstream finance use cases."},
+      {s:'bess'},
+      {id:'BD-05',   label:'Meeting action tracker & RFI log',       color:C.bess, m:[0,0], detail:'SharePoint list or structured Teams template. Immediate quick win for Joel. Low cost, high contractual impact on BESS construction coordination.'},
+      {id:'BD-04',   label:'SafetyCulture HSSE — paid licence',      color:C.bess, m:[0,1], detail:"Formalise SafetyCulture with structured audit workflows, photo capture, contractor notifications. Bogdan championing. HSSE = Stephen's top priority."},
+      {id:'BD-01',   label:'PDN — BESS project dashboard',           color:C.bess, m:[0,3], detail:'Centralised portfolio view: Gantt, budget, contingency health, HSSE KPIs. Connected to MasdarMind. Stephen: "utopia". Starting April.'},
+      {id:'BD-02',   label:'Automated monthly report generation',    color:C.bess, m:[3,5], detail:"Power Automate plug-in connected to BD-01. PPT template auto-populated. Saves ~6 man-days/month. Directly addresses Husain's quality criticism."},
+      {s:'ai'},
+      {id:'P&C-01a', label:'HR Policy Bot v1 — Copilot Studio (live)',color:C.ai, m:[0,0], detail:'Already in production on Copilot Studio. Reduces Tier-1 HR queries. No further action needed in this scenario — run and maintain.'},
+      {id:'P&C-01b', label:'HR Policy Bot v2 + Databricks (RAG)',    color:C.ai, m:[2,5], detail:'Next version migrated to MasdarMind/Databricks RAG architecture. Better accuracy, secure document indexing, no dependency on Copilot Studio.'},
+      {s:'finance'},
+      {id:'FI-02',   label:'Month-end controls (Power Automate)',    color:C.finance, m:[0,1], detail:'SharePoint checklist + Power Automate + Teams approval. Clean audit trail for Lamees and external auditors. Quick win.'},
+      {id:'FI-05',   label:'Budget vs actuals OW — 5-slide pack',   color:C.finance, m:[3,5], detail:"Extend Simon's Power BI model to offshore wind. Minimum 5-slide pack. Depends on FI-01 and FI-03."},
+      {s:'governance'},
+      {id:'BS-04',   label:'BI governance standard',                 color:C.governance, m:[0,1], detail:"Shared Power BI workspace, naming conventions, reusable templates with Simon. Prevents dashboard sprawl."},
+      {id:'BS-01',   label:'Audit intelligence dashboard',           color:C.governance, m:[1,3], detail:"Power BI connected to Teammate+ export. 150+ active actions, views by audit/owner/process. Eliminates Lamees's weekly 1–2h Excel rebuild."},
+      {s:'enablement'},
+      {id:'ST-05',   label:'Executive KPI dashboard — Husain',      color:C.enablement, m:[1,3], detail:"Power BI: financial + strategic KPIs + manual commentary. Three-way session with Simon. Feeds Husain's endorsement on priorities."},
+      {id:'AM-04',   label:'SharePoint document repository (AM)',    color:C.enablement, m:[0,1], detail:'Standardised SharePoint taxonomy for Asset Management. Migration of key documents. Foundation for future AI-assisted document search.'},
+      {s:'specialist'},
+      {id:'ENG-03',  label:'Alice AI — construction planning pilot', color:C.specialist, m:[0,2], detail:'Formalise Digital & AI oversight of Alice AI (Dogger Bank South). Define success metrics, data sharing protocol, UKX expansion plan if successful.'},
+    ]
+  },
+  {
+    label: 'Realistic',
+    desc: 'Microsoft + targeted external tools. Data engineer + run & capitalisation resource. MasdarMind foundations consolidated. First AI use cases in production. COM-1 and COM-2 scoping initiated.',
+    kpis: [
+      {l:'Budget',    v:'~£95k',  s:'incremental', budget:true},
+      {l:'Use cases', v:'24',     s:'delivered'},
+      {l:'Contractor',v:'1',     s:'external'},
+      {l:'AI in prod',v:'2',      s:'use cases'}
+    ],
+    rows: [
+      {s:'foundations'},
+      {id:'DS-04',   label:'Unity Catalog — data governance',        color:C.foundations, m:[0,2], detail:'Classification, ownership, access controls. HR and Finance data safe to onboard into MasdarMind.'},
+      {id:'DS-03',   label:'Data engineer — external contractor',    color:C.foundations, m:[1,5], detail:'Cross-functional contractor. Frees Pouyan (ML/insights) and Tim (data availability). ETL orchestration formalised. Progressively insources HyperQ. Est. £40–50k.'},
+      {id:'AM-05',   label:'SCADA Baltic Eagle pipeline',            color:C.foundations, m:[0,1], detail:'Baltic Eagle connection. Quick win for Tim.'},
+      {id:'FI-01',   label:'Xero API → Databricks',                 color:C.foundations, m:[1,2], detail:'30+ entities. Foundation for all downstream finance use cases.'},
+      {id:'FI-03',   label:'JV partner data normalisation',         color:C.foundations, m:[2,4], detail:"Ingestion pipeline for heterogeneous JV partner files. Automated reconciliation. Depends on FI-01. Reduces Andy's monthly estimate/true-up cycle."},
+      {s:'bess'},
+      {id:'BD-05',   label:'Meeting action tracker & RFI log',       color:C.bess, m:[0,0], detail:'Quick win. SharePoint/Teams. Immediate.'},
+      {id:'DS-01',   label:'BESS Ops Intelligence Platform',         color:C.bess, m:[1,4], detail:'Databricks Apps front-end. Rack-level anomaly detection, daily email alerts, LLM summaries (Gemma). Yousef: "shocked".'},
+      {id:'BD-01',   label:'PDN — BESS project dashboard',           color:C.bess, m:[0,3], detail:'Centralised portfolio view: Gantt, budget, contingency health, HSSE KPIs. Starting April — foundational for all BESS reporting.'},
+      {id:'BD-02',   label:'Automated monthly report generation',    color:C.bess, m:[3,5], detail:'~6 man-days/month saved. Auto-populated senior leadership report.'},
+      {id:'BD-04',   label:'SafetyCulture HSSE — paid licence',      color:C.bess, m:[0,1], detail:'HSSE workflows, contractor alerts.'},
+      {s:'commercial'},
+      {id:'COM-2',   label:'Generation forecasting — scoping',       color:C.commercial, m:[2,5], detail:'Scope asset-level power generation forecasting. Feeds grid coordination, trading and operational planning. Prerequisite: Baltic Eagle SCADA pipeline complete. Lars + Katie. Indicative ROI: 0.7–5.0x over 5 years. Scoping only — deployment 2027.', indicative:true},
+      {id:'COM-1',   label:'BESS dispatch optimisation — scoping',   color:C.commercial, m:[3,5], detail:'Scope AI dispatch engine for BESS assets. Lars: "the biggest AI lever". Indicative ROI: 2.7–10.9x over 5 years. Prerequisite: MasdarMind data foundation in place. Scoping and vendor evaluation only — deployment 2027.', indicative:true},
+      {s:'ai'},
+      {id:'P&C-01a', label:'HR Policy Bot v1 — Copilot Studio (live)',color:C.ai, m:[0,0], detail:'Already in production. Run and maintain.'},
+      {id:'P&C-01b', label:'HR Policy Bot v2 — Databricks (RAG)',    color:C.ai, m:[1,4], detail:'Next version migrated to MasdarMind/Databricks RAG architecture. Better accuracy, secure document indexing. Builds on v1 learnings.'},
+      {id:'AM-08',   label:'RAG doc Q&A — contracts & OW specs',     color:C.ai, m:[2,5], detail:'RAG on MasdarMind. Corpus: offshore wind contracts, engineering specs, financing agreements. Tom: ready to trial immediately. Alexi: critical need.'},
+      {s:'finance'},
+      {id:'FI-02',   label:'Month-end controls',                     color:C.finance, m:[0,1], detail:'Quick win. Power Automate / SharePoint.'},
+      {id:'FI-04',   label:'Cash request digitisation',              color:C.finance, m:[2,4], detail:'Power Automate + DocuSign. Pending HQ approval — change management required. Simon: £20M request = half a day manually.', hq:true},
+      {id:'FI-05',   label:'Budget vs actuals OW dashboard',         color:C.finance, m:[3,5], detail:"Extend Simon's model to offshore wind. Depends on FI-01 + FI-03."},
+      {s:'governance'},
+      {id:'BS-04',   label:'BI governance standard',                 color:C.governance, m:[0,1], detail:'Shared standard with Simon. Anti-sprawl.'},
+      {id:'BS-01',   label:'Audit intelligence dashboard',           color:C.governance, m:[1,3], detail:'Teammate+ dashboard. 150+ actions. Real-time view for Husain.'},
+      {id:'BS-02',   label:'Internal audit self-assessment',         color:C.governance, m:[3,5], detail:'Self-assessment framework mirroring HQ methodology. Prepares BESS first audit and OFSW 2028. Sahil: "showcase upwards".'},
+      {s:'enablement'},
+      {id:'ST-05',   label:'Executive KPI dashboard — Husain',      color:C.enablement, m:[1,3], detail:'Executive Power BI dashboard.'},
+      {id:'ST-02',   label:'Market intelligence aggregation',        color:C.enablement, m:[2,4], detail:'Scraping + LLM summarisation → Teams channels by topic. Reduces manual monitoring.'},
+      {s:'specialist'},
+      {id:'ENG-03',  label:'Alice AI — construction planning pilot', color:C.specialist, m:[0,2], detail:'Formalise Digital & AI oversight. Success metrics defined. UKX expansion plan if DBS pilot successful.'},
+      {id:'EPM',     label:'EPM platform — vendor evaluation',       color:C.specialist, m:[1,5], detail:'Evaluate EPM solutions to replace manual Excel-based budgeting and multi-entity consolidation. Business case with Simon. Deployment post-ERP (2027+).', indicative:true},
+      {s:'resourcing'},
+      {id:'RES-01',  label:'Run & capitalisation resource',          color:C.resource, m:[4,5], detail:'Dedicated resource to manage run operations. Ensures Digital & AI programme continuity beyond build phase.'},
+    ]
+  },
+  {
+    label: 'Ambitious',
+    desc: 'Full stack. MasdarMind as the data backbone. Multi-domain RAG deployed. COM-1 and COM-2 architecture defined and ready for deployment. 1–2 active contractors.',
+    kpis: [
+      {l:'Budget',    v:'~£140k', s:'incremental', budget:true},
+      {l:'Use cases', v:'32+',    s:'delivered'},
+      {l:'Contractors',v:'3',     s:'active'},
+      {l:'AI in prod',v:'5+',     s:'use cases'}
+    ],
+    rows: [
+      {s:'foundations'},
+      {id:'DS-04',   label:'Unity Catalog — accelerated governance', color:C.foundations, m:[0,1], detail:'All domains onboarded by June. Foundation for secure cross-functional data access.'},
+      {id:'DS-03',   label:'Data engineer — senior contractor',      color:C.foundations, m:[0,5], detail:'Full-time from April. Orchestrates all ETL pipelines. Insources HyperQ. Frees Pouyan and Tim. Est. £60–70k.'},
+      {id:'AM-05',   label:'SCADA full portfolio',                   color:C.foundations, m:[0,1], detail:'Baltic Eagle + full pipeline generalisation across all offshore wind assets.'},
+      {id:'FI-01',   label:'Xero API + JV data pipeline',           color:C.foundations, m:[1,3], detail:'30+ Xero entities + JV partner data normalisation. Full finance foundation in MasdarMind.'},
+      {id:'DS-05',   label:'MasdarMind App Portal',                  color:C.foundations, m:[3,5], detail:'Unified internal portal. All Databricks apps accessible via SSO. Positions MasdarMind as a visible, adopted platform.'},
+      {s:'bess'},
+      {id:'BD-05',   label:'Meeting action tracker & RFI log',       color:C.bess, m:[0,0], detail:'Immediate quick win.'},
+      {id:'DS-01',   label:'BESS Ops Intelligence Platform',         color:C.bess, m:[1,3], detail:'Databricks Apps front-end. Anomaly detection in production, heat map, daily alerts, LLM summaries.'},
+      {id:'BD-01',   label:'PDN — BESS project dashboard',           color:C.bess, m:[0,4], detail:'Centralised portfolio dashboard starting April. Gantt, budget, contingency, HSSE KPIs. Foundation for automated reporting.'},
+      {id:'BD-02',   label:'Automated monthly report generation',    color:C.bess, m:[3,5], detail:'~6 man-days/month saved. Connected to BD-01.'},
+      {id:'BD-04',   label:'SafetyCulture HSSE — paid licence',      color:C.bess, m:[0,1], detail:'HSSE workflows formalised.'},
+      {id:'BD-06',   label:'TIPALTI PO data integration',            color:C.bess, m:[2,4], detail:'TIPALTI API → MasdarMind. Financial layer added to project dashboard. Reduces manual monthly data assembly.'},
+      {s:'commercial'},
+      {id:'COM-2',   label:'Generation forecasting — architecture',  color:C.commercial, m:[1,4], detail:'Full architecture defined and built. Asset-level power generation forecasting feeding grid coordination, trading and operational planning. Lars + Katie. Indicative ROI: 0.7–5.0x over 5 years.'},
+      {id:'COM-1',   label:'BESS dispatch optimisation — architecture',color:C.commercial, m:[2,5], detail:'Full architecture defined. AI dispatch engine scope, vendor selected, integration with SCADA and MasdarMind designed. Lars: "the biggest AI lever". Indicative ROI: 2.7–10.9x over 5 years. Deployment: 2027.'},
+      {s:'ai'},
+      {id:'P&C-01a', label:'HR Policy Bot v1 — Copilot Studio (live)',color:C.ai, m:[0,0], detail:'Already in production. Run and maintain.'},
+      {id:'P&C-01b', label:'HR Policy Bot v2 — Databricks (RAG)',    color:C.ai, m:[1,3], detail:'Next version migrated to MasdarMind/Databricks RAG architecture. Better accuracy, secure document indexing. Builds on v1 learnings.'},
+      {id:'AM-08',   label:'RAG phase 1 — offshore wind',            color:C.ai, m:[1,3], detail:'RAG corpus: OW contracts, engineering specs, financing agreements. Tom ready to trial immediately.'},
+      {id:'AM-08b',  label:'RAG phase 2 — BESS & Legal',             color:C.ai, m:[3,5], detail:'RAG extended to BESS and Legal. BESS contracts, DOA/CRS procedures. Hours saved per contract review.'},
+      {id:'M18',     label:'Market intelligence platform',           color:C.ai, m:[2,5], detail:'External data ingestion + LLM synthesis. Continuous portfolio strategy and risk reassessment.'},
+      {s:'finance'},
+      {id:'FI-02',   label:'Month-end controls',                     color:C.finance, m:[0,1], detail:'Quick win.'},
+      {id:'FI-04',   label:'Cash request digitisation',              color:C.finance, m:[2,4], detail:'Power Automate + DocuSign. Pending HQ approval — change management required. Simon: £20M request = half a day manually.', hq:true},
+      {id:'FI-05',   label:'Budget vs actuals — full (OW + BESS)',   color:C.finance, m:[3,5], detail:'Full financial dashboard. Depends on FI-01 + FI-03.'},
+      {id:'FI-06',   label:'HQ group finance standardisation',       color:C.finance, m:[4,5], detail:'Databricks export in HQ template format. Eliminates 2–3 days/month VLOOKUP at HQ. Positions Masdar UK as most advanced entity in the group.'},
+      {s:'governance'},
+      {id:'BS-04',   label:'BI governance standard',                 color:C.governance, m:[0,1], detail:'Shared standard.'},
+      {id:'BS-01',   label:'Audit intelligence dashboard',           color:C.governance, m:[1,2], detail:'Teammate+ dashboard.'},
+      {id:'BS-02',   label:'Internal audit self-assessment',         color:C.governance, m:[2,4], detail:'Self-assessment framework. Prepares BESS first audit.'},
+      {id:'BS-03',   label:'Cyber risk register — scoping',          color:C.governance, m:[2,4], detail:'UK-specific cyber risk register. Implementable policy framework. Sahil recommends a dedicated cyber security hire.'},
+      {id:'LEG-1',   label:'DOA/CRS workflow automation',            color:C.governance, m:[3,5], detail:'Power Automate/Apps. Auto-resolves DOA role codes to actual names via Azure AD. CRS pre-populated. Major time saving for Legal on every contract.'},
+      {s:'enablement'},
+      {id:'ST-05',   label:'Executive KPI dashboard — Husain',      color:C.enablement, m:[1,2], detail:'Executive dashboard. Priority endorsement.'},
+      {id:'ST-02',   label:'Market intel + steering dashboards',     color:C.enablement, m:[2,4], detail:'Scraping + LLM + live steering committee dashboards. Reduces manual meeting prep.'},
+      {id:'P&C-03',  label:'HRIS centralisation — selection',        color:C.enablement, m:[1,4], detail:'Demos already scheduled. Selection of unified HR platform. Mohamed advises, P&C owns.'},
+      {id:'AM-06',   label:'Asset performance benchmarking',         color:C.enablement, m:[3,5], detail:'Aggregation layer on SCADA pipeline. Weather-normalised KPI benchmarking across assets.'},
+      {s:'specialist'},
+      {id:'ENG-03',  label:'Alice AI — construction planning pilot', color:C.specialist, m:[0,3], detail:'Governance formalised. Success metrics. UKX expansion plan if DBS pilot successful by June.'},
+      {id:'EPM',     label:'EPM platform — vendor evaluation',       color:C.specialist, m:[1,4], detail:'Evaluate EPM solutions to replace manual Excel-based budgeting. Business case with Simon. Deployment post-ERP (2027+).', indicative:true},
+      {id:'APM',     label:'Asset Perf. Mgmt — vendor evaluation',  color:C.specialist, m:[2,5], detail:'Evaluate APM platforms for predictive maintenance on OW assets. Prerequisite: SCADA pipeline complete, Unity Catalog in place. Deployment horizon: 2027.', indicative:true},
+      {id:'DOC-AI',  label:'Contract intelligence — vendor eval',    color:C.specialist, m:[3,5], detail:'Evaluate specialised contract intelligence tools for Legal. Depends on document corpus maturity. Complements RAG phase 2.', indicative:true},
+      {s:'resourcing'},
+      {id:'RES-01',  label:'Run & capitalisation resource',          color:C.resource, m:[4,5], detail:'Dedicated resource to manage run operations. Ensures Digital & AI programme continuity beyond build phase.'},
+    ]
+  }
+];
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+
+let budgetOpen = [false, false, false];
+let currentTab = 0;
+
+function esc(s) {
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+}
+
+function barCells(m, color) {
+  const [start, end] = m;
+  let cells = '';
+  for (let i = 0; i < 6; i++) {
+    if (i >= start && i <= end) {
+      let cls = 'g-mid';
+      if (i === start && i === end) cls = 'g-solo';
+      else if (i === start) cls = 'g-left';
+      else if (i === end)   cls = 'g-right';
+      cells += `<td class="gcell"><div class="g-bar ${cls}" style="background:${color}"></div></td>`;
+    } else {
+      cells += `<td class="gcell"></td>`;
+    }
+  }
+  return cells;
+}
+
+function renderScenario(idx) {
+  const sc  = scenarios[idx];
+  const bud = budgets[idx];
+  const hasSpecialist = sc.rows.some(r => r.s === 'specialist');
+
+  const kpiHtml = sc.kpis.map(k =>
+    `<div class="sc-kpi${k.budget?' budget':''}">
+      <div class="kl">${k.l}</div>
+      <div class="kv">${k.v}</div>
+      <div class="ks">${k.s}</div>
+    </div>`
+  ).join('');
+
+  const budgetRowsHtml = bud.rows.map(r => {
+    const isNA = r.v === '—';
+    return `<tr${r.total?' style="font-weight:600"':''}>
+      <td>${r.item}</td>
+      <td class="${isNA?'na':''}">${r.v}</td>
+    </tr>`;
+  }).join('');
+
+  let rowsHtml = '';
+  sc.rows.forEach(row => {
+    if (row.s) {
+      let cls = 'gsec';
+      if (row.s === 'specialist') cls += ' specialist';
+      if (row.s === 'resourcing') cls += ' resourcing';
+      rowsHtml += `<tr class="${cls}"><td colspan="7">${SECTION_LABELS[row.s]}</td></tr>`;
+    } else {
+      const indBadge = row.indicative ? `<span class="ind">indicative</span>` : '';
+      const hqBadge  = row.hq        ? `<span class="hq">HQ approval</span>`  : '';
+      rowsHtml += `<tr class="gitem"
+        onmouseenter="showGTT(event,'${esc(row.id)}','${esc(row.label)}','${esc(row.detail)}',${!!row.indicative},${!!row.hq})"
+        onmouseleave="hideGTT()">
+        <td class="lcell"><span class="gid">${row.id}</span>${row.label}${indBadge}${hqBadge}</td>
+        ${barCells(row.m, row.color)}
+      </tr>`;
+    }
+  });
+
+  const disclaimerHtml = hasSpecialist ? `
+    <div class="disclaimer" style="margin-top:16px">
+      <strong>Specialist tools — disclaimer:</strong>
+      Tool selection is indicative only — final decisions subject to vendor evaluation, confirmed business need, HQ approval, and budget confirmation.<br>
+      <em style="font-size:10px">${DOCTRINE}</em>
+    </div>` : '';
+
+  const openClass = budgetOpen[idx] ? 'open' : '';
+
+  return `
+    <div class="sc-desc-row">
+      <p class="sc-desc-text">${sc.desc}</p>
+      <div class="sc-kpis">${kpiHtml}</div>
+    </div>
+
+    <div class="budget-toggle-row" onclick="toggleBudget(${idx})">
+      <span class="chev-inline${budgetOpen[idx]?' open':''}" id="bchev-${idx}">▶</span>
+      Budget breakdown — incremental costs only (excl. existing Microsoft licences &amp; current infrastructure)
+    </div>
+    <div class="budget-detail${budgetOpen[idx]?' open':''}" id="bdetail-${idx}">
+      <table class="budget-tbl">
+        <thead><tr><th>Cost item</th><th>This scenario</th></tr></thead>
+        <tbody>${budgetRowsHtml}</tbody>
+      </table>
+      <p class="budget-note">${bud.note}</p>
+    </div>
+
+    <div class="gantt-wrap">
+      <table class="gantt-tbl">
+        <colgroup>
+          <col class="lc">
+          ${MONTHS.map(() => '<col class="mc">').join('')}
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Use case</th>
+            ${MONTHS.map(m => `<th>${m}</th>`).join('')}
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+    </div>
+    ${disclaimerHtml}
+  `;
+}
+
+function setGanttTab(idx) {
+  currentTab = idx;
+  // Update buttons
+  document.querySelectorAll('.sc-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  // Update bodies
+  document.querySelectorAll('.sc-body').forEach((b,i) => b.classList.toggle('active', i===idx));
+  // Render if empty
+  const body = document.getElementById('gantt-sc-' + idx);
+  if (!body.dataset.rendered) {
+    body.innerHTML = renderScenario(idx);
+    body.dataset.rendered = '1';
+  }
+}
+
+function toggleBudget(idx) {
+  budgetOpen[idx] = !budgetOpen[idx];
+  const detail = document.getElementById('bdetail-' + idx);
+  const chev   = document.getElementById('bchev-' + idx);
+  if (detail) detail.classList.toggle('open', budgetOpen[idx]);
+  if (chev)   chev.classList.toggle('open', budgetOpen[idx]);
+}
+
+// Tooltip
+const gtt = document.getElementById('gantt-tooltip');
+function showGTT(e, id, label, detail, indicative, hq) {
+  let notes = '';
+  if (indicative) notes += `<div class="tt-note">Indicative — subject to vendor evaluation, confirmed business need, HQ approval & budget.</div>`;
+  if (hq)         notes += `<div class="tt-note">Pending HQ approval — initiate alignment before proceeding.</div>`;
+  gtt.innerHTML = `<strong>${id} — ${label}</strong>${detail}${notes}`;
+  gtt.style.display = 'block';
+  moveGTT(e);
+}
+function moveGTT(e) {
+  let x = e.clientX + 16, y = e.clientY + 16;
+  if (x + 300 > window.innerWidth)  x = e.clientX - 316;
+  if (y + 160 > window.innerHeight) y = e.clientY - 120;
+  gtt.style.left = x + 'px';
+  gtt.style.top  = y + 'px';
+}
+function hideGTT() { gtt.style.display = 'none'; }
+document.addEventListener('mousemove', e => { if (gtt.style.display === 'block') moveGTT(e); });
+
+// ── ANNEXES ───────────────────────────────────────────────────────────────
+function toggleAnnex(id) {
+  const body = document.getElementById('annex-' + id);
+  const chev = document.getElementById('chev-' + id);
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+// ── NAV ACTIVE STATE ──────────────────────────────────────────────────────
+const sections = document.querySelectorAll('section, .hero');
+const navLinks  = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ── INIT: render all 3 scenario bodies up-front ───────────────────────────
+[0, 1, 2].forEach(i => {
+  const body = document.getElementById('gantt-sc-' + i);
+  body.innerHTML = renderScenario(i);
+  body.dataset.rendered = '1';
+});
+// Set default to Realistic (idx=1)
+setGanttTab(1);
+</script>
+
+</body>
+</html>
