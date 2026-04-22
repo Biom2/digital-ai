@@ -3,1658 +3,1163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Masdar UK · Digital & AI · Shareholder Update · April 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Digital & AI Strategy — SLT Presentation | Masdar UK | April 2026</title>
 <style>
-:root{
-  --navy:#0E1F4D;
-  --navy-2:#1A2E5C;
-  --navy-3:#233A75;
-  --gold:#C9A961;
-  --gold-light:#E3C888;
-  --ivory:#F7F4ED;
-  --ivory-2:#EDE8DB;
-  --ink:#0A1530;
-  --muted:#6B7280;
-  --line:rgba(14,31,77,.12);
-  --line-strong:rgba(14,31,77,.22);
-  --live:#2F7D5A;
-  --inflight:#C9A961;
-  --poc:#8E6BB8;
-  --planned:#9AA3B2;
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap');
 
-  /* workstream palette */
-  --ws-foundations:#5E8F7E;
-  --ws-bess:#4A6FA5;
-  --ws-commercial:#C97B4A;
-  --ws-ai:#7A6BB5;
-  --ws-finance:#D4A84B;
-  --ws-governance:#B56A8A;
-  --ws-enablement:#6B7280;
-  --ws-specialist:#2C3E50;
-  --ws-resource:#9AA3B2;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-*{margin:0;padding:0;box-sizing:border-box}
-
-html,body{
-  background:var(--ivory);
-  color:var(--ink);
-  font-family:'Inter',sans-serif;
-  font-weight:400;
-  overflow:hidden;
-  height:100vh;
-  width:100vw;
-  letter-spacing:-.005em;
-}
-
-/* ===== STAGE ===== */
-.stage{
-  position:fixed;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  perspective:1800px;
-}
-
-.slide{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  padding:48px 72px 64px;
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(20px);
-  transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1);
-}
-.slide.active{opacity:1;transform:translateY(0);pointer-events:auto}
-
-/* slide label chrome */
-.slide-chrome{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  font-family:'Inter',sans-serif;
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--navy);
-  opacity:.55;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--line);
-}
-.slide-chrome .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 14px;vertical-align:middle;transform:translateY(-2px)}
-
-/* ===== NAVIGATION ===== */
-.nav{
-  position:fixed;bottom:24px;left:50%;
-  transform:translateX(-50%);
-  display:flex;align-items:center;gap:14px;
-  background:rgba(14,31,77,.92);
-  backdrop-filter:blur(12px);
-  padding:10px 16px;border-radius:100px;
-  z-index:100;
-  box-shadow:0 10px 40px rgba(14,31,77,.3);
-}
-.nav-btn{
-  width:32px;height:32px;border-radius:50%;
-  border:1px solid rgba(201,169,97,.3);
-  background:transparent;color:var(--ivory);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .25s ease;
-  font-size:14px;
-}
-.nav-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.nav-btn:disabled{opacity:.25;cursor:not-allowed}
-.nav-dots{display:flex;gap:7px;align-items:center}
-.dot-btn{
-  width:7px;height:7px;border-radius:50%;
-  background:rgba(255,255,255,.25);
-  border:none;cursor:pointer;
-  transition:all .25s ease;
-  padding:0;
-}
-.dot-btn.active{background:var(--gold);width:22px;border-radius:4px}
-.dot-btn:hover:not(.active){background:rgba(255,255,255,.5)}
-.nav-counter{
-  color:var(--ivory);
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;
-  letter-spacing:.08em;
-  opacity:.7;
-  padding:0 6px;
-}
-
-/* ===== SLIDE 1 — COVER ===== */
-.cover{
-  background:var(--navy);
-  padding:0;
-  color:var(--ivory);
-  overflow:hidden;
-}
-.cover-inner{
-  position:absolute;inset:0;
-  padding:56px 80px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  z-index:2;
-}
-.cover-grid{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(201,169,97,.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,169,97,.06) 1px,transparent 1px);
-  background-size:60px 60px;
-  z-index:1;
-  mask-image:radial-gradient(ellipse at 70% 40%,black 30%,transparent 75%);
-}
-.cover-glow{
-  position:absolute;right:-120px;top:-120px;
-  width:620px;height:620px;
-  background:radial-gradient(circle,rgba(201,169,97,.18),transparent 60%);
-  z-index:1;
-  animation:glowfloat 14s ease-in-out infinite;
-}
-@keyframes glowfloat{
-  0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(-30px,40px) scale(1.1)}
-}
-.brand-line{
-  display:flex;align-items:center;gap:14px;
-  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);font-weight:500;
-}
-.brand-mark{width:28px;height:1px;background:var(--gold)}
-.cover-title{
-  font-family:'Fraunces',serif;
-  font-size:clamp(54px,6.2vw,92px);
-  font-weight:400;
-  line-height:1.02;
-  letter-spacing:-.025em;
-  max-width:14ch;
-}
-.cover-title em{
-  font-style:italic;
-  color:var(--gold);
-  font-weight:300;
-}
-.cover-sub{
-  font-size:19px;
-  color:rgba(247,244,237,.72);
-  max-width:52ch;
-  margin-top:22px;
-  line-height:1.5;
-  font-weight:300;
-}
-.cover-meta{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  gap:40px;
-}
-.cover-speakers{
-  display:flex;gap:44px;
-}
-.speaker-card{
-  font-size:13px;
-  line-height:1.55;
-}
-.speaker-card .role{
-  color:var(--gold);
-  font-size:10px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  margin-bottom:6px;
-  font-weight:500;
-}
-.speaker-card .name{
-  font-family:'Fraunces',serif;
-  font-size:20px;
-  font-weight:500;
-  margin-bottom:3px;
-}
-.speaker-card .desc{
-  color:rgba(247,244,237,.6);
-  font-size:12px;
-}
-.cover-stamp{
-  text-align:right;
-  font-size:12px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:rgba(247,244,237,.55);
-  line-height:1.7;
-}
-.cover-stamp strong{color:var(--gold);letter-spacing:.18em}
-
-/* staggered reveal */
-.slide.active .reveal{animation:reveal .7s cubic-bezier(.2,.8,.2,1) backwards}
-.slide.active .reveal-1{animation-delay:.1s}
-.slide.active .reveal-2{animation-delay:.22s}
-.slide.active .reveal-3{animation-delay:.34s}
-.slide.active .reveal-4{animation-delay:.46s}
-.slide.active .reveal-5{animation-delay:.58s}
-.slide.active .reveal-6{animation-delay:.7s}
-@keyframes reveal{
-  from{opacity:0;transform:translateY(16px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* ===== SLIDE 2 — AGENDA ===== */
-.slide-title{
-  font-family:'Fraunces',serif;
-  font-weight:400;
-  font-size:52px;
-  line-height:1.08;
-  letter-spacing:-.02em;
-  color:var(--ink);
-  margin-top:28px;
-  max-width:22ch;
-}
-.slide-title em{font-style:italic;color:var(--gold);font-weight:300}
-.slide-kicker{
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--navy);
-}
-.slide-kicker .num{color:var(--gold);margin-right:10px;font-family:'JetBrains Mono',monospace;font-weight:500}
-.slide-lead{
-  font-family:'Fraunces',serif;
-  font-size:20px;
-  font-weight:300;
-  font-style:italic;
-  color:var(--muted);
-  max-width:62ch;
-  margin-top:20px;
-  line-height:1.45;
-}
-
-.agenda{
-  margin-top:56px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:0;
-  border-top:1px solid var(--line);
-}
-.agenda-item{
-  padding:32px 20px 28px 0;
-  border-right:1px solid var(--line);
-  position:relative;
-  cursor:pointer;
-  transition:all .3s ease;
-}
-.agenda-item:last-child{border-right:none;padding-right:0}
-.agenda-item:hover{transform:translateY(-4px)}
-.agenda-item:hover .agenda-num{color:var(--gold)}
-.agenda-item:hover .agenda-bar{width:100%}
-.agenda-num{
-  font-family:'Fraunces',serif;
-  font-size:44px;
-  font-weight:300;
-  font-style:italic;
-  color:var(--navy);
-  line-height:1;
-  margin-bottom:18px;
-  transition:color .3s ease;
-}
-.agenda-label{
-  font-size:15px;
-  font-weight:600;
-  margin-bottom:6px;
-  color:var(--ink);
-}
-.agenda-desc{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.45;
-}
-.agenda-bar{
-  position:absolute;top:0;left:0;
-  width:28px;height:2px;
-  background:var(--gold);
-  transition:width .45s cubic-bezier(.2,.8,.2,1);
-}
-
-/* ===== SLIDE 3 — ALIGNMENT ===== */
-.align-layout{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:0;
-  margin-top:48px;
-  flex:1;
-}
-.align-col{
-  padding:36px 32px 32px 0;
-  border-left:1px solid var(--line);
-  padding-left:32px;
-  display:flex;flex-direction:column;
-  position:relative;
-}
-.align-col:first-child{border-left:none;padding-left:0}
-.align-col .tag{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:.22em;
-  color:var(--gold);
-  margin-bottom:22px;
-  text-transform:uppercase;
-}
-.align-col h3{
-  font-family:'Fraunces',serif;
-  font-size:30px;
-  font-weight:400;
-  line-height:1.15;
-  letter-spacing:-.01em;
-  color:var(--ink);
-  margin-bottom:22px;
-}
-.align-col p{
-  font-size:15px;
-  line-height:1.62;
-  color:#2a3249;
-}
-.align-col .icon{
-  width:48px;height:48px;
-  margin-bottom:24px;
-  opacity:.85;
-}
-.align-takeaway{
-  margin-top:auto;
-  padding-top:36px;
-  border-top:1px solid var(--line);
-  display:flex;align-items:center;gap:16px;
-  font-size:14px;
-  color:var(--navy);
-  font-weight:500;
-}
-.align-takeaway::before{
-  content:"";
-  display:inline-block;
-  width:32px;height:1px;
-  background:var(--gold);
-}
-
-/* ===== SLIDE 4 — 90 DAYS ===== */
-.timeline-wrap{
-  margin-top:48px;
-  position:relative;
-  padding:80px 0 40px;
-}
-.timeline-rail{
-  position:absolute;left:0;right:0;top:120px;
-  height:1px;background:var(--line-strong);
-}
-.timeline-rail::before{
-  content:"";position:absolute;left:0;top:-3px;
-  width:0;height:7px;
-  background:var(--gold);
-  animation:railfill 1.6s cubic-bezier(.2,.8,.2,1) .3s forwards;
-}
-.slide.active .timeline-rail::before{animation:railfill 1.6s cubic-bezier(.2,.8,.2,1) .3s forwards}
-@keyframes railfill{to{width:100%}}
-
-.timeline{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:24px;
-  position:relative;
-}
-.tl-item{
-  position:relative;
-  padding-top:60px;
-}
-.tl-dot{
-  position:absolute;top:33px;left:0;
-  width:14px;height:14px;
-  border-radius:50%;
-  background:var(--ivory);
-  border:2px solid var(--navy);
-  z-index:2;
-  transition:all .3s ease;
-}
-.tl-item.live .tl-dot{background:var(--live);border-color:var(--live)}
-.tl-item:hover .tl-dot{transform:scale(1.4);background:var(--gold);border-color:var(--gold)}
-.tl-date{
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:var(--gold);
-  font-weight:500;
-  margin-bottom:10px;
-}
-.tl-title{
-  font-family:'Fraunces',serif;
-  font-size:22px;
-  font-weight:500;
-  line-height:1.2;
-  color:var(--ink);
-  margin-bottom:10px;
-}
-.tl-desc{
-  font-size:13px;
-  line-height:1.5;
-  color:var(--muted);
-}
-.tl-live-pill{
-  display:inline-block;
-  font-family:'JetBrains Mono',monospace;
-  font-size:9px;
-  padding:3px 8px;
-  background:var(--live);
-  color:white;
-  border-radius:3px;
-  letter-spacing:.12em;
-  margin-top:8px;
-  font-weight:500;
-}
-
-.stats-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:0;
-  margin-top:56px;
-  padding-top:40px;
-  border-top:1px solid var(--line);
-}
-.stat{
-  padding:0 24px;
-  border-right:1px solid var(--line);
-  position:relative;
-}
-.stat:last-child{border-right:none}
-.stat-num{
-  font-family:'Fraunces',serif;
-  font-size:64px;
-  font-weight:400;
-  line-height:1;
-  color:var(--navy);
-  letter-spacing:-.03em;
-}
-.stat-num sup{
-  font-size:22px;
-  color:var(--gold);
-  font-weight:500;
-  top:-28px;
-  margin-left:4px;
-  font-style:italic;
-}
-.stat-label{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:10px;
-  line-height:1.4;
-  max-width:22ch;
-}
-
-/* ===== SLIDE 5 — MASDARMIND ===== */
-.platform-wrap{
-  display:grid;
-  grid-template-columns:1.35fr 1fr;
-  gap:56px;
-  margin-top:36px;
-  flex:1;
-  align-items:center;
-}
-.architecture{
-  background:#fff;
-  border-radius:3px;
-  padding:36px 30px;
-  border:1px solid var(--line);
-  position:relative;
-}
-.arch-title{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:24px;
-}
-
-.medallion{
-  display:grid;
-  grid-template-columns:auto 1fr 1fr 1fr 1fr;
-  gap:6px;
-  align-items:stretch;
-}
-.med-sources,.med-outputs{
-  display:flex;flex-direction:column;gap:4px;
-  padding:8px 0;
-}
-.med-src,.med-out{
-  padding:9px 10px;
-  background:var(--ivory);
-  font-size:11.5px;
-  border-radius:2px;
-  color:var(--ink);
-  white-space:nowrap;
-  border-left:2px solid var(--navy);
-  font-weight:500;
-  transition:all .3s ease;
-}
-.med-src:hover,.med-out:hover{background:var(--gold);color:var(--navy);transform:translateX(3px)}
-
-.med-layer{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:16px 8px;
-  border-radius:3px;
-  text-align:center;
-  min-height:220px;
-  position:relative;
-  overflow:hidden;
-}
-.med-layer::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.08),transparent);
-}
-.med-bronze{background:linear-gradient(160deg,#8B6F47,#6B5336)}
-.med-silver{background:linear-gradient(160deg,#8F96A3,#6B7280)}
-.med-gold{background:linear-gradient(160deg,#C9A961,#A8873F)}
-.med-tier{
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;letter-spacing:.2em;
-  color:rgba(255,255,255,.7);
-  margin-bottom:10px;
-  font-weight:500;
-}
-.med-layer h4{
-  font-family:'Fraunces',serif;
-  font-size:22px;
-  color:#fff;
-  margin-bottom:6px;
-  font-weight:500;
-}
-.med-layer small{
-  font-size:11px;
-  color:rgba(255,255,255,.85);
-  line-height:1.4;
-}
-.med-arrow{
-  align-self:center;
-  color:var(--muted);
-  font-size:18px;
-}
-
-.arch-foot{
-  margin-top:22px;
-  padding-top:16px;
-  border-top:1px solid var(--line);
-  font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;
-  letter-spacing:.12em;
-  color:var(--muted);
-  text-align:center;
-  text-transform:uppercase;
-}
-
-.platform-notes{
-  display:flex;flex-direction:column;gap:24px;
-}
-.note{
-  padding:20px 0 20px 22px;
-  border-left:2px solid var(--gold);
-}
-.note h4{
-  font-family:'Fraunces',serif;
-  font-size:20px;
-  font-weight:500;
-  margin-bottom:6px;
-  color:var(--ink);
-}
-.note p{
-  font-size:14px;
-  color:#2a3249;
-  line-height:1.55;
-}
-.handoff-box{
-  margin-top:4px;
-  padding:18px 22px;
-  background:var(--navy);
-  color:var(--ivory);
-  border-radius:3px;
-  display:flex;align-items:center;gap:16px;
-}
-.handoff-box .hicon{
-  width:40px;height:40px;border-radius:50%;
-  background:var(--gold);color:var(--navy);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-family:'Fraunces',serif;
-  flex-shrink:0;
-}
-.handoff-box .htxt{font-size:13px;line-height:1.5}
-.handoff-box .htxt strong{color:var(--gold);font-weight:500}
-
-/* ===== SLIDE 6 — USE CASES ===== */
-.uc-legend{
-  display:flex;gap:22px;margin-top:20px;margin-bottom:18px;
-  font-size:11px;
-  font-family:'JetBrains Mono',monospace;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-}
-.uc-legend .lg{display:flex;align-items:center;gap:7px}
-.uc-legend .lg::before{content:"";width:8px;height:8px;border-radius:50%}
-.lg-live::before{background:var(--live)}
-.lg-flight::before{background:var(--inflight)}
-.lg-poc::before{background:var(--poc)}
-
-.uc-table{
-  margin-top:10px;
-  background:#fff;
-  border-radius:3px;
-  border:1px solid var(--line);
-  overflow:hidden;
-  flex:1;
-}
-.uc-head{
-  display:grid;
-  grid-template-columns:2fr 1.2fr 3fr 0.8fr;
-  gap:20px;
-  padding:14px 22px;
-  background:var(--navy);
-  color:var(--ivory);
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  font-weight:500;
-}
-.uc-row{
-  display:grid;
-  grid-template-columns:2fr 1.2fr 3fr 0.8fr;
-  gap:20px;
-  padding:16px 22px;
-  border-top:1px solid var(--line);
-  align-items:center;
-  transition:background .2s ease;
-  cursor:default;
-}
-.uc-row:hover{background:var(--ivory)}
-.uc-row .case{
-  font-family:'Fraunces',serif;
-  font-size:16px;
-  font-weight:500;
-  color:var(--ink);
-}
-.uc-row .area{
-  font-size:12px;
-  color:var(--muted);
-  font-family:'JetBrains Mono',monospace;
-  letter-spacing:.05em;
-}
-.uc-row .desc{
-  font-size:13px;
-  line-height:1.5;
-  color:#374151;
-}
-.uc-row .st{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  padding:4px 10px;
-  border-radius:3px;
-  text-align:center;
-  font-weight:500;
-  justify-self:end;
-}
-.st-live{background:var(--live);color:#fff}
-.st-flight{background:var(--inflight);color:var(--navy)}
-.st-poc{background:var(--poc);color:#fff}
-
-.uc-foot{
-  margin-top:16px;
-  font-size:11.5px;
-  color:var(--muted);
-  letter-spacing:.02em;
-  padding-left:14px;
-  border-left:2px solid var(--gold);
-  line-height:1.5;
-}
-
-/* ===== SLIDE 7 — ROADMAP (GANTT) ===== */
-.roadmap-slide{padding:32px 48px 56px}
-.roadmap-header{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  margin-top:14px;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--line);
-}
-.roadmap-title{
-  font-family:'Fraunces',serif;
-  font-size:36px;
-  font-weight:400;
-  line-height:1.1;
-  letter-spacing:-.015em;
-}
-.roadmap-title em{color:var(--gold);font-style:italic}
-.roadmap-sub{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:6px;
-}
-.roadmap-legend{
-  display:flex;gap:22px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-}
-.rl{display:flex;align-items:center;gap:7px}
-.rl-bar{width:20px;height:8px;border-radius:2px}
-.rl-live{background:var(--live)}
-.rl-flight{background:var(--inflight)}
-.rl-planned{background:var(--planned)}
-
-.gantt-scroll{
-  flex:1;
-  overflow-y:auto;
-  overflow-x:hidden;
-  margin-top:14px;
-  padding-right:8px;
-  scrollbar-width:thin;
-  scrollbar-color:var(--navy) var(--ivory);
-}
-.gantt-scroll::-webkit-scrollbar{width:6px}
-.gantt-scroll::-webkit-scrollbar-thumb{background:var(--navy);border-radius:3px}
-
-.gantt{
-  display:grid;
-  grid-template-columns:300px repeat(3,1fr);
-  column-gap:0;
-  font-size:12px;
-}
-.gantt-header{
-  display:contents;
-}
-.gantt-header > div{
-  padding:10px 12px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--navy);
-  font-weight:600;
-  border-bottom:1.5px solid var(--navy);
-  background:var(--ivory);
-  position:sticky;top:0;z-index:5;
-}
-.gantt-header .first{background:var(--navy);color:var(--ivory)}
-
-.ws-label{
-  grid-column:1 / -1;
-  padding:14px 12px 8px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--navy);
-  font-weight:600;
-  border-bottom:1px solid var(--line);
-  background:var(--ivory-2);
-  margin-top:4px;
-}
-.ws-label .dot{
-  display:inline-block;
-  width:8px;height:8px;border-radius:50%;
-  margin-right:10px;vertical-align:middle;
-  transform:translateY(-1px);
-}
-
-.gantt-row{
-  display:contents;
-}
-.gantt-row > div{
-  padding:9px 10px;
-  border-bottom:1px solid rgba(14,31,77,.05);
-  font-size:12px;
-  display:flex;align-items:center;
-  position:relative;
-  background:#fff;
-}
-.gantt-row .label{
-  display:block;
-  color:var(--ink);
-  font-size:12.5px;
-}
-.gantt-row .label .code{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  color:var(--muted);
-  margin-right:8px;
-  letter-spacing:.05em;
-}
-.gantt-row .label .tags{
-  display:inline-flex;gap:4px;margin-left:8px;
-}
-.tag-pill{
-  font-family:'JetBrains Mono',monospace;
-  font-size:8.5px;
-  padding:1px 5px;
-  border-radius:2px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  font-weight:500;
-  white-space:nowrap;
-}
-.tag-de{background:rgba(14,31,77,.08);color:var(--navy);border:1px solid rgba(14,31,77,.15)}
-.tag-hq{background:rgba(201,169,97,.18);color:#8B6F1A;border:1px solid rgba(201,169,97,.4)}
-.tag-pe{background:rgba(122,107,181,.15);color:#5a4996;border:1px solid rgba(122,107,181,.3)}
-.tag-ind{background:transparent;color:var(--muted);border:1px dashed var(--line-strong)}
-
-.gantt-cell{
-  position:relative;
-  padding:9px 4px !important;
-}
-.bar{
-  height:18px;border-radius:3px;
-  width:92%;margin:0 auto;
-  position:relative;
-  transition:all .3s ease;
-  cursor:pointer;
-  box-shadow:0 1px 2px rgba(0,0,0,.06);
-}
-.bar:hover{transform:scaleY(1.15);box-shadow:0 3px 8px rgba(0,0,0,.18)}
-.bar.half-r{width:46%;margin-left:54%}
-.bar.half-l{width:46%;margin-right:54%;margin-left:0}
-.bar.q34{width:200%;margin-left:0}
-.bar-live{background:var(--live)}
-.bar-flight{background:var(--inflight)}
-.bar-planned{background:var(--planned)}
-
-/* tooltip */
-.gantt-tooltip{
-  position:fixed;
-  background:var(--navy);
-  color:var(--ivory);
-  padding:10px 14px;
-  border-radius:3px;
-  font-size:11.5px;
-  line-height:1.5;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .15s ease;
-  z-index:1000;
-  max-width:260px;
-  box-shadow:0 8px 24px rgba(14,31,77,.25);
-  border:1px solid var(--gold);
-}
-.gantt-tooltip.show{opacity:1}
-.gantt-tooltip strong{color:var(--gold);display:block;margin-bottom:4px;font-family:'Fraunces',serif;font-size:13px;font-weight:500}
-
-.roadmap-footnote{
-  margin-top:14px;
-  padding:12px 16px;
-  background:rgba(14,31,77,.04);
-  border-left:2px solid var(--gold);
-  font-size:11px;
-  color:var(--muted);
-  line-height:1.55;
-}
-.roadmap-footnote strong{color:var(--navy);font-weight:600}
-
-/* ===== SLIDE 8 — TAKEAWAYS ===== */
-.takeaway-slide{
-  background:var(--navy);
-  color:var(--ivory);
-  padding:0;
-  overflow:hidden;
-}
-.takeaway-inner{
-  position:absolute;inset:0;
-  padding:56px 80px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  z-index:2;
-}
-.takeaway-head .slide-kicker{color:var(--gold)}
-.takeaway-title{
-  font-family:'Fraunces',serif;
-  font-size:64px;
-  font-weight:400;
-  line-height:1.05;
-  letter-spacing:-.02em;
-  color:var(--ivory);
-  margin-top:20px;
-  max-width:18ch;
-}
-.takeaway-title em{font-style:italic;color:var(--gold);font-weight:300}
-
-.takeaways{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:48px;
-  margin-top:auto;
-  padding-top:40px;
-}
-.ta{
-  padding:28px 0 0;
-  border-top:1.5px solid var(--gold);
-  position:relative;
-}
-.ta-num{
-  font-family:'Fraunces',serif;
-  font-size:56px;
-  font-weight:300;
-  font-style:italic;
-  color:var(--gold);
-  line-height:1;
-  margin-bottom:20px;
-}
-.ta-head{
-  font-family:'Fraunces',serif;
-  font-size:26px;
-  font-weight:500;
-  color:var(--ivory);
-  margin-bottom:14px;
-  line-height:1.15;
-}
-.ta-body{
-  font-size:14px;
-  color:rgba(247,244,237,.72);
-  line-height:1.62;
-}
-
-.thanks{
-  margin-top:52px;
-  padding-top:28px;
-  border-top:1px solid rgba(201,169,97,.25);
-  display:flex;justify-content:space-between;align-items:flex-end;
-}
-.thanks-word{
-  font-family:'Fraunces',serif;
-  font-size:38px;
-  font-style:italic;
-  font-weight:300;
-  color:var(--gold);
-}
-.thanks-meta{
-  text-align:right;
-  font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:rgba(247,244,237,.55);
-  line-height:1.7;
-}
-
-/* ===== PROGRESS BAR ===== */
-.progress{
-  position:fixed;top:0;left:0;right:0;
-  height:2px;background:transparent;
-  z-index:200;
-}
-.progress-fill{
-  height:100%;background:var(--gold);
-  transition:width .45s cubic-bezier(.2,.8,.2,1);
-}
-
-/* keyboard hint */
-.hint{
-  position:fixed;top:22px;right:28px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;letter-spacing:.15em;
-  color:var(--muted);
-  text-transform:uppercase;
-  opacity:.5;
-  z-index:50;
-  pointer-events:none;
-}
-.hint kbd{
-  padding:2px 7px;margin:0 2px;
-  background:rgba(14,31,77,.08);
-  border-radius:3px;
-  font-family:inherit;
-}
-
-@media (max-width:1100px){
-  body::after{
-    content:"This presentation is designed for widescreen displays (1280px+). For best experience, view on desktop.";
-    position:fixed;inset:0;
-    background:var(--navy);color:var(--ivory);
-    display:flex;align-items:center;justify-content:center;
-    padding:40px;text-align:center;font-size:14px;
-    z-index:9999;line-height:1.6;
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --ink: #1A1916;
+    --muted: #7A7870;
+    --faint: #F0EEE8;
+    --border: #E2E0D8;
+    --accent: #4668b3;
+    --accent2: #2E7FCF;
+    --accent3: #6B5FD4;
+    --accent4: #D4860A;
+    --accent5: #B84C7A;
+    --accent6: #C4440E;
+    --green: #1D9E75;
+    --red: #D44;
   }
-}
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,247,.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-brand { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2px; }
+  .nav-links a {
+    font-size: 11px; color: var(--muted); text-decoration: none;
+    padding: 5px 11px; border-radius: 5px; transition: all .15s;
+    font-weight: 500; letter-spacing: -.01em;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--faint); }
+
+  /* SLIDE WRAPPER */
+  .slide {
+    min-height: 100vh;
+    padding: 100px 80px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .slide-num {
+    position: absolute; top: 68px; right: 80px;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--border);
+    letter-spacing: .06em;
+  }
+
+  /* SECTION LABEL */
+  .s-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: .12em; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .s-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
+
+  /* HEADINGS */
+  h1.display {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400; line-height: 1.1; letter-spacing: -.03em;
+    max-width: 820px;
+  }
+  h1.display em { font-style: italic; color: var(--accent); }
+  h2.section-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    font-weight: 400; line-height: 1.12; letter-spacing: -.025em;
+    margin-bottom: 32px;
+  }
+  h2.section-title em { font-style: italic; color: var(--accent); }
+
+  .sub {
+    font-size: 16px; color: var(--muted); font-weight: 300; line-height: 1.7;
+    max-width: 580px; margin-top: 20px;
+  }
+
+  /* HERO META */
+  .hero-meta {
+    display: flex; gap: 48px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta-item .val {
+    font-size: 28px; font-weight: 700; letter-spacing: -.03em; line-height: 1;
+    color: var(--ink);
+  }
+  .hero-meta-item .val.accent { color: var(--accent); }
+  .hero-meta-item .lbl {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em;
+  }
+
+  /* STAT STRIP */
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px; margin-bottom: 40px;
+  }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 18px; text-align: center;
+  }
+  .stat-card .sv { font-size: 36px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+  .stat-card .sl { font-size: 10px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: .07em; font-weight: 500; }
+  .stat-card.c-accent .sv { color: var(--accent); }
+  .stat-card.c-green .sv { color: var(--green); }
+  .stat-card.c-orange .sv { color: var(--accent4); }
+  .stat-card.c-purple .sv { color: var(--accent3); }
+  .stat-card.c-blue .sv { color: var(--accent2); }
+
+  /* SIGNAL CARDS */
+  .signals { display: grid; gap: 2px; margin-bottom: 32px; }
+  .signal {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 22px 28px; display: grid; grid-template-columns: 44px 1fr;
+    gap: 18px; align-items: start; transition: background .15s;
+  }
+  .signal:first-child { border-radius: 12px 12px 0 0; }
+  .signal:last-child { border-radius: 0 0 12px 12px; }
+  .signal:hover { background: var(--faint); }
+  .signal-num { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; color: var(--accent); line-height: 1; }
+  .signal h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; letter-spacing: -.01em; }
+  .signal p { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+  .signal .quote { margin-top: 8px; font-size: 12px; font-style: italic; color: var(--accent); border-left: 2px solid var(--accent); padding-left: 10px; }
+
+  /* MATURITY BARS */
+  .maturity-grid { display: grid; gap: 5px; margin-bottom: 32px; }
+  .mat-row { display: grid; grid-template-columns: 200px 1fr 36px; gap: 12px; align-items: center; padding: 6px 0; }
+  .mat-label { font-size: 13px; font-weight: 500; }
+  .mat-bar-bg { height: 18px; background: var(--faint); border-radius: 4px; overflow: hidden; }
+  .mat-bar { height: 100%; border-radius: 4px; }
+  .mat-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); text-align: right; }
+
+  /* PRIORISATION */
+  .prio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  .prio-axis {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px;
+  }
+  .prio-axis-label { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+  .prio-axis h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; letter-spacing: -.01em; }
+  .prio-criteria { display: flex; flex-direction: column; gap: 5px; }
+  .prio-crit { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 10px; background: var(--faint); border-radius: 5px; }
+  .prio-crit span:last-child { font-family: 'DM Mono', monospace; color: var(--muted); }
+  .prio-formula { margin-top: 12px; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-family: 'DM Mono', monospace; text-align: center; }
+
+  .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 32px; }
+  .quad {
+    border-radius: 8px; padding: 14px 16px;
+    border: 1px solid;
+  }
+  .quad .qt { font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+  .quad h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .quad p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* DEPARTMENT MAP */
+  .dept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+  .dept-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; border-top: 3px solid;
+  }
+  .dept-card .dept-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 12px; }
+  .dept-card .uc-list { display: flex; flex-direction: column; gap: 4px; }
+  .uc-item { font-size: 12px; padding: 5px 9px; background: var(--faint); border-radius: 5px; line-height: 1.4; }
+  .uc-item .uc-id { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-right: 5px; }
+  .uc-item.live { background: rgba(29,158,117,.08); border: 1px solid rgba(29,158,117,.2); }
+  .uc-item .live-dot { display: inline-block; width: 6px; height: 6px; background: var(--green); border-radius: 50%; margin-right: 4px; }
+
+  /* 6-MONTH ROADMAP */
+  .roadmap-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .roadmap-table th {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--muted); padding: 8px 12px; text-align: left; background: var(--faint);
+    border-bottom: 1px solid var(--border);
+  }
+  .roadmap-table th:not(:first-child):not(:nth-child(2)) { text-align: center; }
+  .roadmap-table td {
+    padding: 7px 12px; border-bottom: 1px solid var(--faint); vertical-align: middle;
+  }
+  .roadmap-table tr:last-child td { border-bottom: none; }
+  .roadmap-table tr.dept-row td {
+    background: var(--faint); font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+    padding: 8px 12px; border-top: 1px solid var(--border);
+  }
+  .roadmap-table tr:hover:not(.dept-row) td { background: #FAFAF7; }
+  .bar { height: 14px; border-radius: 3px; display: block; }
+  .bar-full { width: 90%; }
+  .bar-start { width: 90%; border-radius: 3px 0 0 3px; }
+  .bar-mid { width: 100%; border-radius: 0; }
+  .bar-end { width: 90%; border-radius: 0 3px 3px 0; }
+  .cell-empty { }
+  .badge { font-size: 9px; font-family: 'DM Mono', monospace; padding: 2px 6px; border-radius: 3px; margin-left: 5px; text-transform: uppercase; letter-spacing: .04em; }
+  .badge-live { background: rgba(29,158,117,.12); color: var(--green); border: 1px solid rgba(29,158,117,.3); }
+  .badge-de { background: rgba(46,127,207,.1); color: var(--accent2); border: 1px solid rgba(46,127,207,.25); }
+  .badge-hq { background: rgba(212,134,10,.1); color: var(--accent4); border: 1px solid rgba(212,134,10,.25); }
+  .badge-ind { background: var(--faint); color: var(--muted); border: 1px solid var(--border); }
+
+  /* INVESTMENT */
+  .inv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 32px; }
+  .inv-card { padding: 28px 24px; border-right: 1px solid var(--border); }
+  .inv-card:last-child { border-right: none; }
+  .inv-card.recommended { background: var(--ink); color: var(--bg); }
+  .inv-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
+  .inv-amount { font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; letter-spacing: -.02em; line-height: 1; margin-bottom: 4px; }
+  .inv-meta { font-family: 'DM Mono', monospace; font-size: 10px; opacity: .5; margin-bottom: 14px; }
+  .inv-desc { font-size: 13px; line-height: 1.6; opacity: .7; font-weight: 300; }
+  .inv-badge { display: inline-block; font-size: 9px; font-family: 'DM Mono', monospace; padding: 3px 8px; border-radius: 4px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; background: var(--accent); color: white; }
+
+  /* VISION */
+  .vision-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 32px; }
+  .vision-phase { padding: 28px 24px; border-right: 1px solid var(--border); }
+  .vision-phase:last-child { border-right: none; }
+  .vision-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+  .vision-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; font-weight: 400; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 12px; }
+  .vision-items { display: flex; flex-direction: column; gap: 5px; }
+  .vision-item { font-size: 12px; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+  .vision-item::before { content: '—'; color: var(--border); flex-shrink: 0; margin-top: 1px; }
+  .vision-hq { margin-top: 24px; padding: 16px 20px; background: rgba(70,104,179,.06); border: 1px solid rgba(70,104,179,.2); border-radius: 10px; font-size: 13px; color: var(--ink); line-height: 1.6; }
+  .vision-hq strong { font-weight: 600; }
+
+  /* ASKS */
+  .ask-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .ask-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 22px; border-left: 4px solid var(--accent);
+  }
+  .ask-card.urgent { border-left-color: var(--red); }
+  .ask-card.info { border-left-color: var(--accent2); }
+  .ask-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .ask-card p { font-size: 13px; color: var(--muted); line-height: 1.5; font-weight: 300; }
+
+  /* NEXT STEPS */
+  .next-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 32px; }
+  .next-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .next-when { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+  .next-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; letter-spacing: -.01em; }
+  .next-card p { font-size: 12px; color: var(--muted); line-height: 1.5; font-weight: 300; }
+
+  /* CLOSING */
+  .closing-line { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; letter-spacing: -.02em; line-height: 1.3; max-width: 700px; }
+  .closing-line em { font-style: italic; color: var(--accent); }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+  /* PROSE */
+  .prose { font-size: 14px; color: var(--muted); line-height: 1.7; font-weight: 300; max-width: 700px; margin-bottom: 28px; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  /* METHOD BADGE */
+  .method-highlight {
+    background: #3A3935; color: var(--bg); border-radius: 12px;
+    padding: 18px 28px; display: flex; align-items: center; gap: 24px;
+    margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .method-formula { font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; }
+  .method-sub { font-size: 13px; opacity: .55; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-1 { opacity: 0; animation: fadeUp .6s ease .1s forwards; }
+  .fade-2 { opacity: 0; animation: fadeUp .6s ease .2s forwards; }
+  .fade-3 { opacity: 0; animation: fadeUp .6s ease .3s forwards; }
+  .fade-4 { opacity: 0; animation: fadeUp .6s ease .4s forwards; }
+
+  /* TRANSVERSE TAG */
+  .tag-transverse { font-size: 9px; font-family: 'DM Mono', monospace; padding: 1px 5px; border-radius: 3px; margin-left: 4px; background: rgba(107,95,212,.1); color: var(--accent3); border: 1px solid rgba(107,95,212,.2); text-transform: uppercase; letter-spacing: .04em; }
+  .tag-live { font-size: 9px; font-family: 'DM Mono', monospace; padding: 1px 5px; border-radius: 3px; margin-left: 4px; background: rgba(29,158,117,.1); color: var(--green); border: 1px solid rgba(29,158,117,.25); text-transform: uppercase; letter-spacing: .04em; }
 </style>
 </head>
 <body>
 
-<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
-<div class="hint"><kbd>←</kbd><kbd>→</kbd> navigate</div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">Masdar UK · Digital & AI Strategy · April 2026</div>
+  <div class="nav-links">
+    <a href="#cover">Cover</a>
+    <a href="#discovery">Discovery</a>
+    <a href="#signals">Signals</a>
+    <a href="#maturity">Maturity</a>
+    <a href="#method">Method</a>
+    <a href="#ucmap">UC Map</a>
+    <a href="#roadmap6m">Roadmap</a>
+    <a href="#platform">Platform</a>
+    <a href="#vision">Vision</a>
+    <a href="#investment">Investment</a>
+    <a href="#asks">Asks</a>
+    <a href="#next">Next</a>
+  </div>
+</nav>
 
-<div class="stage" id="stage">
-
-<!-- ========== SLIDE 1: COVER ========== -->
-<section class="slide cover active" data-slide="1">
-  <div class="cover-grid"></div>
-  <div class="cover-glow"></div>
-  <div class="cover-inner">
-    <div class="brand-line reveal reveal-1">
-      <span class="brand-mark"></span>
-      <span>Masdar UK</span>
-      <span class="brand-mark"></span>
-      <span>Digital &amp; AI</span>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 — COVER -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="cover" style="min-height:100vh; border-bottom: 2px solid var(--ink);">
+  <div class="slide-num">01 / 12</div>
+  <div class="s-label fade-1">Strategy & SLT Meeting · April 24, 2026</div>
+  <h1 class="display fade-2">Building the <em>Digital & AI</em><br>Foundation for Masdar UK</h1>
+  <p class="sub fade-3">Discovery, prioritisation, and the 2026 roadmap — 45 days in.</p>
+  <div class="hero-meta fade-4">
+    <div class="hero-meta-item">
+      <span class="val accent">45</span>
+      <span class="lbl">Days in role</span>
     </div>
-
-    <div>
-      <h1 class="cover-title reveal reveal-2">
-        Building the AI<br>foundation for <em>offshore&nbsp;wind</em><br>and battery&nbsp;storage.
-      </h1>
-      <p class="cover-sub reveal reveal-3">
-        An update on Masdar UK's execution of the Group AI direction, prepared for Mubadala shareholder representatives.
-      </p>
+    <div class="hero-meta-item">
+      <span class="val">16</span>
+      <span class="lbl">Stakeholders interviewed</span>
     </div>
-
-    <div class="cover-meta reveal reveal-4">
-      <div class="cover-speakers">
-        <div class="speaker-card">
-          <div class="role"></div>
-          <div class="name"></div>
-          <div class="desc"><br>Masdar UK</div>
-        </div>
-        <div class="speaker-card">
-          <div class="role"></div>
-          <div class="name"></div>
-          <div class="desc"><br></div>
-        </div>
-      </div>
-      <div class="cover-stamp">
-        <strong>Shareholder update</strong><br>
-        Mubadala · April 2026<br>
-        London
-      </div>
+    <div class="hero-meta-item">
+      <span class="val">92</span>
+      <span class="lbl">Use cases identified</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="val">32+</span>
+      <span class="lbl">Use cases in 2026 roadmap</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="val accent">1</span>
+      <span class="lbl">AI tool already live</span>
     </div>
   </div>
-</section>
-
-<!-- ========== SLIDE 2: AGENDA ========== -->
-<section class="slide" data-slide="2">
-  <div class="slide-chrome">
-    <span>Masdar UK <span class="dot"></span> Digital &amp; AI <span class="dot"></span> Mubadala shareholder update</span>
-    <span>02 / 08</span>
-  </div>
-
-  <div class="slide-kicker reveal reveal-1"><span class="num">02</span>Agenda</div>
-  <h2 class="slide-title reveal reveal-2">What we'll <em>cover</em>.</h2>
-  <p class="slide-lead reveal reveal-3">Five short chapters. Most of the substance is in chapter 5.</p>
-
-  <div class="agenda">
-    <div class="agenda-item reveal reveal-2">
-      <div class="agenda-bar"></div>
-      <div class="agenda-num">01</div>
-      <div class="agenda-label">Alignment</div>
-      <div class="agenda-desc">Group direction, UK mandate, delivery model.</div>
-    </div>
-    <div class="agenda-item reveal reveal-3">
-      <div class="agenda-bar"></div>
-      <div class="agenda-num">02</div>
-      <div class="agenda-label">What we built</div>
-      <div class="agenda-desc">Ninety days of foundations, measured in artefacts.</div>
-    </div>
-    <div class="agenda-item reveal reveal-4">
-      <div class="agenda-bar"></div>
-      <div class="agenda-num">03</div>
-      <div class="agenda-label">MasdarMind</div>
-      <div class="agenda-desc">The data platform, with a deep dive.</div>
-    </div>
-    <div class="agenda-item reveal reveal-5">
-      <div class="agenda-bar"></div>
-      <div class="agenda-num">04</div>
-      <div class="agenda-label">Live use cases</div>
-      <div class="agenda-desc">What is running in production today.</div>
-    </div>
-    <div class="agenda-item reveal reveal-6">
-      <div class="agenda-bar"></div>
-      <div class="agenda-num">05</div>
-      <div class="agenda-label">2026 roadmap</div>
-      <div class="agenda-desc">Six workstreams through year-end, sequenced and resourced.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== SLIDE 3: ALIGNMENT ========== -->
-<section class="slide" data-slide="3">
-  <div class="slide-chrome">
-    <span>01 <span class="dot"></span> Alignment</span>
-    <span>03 / 08</span>
-  </div>
-
-  <div class="slide-kicker reveal reveal-1"><span class="num">01</span>Alignment</div>
-  <h2 class="slide-title reveal reveal-2">Executing the Group's AI ambition <em>on the ground</em>.</h2>
-
-  <div class="align-layout">
-    <div class="align-col reveal reveal-3">
-      <div class="tag">Group vision</div>
-      <h3>AI that moves operational and commercial numbers.</h3>
-      <p>The Group direction is explicit. AI earns its place by improving availability, lowering cost, accelerating execution, and lifting enterprise productivity. Technology is a means, not a milestone.</p>
-    </div>
-    <div class="align-col reveal reveal-4">
-      <div class="tag">UK mandate</div>
-      <h3>Translate that into Offshore Wind and BESS.</h3>
-      <p>Masdar UK operationalises the direction for Offshore Wind and BESS.</p>
-    </div>
-    <div class="align-col reveal reveal-5">
-      <div class="tag">Delivery model</div>
-      <h3>Platform, portfolio, governance.</h3>
-      <p>One data &amp; AI platform (MasdarMind). A prioritised use case portfolio backed by named business owners. Governance built in from day one, aligned with the Group data management office.</p>
-    </div>
-  </div>
-
-  <div class="align-takeaway reveal reveal-6">
-    Aligned with Group direction. Local operating model in place to deliver against it.
-  </div>
-</section>
-
-<!-- ========== SLIDE 4: 90 DAYS ========== -->
-<section class="slide" data-slide="4">
-  <div class="slide-chrome">
-    <span>02 <span class="dot"></span> What we built</span>
-    <span>04 / 08</span>
-  </div>
-
-  <div class="slide-kicker reveal reveal-1"><span class="num">02</span>What we built</div>
-  <h2 class="slide-title reveal reveal-2">Ninety days of <em>foundations</em>.</h2>
-
-  <div class="timeline-wrap">
-    <div class="timeline-rail"></div>
-    <div class="timeline">
-      <div class="tl-item reveal reveal-2">
-        <div class="tl-dot"></div>
-        <div class="tl-date">Late Feb</div>
-        <div class="tl-title">Stakeholder tour</div>
-        <div class="tl-desc">Fifteen structured interviews across eleven functions.</div>
-      </div>
-      <div class="tl-item reveal reveal-3">
-        <div class="tl-dot"></div>
-        <div class="tl-date">Early Mar</div>
-        <div class="tl-title">Use Case Bank</div>
-        <div class="tl-desc">92 use cases catalogued, 27 scored and prioritised.</div>
-      </div>
-      <div class="tl-item reveal reveal-4">
-        <div class="tl-dot"></div>
-        <div class="tl-date">Mid Mar</div>
-        <div class="tl-title">Operating model</div>
-        <div class="tl-desc">Prioritization & intake process, Data Governance.</div>
-      </div>
-      <div class="tl-item reveal reveal-5">
-        <div class="tl-dot"></div>
-        <div class="tl-date">Late Mar</div>
-        <div class="tl-title">MasdarMind architecture</div>
-        <div class="tl-desc">Databricks, Azure, Power BI. Group-aligned stack.</div>
-      </div>
-      <div class="tl-item live reveal reveal-6">
-        <div class="tl-dot"></div>
-        <div class="tl-date">April</div>
-        <div class="tl-title">First use cases live</div>
-        <div class="tl-desc">HR Policy Bot running & Anomaly Detection in production.</div>
-        <span class="tl-live-pill">● LIVE</span>
-      </div>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat reveal reveal-3">
-        <div class="stat-num" data-target="6">0</div>
-        <div class="stat-label">Core delivery artefacts produced.</div>
-      </div>
-      <div class="stat reveal reveal-4">
-        <div class="stat-num" data-target="11">0</div>
-        <div class="stat-label">Functions engaged across Masdar UK.</div>
-      </div>
-      <div class="stat reveal reveal-5">
-        <div class="stat-num" data-target="92">0</div>
-        <div class="stat-label">Use cases catalogued with named owners.</div>
-      </div>
-      <div class="stat reveal reveal-6">
-        <div class="stat-num" data-target="6">0</div>
-        <div class="stat-label">Workstreams launched and resourced.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== SLIDE 5: MASDARMIND ========== -->
-<section class="slide" data-slide="5">
-  <div class="slide-chrome">
-    <span>03 <span class="dot"></span> The platform</span>
-    <span>05 / 08</span>
-  </div>
-
-  <div class="slide-kicker reveal reveal-1"><span class="num">03</span>The platform</div>
-  <h2 class="slide-title reveal reveal-2">MasdarMind: the <em>spine</em> for data and AI.</h2>
-
-  <div class="platform-wrap">
-    <div class="architecture reveal reveal-3">
-      <div class="arch-title">Medallion architecture</div>
-      <div class="medallion">
-        <div class="med-sources">
-          <div class="med-src">SCADA (OT)</div>
-          <div class="med-src">Xero (Finance)</div>
-          <div class="med-src">Unifier (BESS)</div>
-          <div class="med-src">HR policies</div>
-          <div class="med-src">Legal docs</div>
-          <div class="med-src">Market data</div>
-        </div>
-        <div class="med-layer med-bronze">
-          <div class="med-tier">BRONZE</div>
-          <h4>Raw</h4>
-          <small>Ingest, as&#8209;is.</small>
-        </div>
-        <div class="med-layer med-silver">
-          <div class="med-tier">SILVER</div>
-          <h4>Conformed</h4>
-          <small>Cleaned, joined.</small>
-        </div>
-        <div class="med-layer med-gold">
-          <div class="med-tier">GOLD</div>
-          <h4>Business</h4>
-          <small>Modelled, curated.</small>
-        </div>
-        <div class="med-outputs">
-          <div class="med-out">Power BI</div>
-          <div class="med-out">RAG / AI agents</div>
-          <div class="med-out">Finance ops</div>
-          <div class="med-out">Governance</div>
-          <div class="med-out">Exec KPIs</div>
-        </div>
-      </div>
-      <div class="arch-foot">Unity Catalog · ADLS Gen2 · Databricks · Azure</div>
-    </div>
-
-    <div class="platform-notes">
-      <div class="note reveal reveal-4">
-        <h4>Group-aligned stack</h4>
-        <p>Azure, Databricks, Power BI. Same components as Masdar enterprise standards.</p>
-      </div>
-      <div class="note reveal reveal-5">
-        <h4>Governed access</h4>
-        <p>Unity Catalog for data access, ZTNA/PAM for OT, vendor vetting framework applied.</p>
-      </div>
-      <div class="note reveal reveal-6">
-        <h4>Ready to scale</h4>
-        <p>Built to carry BESS, Offshore Wind, and shared functions on one infrastructure.</p>
-      </div>
-      <div class="handoff-box reveal reveal-6">
-        <div class="hicon">DB</div>
-        <div class="htxt"><strong>Data Platform Deep Dive</strong></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== SLIDE 6: USE CASES ========== -->
-<section class="slide" data-slide="6">
-  <div class="slide-chrome">
-    <span>04 <span class="dot"></span> AI in production</span>
-    <span>06 / 08</span>
-  </div>
-
-  <div class="slide-kicker reveal reveal-1"><span class="num">04</span>Live use cases</div>
-  <h2 class="slide-title reveal reveal-2">Live and in-flight <em>today</em>.</h2>
-
-  <div class="uc-legend reveal reveal-3">
-    <div class="lg lg-live">Live</div>
-    <div class="lg lg-flight">In-flight</div>
-    <div class="lg lg-poc">PoC</div>
-  </div>
-
-  <div class="uc-table reveal reveal-3">
-    <div class="uc-head">
-      <div>Use case</div>
-      <div>Area</div>
-      <div>Description</div>
-      <div>Status</div>
-    </div>
-    <div class="uc-row">
-      <div class="case">HR Policy Bot v1</div>
-      <div class="area">Shared services</div>
-      <div class="desc">100% of UK HR policies indexed. Instant, auditable policy access for every employee.</div>
-      <div class="st st-live">● Live</div>
-    </div>
-    <div class="uc-row">
-      <div class="case">BESS Anomaly Detection</div>
-      <div class="area">BESS Ops</div>
-      <div class="desc">Early fault detection on battery assets. Models in production under Pouyan.</div>
-      <div class="st st-live">● Live</div>
-    </div>
-    <div class="uc-row">
-      <div class="case">RAG, OW / BESS / Legal</div>
-      <div class="area">Cross-function</div>
-      <div class="desc">Document intelligence for fast retrieval across technical and legal corpora.</div>
-      <div class="st st-flight">In-flight</div>
-    </div>
-    <div class="uc-row">
-      <div class="case">Executive KPI dashboard</div>
-      <div class="area">SLT</div>
-      <div class="desc">Single operational and commercial view for the senior leadership team.</div>
-      <div class="st st-flight">In-flight</div>
-    </div>
-    <div class="uc-row">
-      <div class="case">Xero → Gross Profit engine</div>
-      <div class="area">Finance</div>
-      <div class="desc">Databricks-based near real-time gross profit. Replaces manual month-end.</div>
-      <div class="st st-poc">PoC</div>
-    </div>
-    <div class="uc-row">
-      <div class="case">Audit &amp; DOA Intelligence</div>
-      <div class="area">Governance</div>
-      <div class="desc">Automated controls mapping and delegation-of-authority compliance checks.</div>
-      <div class="st st-flight">In-flight</div>
-    </div>
-  </div>
-
-  <div class="uc-foot reveal reveal-6">
-    Delivered under enterprise governance. Unity Catalog for access. ZTNA/PAM for OT. Vendor vetting framework applied. Non-enterprise tools (Make, Zapier, n8n) explicitly excluded.
-  </div>
-</section>
-
-<!-- ========== SLIDE 7: ROADMAP ========== -->
-<section class="slide roadmap-slide" data-slide="7">
-  <div class="slide-chrome">
-    <span>05 <span class="dot"></span> 2026 roadmap</span>
-    <span>07 / 08</span>
-  </div>
-
-  <div class="roadmap-header reveal reveal-1">
-    <div>
-      <div class="slide-kicker" style="margin-bottom:6px"><span class="num">05</span>2026 roadmap</div>
-      <h2 class="roadmap-title">The <em>full</em> 2026 delivery picture.</h2>
-      <div class="roadmap-sub">Nine workstreams · sequenced · resourced · aligned to Group direction. Hover any bar for detail.</div>
-    </div>
-    <div class="roadmap-legend">
-      <div class="rl"><div class="rl-bar rl-live"></div>Live</div>
-      <div class="rl"><div class="rl-bar rl-flight"></div>In-flight</div>
-      <div class="rl"><div class="rl-bar rl-planned"></div>Planned</div>
-    </div>
-  </div>
-
-  <div class="gantt-scroll" id="ganttScroll">
-    <div class="gantt" id="ganttGrid"></div>
-  </div>
-
-  <div class="roadmap-footnote reveal reveal-4">
-    <strong>Specialist tools disclaimer.</strong> Vendor selection for EPM, Asset Performance Management, Contract Intelligence and Alice AI is indicative only. Final decisions subject to vendor evaluation, confirmed business need, HQ approval and budget confirmation. Selection criteria: (1) business owner identified outside Digital &amp; AI, (2) clean integration with MasdarMind from day one, (3) justified against the existing Microsoft and Databricks stack.
-  </div>
-</section>
-
-<!-- ========== SLIDE 8: TAKEAWAYS ========== -->
-<section class="slide takeaway-slide" data-slide="8">
-  <div class="cover-grid"></div>
-  <div class="cover-glow" style="left:-180px;right:auto;top:auto;bottom:-180px"></div>
-  <div class="takeaway-inner">
-    <div class="takeaway-head">
-      <div class="slide-kicker reveal reveal-1" style="color:var(--gold)">Key takeaways</div>
-      <h2 class="takeaway-title reveal reveal-2">Where Masdar UK <em>stands</em> on AI.</h2>
-    </div>
-
-    <div class="takeaways">
-      <div class="ta reveal reveal-3">
-        <div class="ta-num">01</div>
-        <div class="ta-head">Aligned with Group.</div>
-        <div class="ta-body">The AI direction is set by HQ. We have translated it into an operating model for Offshore Wind and BESS in the UK, and are executing against it.</div>
-      </div>
-      <div class="ta reveal reveal-4">
-        <div class="ta-num">02</div>
-        <div class="ta-head">Foundations in place.</div>
-        <div class="ta-body">MasdarMind platform, governance framework, first AI use cases in production.</div>
-      </div>
-      <div class="ta reveal reveal-5">
-        <div class="ta-num">03</div>
-        <div class="ta-head">On track for 2026.</div>
-        <div class="ta-body">Six workstreams sequenced across the year. Six months from foundations to a portfolio of AI capabilities at scale.</div>
-      </div>
-    </div>
-
-    <div class="thanks reveal reveal-6">
-      <div class="thanks-word">Thank you.</div>
-      <div class="thanks-meta">Masdar UK<br>Digital &amp; AI<br>April 2026</div>
-    </div>
-  </div>
-</section>
-
 </div>
 
-<!-- Navigation -->
-<div class="nav">
-  <button class="nav-btn" id="prevBtn" aria-label="Previous">‹</button>
-  <div class="nav-dots" id="navDots"></div>
-  <span class="nav-counter" id="navCounter">01 / 08</span>
-  <button class="nav-btn" id="nextBtn" aria-label="Next">›</button>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 2 — DISCOVERY PROCESS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="discovery">
+  <div class="slide-num">02 / 12</div>
+  <div class="s-label">01 · How we worked</div>
+  <h2 class="section-title">A structured <em>discovery process</em><br>across all 11 functions</h2>
+
+  <div class="two-col">
+    <div>
+      <div class="prose">
+        Over 45 days, a full listening tour was conducted across every functional pillar at Masdar UK — from BESS Delivery to Legal, Finance to Asset Management. No assumptions. Everything grounded in direct stakeholder input.
+      </div>
+      <div class="stat-strip" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="stat-card c-accent"><div class="sv">16</div><div class="sl">Interviews conducted</div></div>
+        <div class="stat-card c-blue"><div class="sv">11</div><div class="sl">Functions covered</div></div>
+        <div class="stat-card c-green"><div class="sv">92</div><div class="sl">Use cases identified</div></div>
+        <div class="stat-card c-orange"><div class="sv">8</div><div class="sl">Core deliverables</div></div>
+      </div>
+    </div>
+    <div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+        <div style="background: var(--faint); padding: 10px 16px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); border-bottom: 1px solid var(--border);">Deliverables produced</div>
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tbody>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">Stakeholder Listening Tour (Wave 1)</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">Tool & Systems Landscape Map (30+ tools)</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">Use Case Bank (92 entries)</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">Use Case Scoring & Prioritisation</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">Digital Maturity Assessment</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">HQ Alignment Note (One Masdar AI 2030)</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px; border-bottom:1px solid var(--faint);">Data Governance Framework</td><td style="padding:9px 16px; text-align:right; border-bottom:1px solid var(--faint);"><span style="color:var(--green); font-weight:600; font-size:11px;">✓ Done</span></td></tr>
+            <tr><td style="padding:9px 16px;">HR Policy AI Agent</td><td style="padding:9px 16px; text-align:right;"><span style="color:var(--accent2); font-weight:600; font-size:11px;">● Live</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Gantt tooltip -->
-<div class="gantt-tooltip" id="ganttTip"></div>
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 — 5 STRATEGIC SIGNALS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="signals">
+  <div class="slide-num">03 / 12</div>
+  <div class="s-label">02 · What we heard</div>
+  <h2 class="section-title">Five <em>strategic signals</em><br>emerged from the field</h2>
+  <div class="signals">
+    <div class="signal">
+      <div class="signal-num">1</div>
+      <div>
+        <h3>Manual reporting burden is universal</h3>
+        <p>Across BESS Delivery, Finance, and Asset Management, significant time is spent on manual data compilation, monthly reports, and status updates — time that could be reclaimed through automation.</p>
+        <div class="quote">"I spend two days a month just putting numbers together for a report nobody reads."</div>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">2</div>
+      <div>
+        <h3>MasdarMind maturity gap</h3>
+        <p>The Databricks/Azure platform exists but is underutilised. Most functions are not yet connected to it. The foundational investment has been made — the gap is in ingestion, governance, and access.</p>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">3</div>
+      <div>
+        <h3>BI governance window is closing</h3>
+        <p>Multiple Power BI dashboards exist in isolation with no single source of truth. Without a governance standard now, the fragmentation will compound as the portfolio grows.</p>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">4</div>
+      <div>
+        <h3>Undigitised workflows across functions</h3>
+        <p>Legal approvals (DOA/CRS), HSSE reporting, cash requests, and contract reviews are still largely manual or on email. Low complexity, high frequency — ideal automation candidates.</p>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-num">5</div>
+      <div>
+        <h3>Business-facing tool gap</h3>
+        <p>Non-technical teams have no accessible interface to the data or AI capability being built. Closing this gap — through dashboards and AI agents — is the key to adoption and ROI realisation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 4 — DIGITAL MATURITY -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="maturity">
+  <div class="slide-num">04 / 12</div>
+  <div class="s-label">03 · Where we stand</div>
+  <h2 class="section-title">Digital maturity by function —<br><em>most sit at Level 1–2</em></h2>
+  <div class="prose">
+    Functions were assessed on a 1–5 maturity scale across five dimensions: data availability, process digitisation, tool adoption, analytical capability, and AI readiness. <strong>The exception is Data Science</strong>, already operating at Level 3 with AI in production.
+  </div>
+  <div class="maturity-grid">
+    <div class="mat-row">
+      <div class="mat-label">Data Science</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:60%; background:var(--accent);"></div></div>
+      <div class="mat-val">3.0</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Finance & Accounting</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:36%; background:var(--accent4);"></div></div>
+      <div class="mat-val">1.8</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">BESS Delivery</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:30%; background:var(--accent2);"></div></div>
+      <div class="mat-val">1.5</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Asset Management (OW)</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:30%; background:var(--accent2);"></div></div>
+      <div class="mat-val">1.5</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Business Support & Audit</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:28%; background:var(--accent5);"></div></div>
+      <div class="mat-val">1.4</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">People & Culture</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:22%; background:var(--accent6);"></div></div>
+      <div class="mat-val">1.1</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Legal & Contracts</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:20%; background:var(--accent6);"></div></div>
+      <div class="mat-val">1.0</div>
+    </div>
+  </div>
+  <div style="padding:14px 20px; background:rgba(70,104,179,.06); border:1px solid rgba(70,104,179,.2); border-radius:10px; font-size:13px; line-height:1.6;">
+    <strong>Key insight:</strong> The gap between Data Science (3.0) and the rest of the business is the central challenge of 2026. The roadmap is designed to systematically close this gap — function by function.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 5 — PRIORITISATION METHOD -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="method">
+  <div class="slide-num">05 / 12</div>
+  <div class="s-label">04 · How we chose</div>
+  <h2 class="section-title">A rigorous, <em>reproducible</em><br>prioritisation framework</h2>
+  <div class="prose">
+    All 92 use cases were scored using a structured two-axis model — fully compatible with the <strong>One Masdar AI Strategy 2030 prioritisation toolkit</strong>. Top 32 retained for the 2026 roadmap.
+  </div>
+  <div class="prio-grid">
+    <div class="prio-axis">
+      <div class="prio-axis-label" style="color:var(--accent);">Axis 1 — Impact (I)</div>
+      <h4>Business value if implemented</h4>
+      <div class="prio-criteria">
+        <div class="prio-crit"><span>Business Value</span><span>1–5</span></div>
+        <div class="prio-crit"><span>Strategic Alignment</span><span>1–5</span></div>
+        <div class="prio-crit"><span>Revenue / Cost Effect</span><span>1–5</span></div>
+      </div>
+      <div class="prio-formula" style="background:rgba(70,104,179,.08); color:var(--accent);">I = avg(3 sub-criteria) → 1–5</div>
+    </div>
+    <div class="prio-axis">
+      <div class="prio-axis-label" style="color:var(--accent2);">Axis 2 — Feasibility & Urgency (F)</div>
+      <h4>Speed and reliability of delivery</h4>
+      <div class="prio-criteria">
+        <div class="prio-crit"><span>Data Readiness</span><span>1–5</span></div>
+        <div class="prio-crit"><span>Technical Complexity</span><span>1–5</span></div>
+        <div class="prio-crit"><span>Tool Availability</span><span>1–5</span></div>
+        <div class="prio-crit"><span>Organisational Readiness</span><span>1–5</span></div>
+        <div class="prio-crit"><span>Timeline to Deploy</span><span>1–5</span></div>
+      </div>
+      <div class="prio-formula" style="background:rgba(46,127,207,.08); color:var(--accent2);">F = avg(5 sub-criteria) → 1–5</div>
+    </div>
+  </div>
+  <div class="method-highlight">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.4; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Total Score</div>
+      <div class="method-formula">Total = I + F &nbsp;→&nbsp; out of 10</div>
+      <div class="method-sub">Primary sort key · Quadrant assignment provides strategic lens</div>
+    </div>
+  </div>
+  <div class="quadrant-grid">
+    <div class="quad" style="background:rgba(29,158,117,.07); border-color:rgba(29,158,117,.25);">
+      <div class="qt" style="color:var(--green);">High Impact · High Feasibility</div>
+      <h4>⚡ Quick Wins</h4>
+      <p>Deliver first — high value, fast to deploy</p>
+    </div>
+    <div class="quad" style="background:rgba(46,127,207,.07); border-color:rgba(46,127,207,.25);">
+      <div class="qt" style="color:var(--accent2);">High Impact · Lower Feasibility</div>
+      <h4>🎯 Strategic Bets</h4>
+      <p>Invest in foundations — transformational upside</p>
+    </div>
+    <div class="quad" style="background:rgba(122,120,112,.05); border-color:rgba(122,120,112,.18);">
+      <div class="qt" style="color:var(--muted);">Lower Impact · High Feasibility</div>
+      <h4>📌 Fill-ins</h4>
+      <p>Opportunistic — do if capacity allows</p>
+    </div>
+    <div class="quad" style="background:rgba(212,134,10,.06); border-color:rgba(212,134,10,.2);">
+      <div class="qt" style="color:var(--accent4);">Lower Impact · Lower Feasibility</div>
+      <h4>⏸ Deprioritise</h4>
+      <p>Park for later — revisit when context changes</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 6 — USE CASE MAP BY DEPARTMENT -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="ucmap">
+  <div class="slide-num">06 / 12</div>
+  <div class="s-label">05 · What's in scope</div>
+  <h2 class="section-title">Use cases mapped <em>to your team</em></h2>
+  <div class="prose">32 use cases across 10 departments. Transverse use cases benefit all functions via the shared MasdarMind platform.</div>
+
+  <div class="dept-grid">
+
+    <!-- BESS DELIVERY -->
+    <div class="dept-card" style="border-top-color: var(--accent2);">
+      <div class="dept-name" style="color:var(--accent2);">BESS Delivery</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">BD-05</span>Meeting action tracker & RFI log</div>
+        <div class="uc-item"><span class="uc-id">DS-01</span>BESS Ops Intelligence Platform</div>
+        <div class="uc-item"><span class="uc-id">BD-01</span>PDN — BESS project dashboard</div>
+        <div class="uc-item"><span class="uc-id">BD-02</span>Automated monthly report generation</div>
+        <div class="uc-item"><span class="uc-id">ENG-03</span>Alice AI — construction planning pilot <span class="badge-ind badge">indicative</span></div>
+      </div>
+    </div>
+
+    <!-- FINANCE -->
+    <div class="dept-card" style="border-top-color: var(--accent4);">
+      <div class="dept-name" style="color:var(--accent4);">Finance</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">FI-01</span>Xero API + JV data pipeline</div>
+        <div class="uc-item"><span class="uc-id">FI-02</span>Month-end controls</div>
+        <div class="uc-item"><span class="uc-id">FI-04</span>Cash request digitisation</div>
+        <div class="uc-item"><span class="uc-id">FI-05</span>Budget vs actuals — full (OW + BESS)</div>
+        <div class="uc-item"><span class="uc-id">FI-06</span>HQ group finance standardisation</div>
+        <div class="uc-item"><span class="uc-id">EPM</span>EPM platform — vendor evaluation <span class="badge-ind badge">indicative</span></div>
+      </div>
+    </div>
+
+    <!-- ASSET MANAGEMENT -->
+    <div class="dept-card" style="border-top-color: var(--accent);">
+      <div class="dept-name" style="color:var(--accent);">Asset Management</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">AM-05</span>SCADA full portfolio</div>
+        <div class="uc-item"><span class="uc-id">AM-08</span>RAG phase 1 — offshore wind</div>
+        <div class="uc-item"><span class="uc-id">AM-06</span>Asset performance benchmarking</div>
+        <div class="uc-item"><span class="uc-id">APM</span>Asset Perf. Mgmt — vendor eval <span class="badge-ind badge">indicative</span></div>
+      </div>
+    </div>
+
+    <!-- COMMERCIAL -->
+    <div class="dept-card" style="border-top-color: var(--accent6);">
+      <div class="dept-name" style="color:var(--accent6);">Commercial</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">COM-2</span>Generation forecasting — architecture</div>
+        <div class="uc-item"><span class="uc-id">COM-1</span>BESS dispatch optimisation — architecture</div>
+      </div>
+    </div>
+
+    <!-- P&C -->
+    <div class="dept-card" style="border-top-color: var(--accent5);">
+      <div class="dept-name" style="color:var(--accent5);">People & Culture</div>
+      <div class="uc-list">
+        <div class="uc-item live"><span class="live-dot"></span><span class="uc-id">P&C-01a</span>HR Policy Bot v1 — Live</div>
+        <div class="uc-item"><span class="uc-id">P&C-01b</span>HR Policy Bot v2 — Databricks (RAG)</div>
+        <div class="uc-item"><span class="uc-id">P&C-03</span>HRIS centralisation — selection</div>
+      </div>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="dept-card" style="border-top-color: #8B4513;">
+      <div class="dept-name" style="color:#8B4513;">Legal</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">LEG-1</span>DOA/CRS workflow automation</div>
+        <div class="uc-item"><span class="uc-id">AM-08b</span>RAG phase 2 — BESS & Legal</div>
+        <div class="uc-item"><span class="uc-id">DOC-AI</span>Contract intelligence — vendor eval <span class="badge-ind badge">indicative</span></div>
+      </div>
+    </div>
+
+    <!-- BUSINESS SUPPORT -->
+    <div class="dept-card" style="border-top-color: var(--accent5);">
+      <div class="dept-name" style="color:var(--accent5);">Business Support</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">BS-01</span>Audit intelligence dashboard</div>
+        <div class="uc-item"><span class="uc-id">BS-02</span>Internal audit self-assessment</div>
+        <div class="uc-item"><span class="uc-id">BS-03</span>Cyber risk register — scoping</div>
+      </div>
+    </div>
+
+    <!-- QHSE -->
+    <div class="dept-card" style="border-top-color: var(--green);">
+      <div class="dept-name" style="color:var(--green);">QHSE</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">BD-04</span>SafetyCulture HSSE — paid licence</div>
+      </div>
+    </div>
+
+    <!-- STRATEGY -->
+    <div class="dept-card" style="border-top-color: var(--ink);">
+      <div class="dept-name" style="color:var(--ink);">Strategy & Enablement</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">DS-03</span>Data engineer — senior contractor</div>
+        <div class="uc-item"><span class="uc-id">ST-05</span>Executive KPI dashboard — Husain</div>
+        <div class="uc-item"><span class="uc-id">ST-02</span>Market intel + steering dashboards</div>
+      </div>
+    </div>
+
+    <!-- TRANSVERSE -->
+    <div class="dept-card" style="border-top-color: var(--accent3);">
+      <div class="dept-name" style="color:var(--accent3);">Transverse (All Functions)</div>
+      <div class="uc-list">
+        <div class="uc-item"><span class="uc-id">DS-04</span>Unity Catalog — accelerated governance</div>
+        <div class="uc-item"><span class="uc-id">DS-05</span>MasdarMind App Portal</div>
+        <div class="uc-item"><span class="uc-id">BD-06</span>TIPALTI PO data integration</div>
+        <div class="uc-item"><span class="uc-id">M18</span>Market intelligence platform</div>
+        <div class="uc-item"><span class="uc-id">BS-04</span>BI governance standard</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 7 — 6-MONTH ROADMAP -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="roadmap6m">
+  <div class="slide-num">07 / 12</div>
+  <div class="s-label">06 · The plan</div>
+  <h2 class="section-title">2026 roadmap — <em>next 6 months</em></h2>
+  <div class="prose">Sequenced across Q2, Q3, and Q4 2026. Owners TBD per use case — to be confirmed with each function head.</div>
+
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; overflow-x:auto;">
+    <table class="roadmap-table">
+      <thead>
+        <tr>
+          <th style="width:42%;">Use Case</th>
+          <th style="width:10%;">Dept</th>
+          <th style="width:16%; text-align:center;">Q2 2026</th>
+          <th style="width:16%; text-align:center;">Q3 2026</th>
+          <th style="width:16%; text-align:center;">Q4 2026</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="dept-row"><td colspan="5">Data Foundations & Infrastructure</td></tr>
+        <tr>
+          <td>DS-04 Unity Catalog — governance <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Transverse</span></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>DS-03 Data engineer — contractor <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Strategy</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>AM-05 SCADA full portfolio <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Asset Mgmt</span></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>FI-01 Xero API + JV data pipeline <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Finance</span></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>DS-05 MasdarMind App Portal <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Transverse</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--green); margin:auto;"></div></td>
+        </tr>
+
+        <tr class="dept-row"><td colspan="5">BESS Delivery</td></tr>
+        <tr>
+          <td>BD-05 Meeting action tracker & RFI log</td>
+          <td><span style="font-size:10px;color:var(--muted);">BESS Del.</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>DS-01 BESS Ops Intelligence Platform <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">BESS Del.</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>BD-01 PDN — BESS project dashboard <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">BESS Del.</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>BD-02 Automated monthly report generation</td>
+          <td><span style="font-size:10px;color:var(--muted);">BESS Del.</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>BD-04 SafetyCulture HSSE — paid licence</td>
+          <td><span style="font-size:10px;color:var(--muted);">QHSE</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>BD-06 TIPALTI PO data integration <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Transverse</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent2); margin:auto;"></div></td>
+        </tr>
+
+        <tr class="dept-row"><td colspan="5">Commercial</td></tr>
+        <tr>
+          <td>COM-2 Generation forecasting — architecture</td>
+          <td><span style="font-size:10px;color:var(--muted);">Commercial</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent6); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent6); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent6); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>COM-1 BESS dispatch optimisation — architecture</td>
+          <td><span style="font-size:10px;color:var(--muted);">Commercial</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent6); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent6); margin:auto;"></div></td>
+        </tr>
+
+        <tr class="dept-row"><td colspan="5">AI & RAG</td></tr>
+        <tr>
+          <td>P&C-01a HR Policy Bot v1 — Copilot Studio <span class="badge badge-live">Live</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">P&C</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>P&C-01b HR Policy Bot v2 — Databricks (RAG) <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">P&C</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AM-08 RAG phase 1 — offshore wind <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Asset Mgmt</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>AM-08b RAG phase 2 — BESS & Legal <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Transverse</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>M18 Market intelligence platform <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Transverse</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent3); margin:auto;"></div></td>
+        </tr>
+
+        <tr class="dept-row"><td colspan="5">Finance & Reporting</td></tr>
+        <tr>
+          <td>FI-02 Month-end controls</td>
+          <td><span style="font-size:10px;color:var(--muted);">Finance</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent4); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>FI-04 Cash request digitisation <span class="badge badge-hq">HQ</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Finance</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent4); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent4); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>FI-05 Budget vs actuals — full (OW + BESS) <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Finance</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent4); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent4); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>FI-06 HQ group finance standardisation <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Finance</span></td>
+          <td></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent4); margin:auto;"></div></td>
+        </tr>
+
+        <tr class="dept-row"><td colspan="5">Governance & Audit</td></tr>
+        <tr>
+          <td>BS-04 BI governance standard</td>
+          <td><span style="font-size:10px;color:var(--muted);">Transverse</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+          <td></td><td></td>
+        </tr>
+        <tr>
+          <td>BS-01 Audit intelligence dashboard</td>
+          <td><span style="font-size:10px;color:var(--muted);">Biz Support</span></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>BS-02 Internal audit self-assessment</td>
+          <td><span style="font-size:10px;color:var(--muted);">Biz Support</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>BS-03 Cyber risk register — scoping</td>
+          <td><span style="font-size:10px;color:var(--muted);">Biz Support</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>LEG-1 DOA/CRS workflow automation <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Legal</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:var(--accent5); margin:auto;"></div></td>
+        </tr>
+
+        <tr class="dept-row"><td colspan="5">Enablement & Strategy</td></tr>
+        <tr>
+          <td>ST-05 Executive KPI dashboard — Husain <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Strategy</span></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>ST-02 Market intel + steering dashboards <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Strategy</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>P&C-03 HRIS centralisation — selection</td>
+          <td><span style="font-size:10px;color:var(--muted);">P&C</span></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+        </tr>
+        <tr>
+          <td>AM-06 Asset performance benchmarking <span class="badge badge-de">DE</span></td>
+          <td><span style="font-size:10px;color:var(--muted);">Asset Mgmt</span></td>
+          <td></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+          <td><div class="bar bar-full" style="background:#5F5E5A; margin:auto;"></div></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <div style="padding:10px 16px; background:var(--faint); border-top:1px solid var(--border); font-size:11px; color:var(--muted); display:flex; gap:20px; flex-wrap:wrap;">
+      <span><span class="badge badge-de">DE</span> Data Engineer dependency</span>
+      <span><span class="badge badge-hq">HQ</span> HQ approval required</span>
+      <span><span class="badge badge-live">Live</span> Already in production</span>
+      <span><span class="badge badge-ind">indicative</span> Subject to vendor evaluation</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 8 — MASDAR MIND PLATFORM -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="platform">
+  <div class="slide-num">08 / 12</div>
+  <div class="s-label">07 · The foundation</div>
+  <h2 class="section-title"><em>MasdarMind</em> — the central platform<br>powering every use case</h2>
+  <div class="prose">All 32 use cases in this roadmap are powered by or feed into MasdarMind — Masdar UK's unified data lakehouse built on Databricks and Azure. This is not a cost centre. It is the infrastructure that makes every downstream use case faster, cheaper, and more reliable to deliver.</div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-bottom:28px;">
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--green); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Bronze Layer</div>
+      <div style="font-size:14px; font-weight:600; margin-bottom:6px;">Raw Ingestion</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">SCADA, Xero, TIPALTI, SharePoint, Arenko, Accure feeds land here. No transformation, full history preserved.</div>
+    </div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Silver Layer</div>
+      <div style="font-size:14px; font-weight:600; margin-bottom:6px;">Cleaned & Governed</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Standardised schemas, data quality checks, Unity Catalog governance. One version of the truth per domain.</div>
+    </div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent4); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Gold Layer</div>
+      <div style="font-size:14px; font-weight:600; margin-bottom:6px;">Business-Ready</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">KPIs, aggregates, and ML features consumed by Power BI dashboards, AI agents, and the MasdarMind App Portal.</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div style="padding:16px 20px; background:rgba(29,158,117,.07); border:1px solid rgba(29,158,117,.2); border-radius:10px;">
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--green); margin-bottom:6px;">Already live</div>
+      <div style="font-size:13px; color:var(--muted); line-height:1.6;">Pouyan's anomaly detection in production · HR Policy Bot on SharePoint · Xero PoC underway with Tim</div>
+    </div>
+    <div style="padding:16px 20px; background:rgba(212,134,10,.07); border:1px solid rgba(212,134,10,.2); border-radius:10px;">
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent4); margin-bottom:6px;">Key 2026 unblocks needed</div>
+      <div style="font-size:13px; color:var(--muted); line-height:1.6;">Databricks Apps UAE data centre config · Xero paid API plan · Data Engineer contractor onboarding</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 9 — LONG-TERM VISION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="vision">
+  <div class="slide-num">09 / 12</div>
+  <div class="s-label">08 · Where we're going</div>
+  <h2 class="section-title">The long-term vision —<br><em>in alignment with HQ</em></h2>
+  <div class="prose">The 2026 roadmap is the foundation. The longer-term trajectory will be built in alignment with the <strong>One Masdar AI Strategy 2030</strong> and the HQ AI SteerCo governance process. Below is a directional view — not a committed plan.</div>
+
+  <div class="vision-strip">
+    <div class="vision-phase" style="background:rgba(70,104,179,.04);">
+      <div class="vision-year">2026 — Now</div>
+      <div class="vision-title">Build & Deliver</div>
+      <div class="vision-items">
+        <div class="vision-item">MasdarMind foundations live</div>
+        <div class="vision-item">Quick wins delivered per department</div>
+        <div class="vision-item">First AI agents in production</div>
+        <div class="vision-item">Data governance standard set</div>
+        <div class="vision-item">Digital maturity: Level 1→2 for all functions</div>
+      </div>
+    </div>
+    <div class="vision-phase" style="background:rgba(46,127,207,.04);">
+      <div class="vision-year">2027–2028</div>
+      <div class="vision-title">Scale & Integrate</div>
+      <div class="vision-items">
+        <div class="vision-item">MasdarMind as single source of truth</div>
+        <div class="vision-item">Multi-domain RAG across all BUs</div>
+        <div class="vision-item">Predictive analytics in operations</div>
+        <div class="vision-item">Commercial AI models in production</div>
+        <div class="vision-item">Digital maturity: Level 3 for key functions</div>
+      </div>
+    </div>
+    <div class="vision-phase" style="background:rgba(107,95,212,.04);">
+      <div class="vision-year">2029–2031</div>
+      <div class="vision-title">AI-Native Business</div>
+      <div class="vision-items">
+        <div class="vision-item">Autonomous reporting & controls</div>
+        <div class="vision-item">AI-assisted investment decisions</div>
+        <div class="vision-item">Full BESS dispatch optimisation</div>
+        <div class="vision-item">Masdar UK as digital benchmark within group</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vision-hq">
+    <strong>Note on long-term roadmap:</strong> The 2027+ trajectory will be developed in close alignment with Abu Dhabi HQ and the One Masdar AI Strategy 2030 governance framework. UK priorities will be submitted to the AI SteerCo as part of the group portfolio process. No long-term commitments are made without HQ alignment.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 10 — INVESTMENT (VALIDATED) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="investment">
+  <div class="slide-num">10 / 12</div>
+  <div class="s-label">09 · Investment</div>
+  <h2 class="section-title">Investment approved —<br><em>Ambitious scenario</em> confirmed</h2>
+  <div class="prose">All figures are incremental costs only — existing Microsoft licences and current infrastructure are excluded.</div>
+
+  <div style="background:var(--ink); color:var(--bg); border-radius:16px; padding:36px 40px; margin-bottom:24px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.4; text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px;">Validated by Husain Al Meer · April 2026</div>
+    <div style="display:flex; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:20px;">
+      <div>
+        <div style="font-family:'Instrument Serif',Georgia,serif; font-size:72px; font-weight:400; letter-spacing:-.03em; line-height:1;">~£160k</div>
+        <div style="font-family:'DM Mono',monospace; font-size:11px; opacity:.45; margin-top:4px;">incl. contingency · incremental only</div>
+      </div>
+      <div style="display:flex; gap:20px; padding-bottom:12px; flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-.02em;">32+</div>
+          <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.45; text-transform:uppercase; letter-spacing:.07em; margin-top:2px;">Use cases</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-.02em;">1–2</div>
+          <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.45; text-transform:uppercase; letter-spacing:.07em; margin-top:2px;">Contractors</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:28px; font-weight:700; letter-spacing:-.02em;">5+</div>
+          <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.45; text-transform:uppercase; letter-spacing:.07em; margin-top:2px;">AI in prod</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:14px; opacity:.65; line-height:1.7; max-width:680px;">Full roadmap delivery with two specialist contractors. AI-assisted decision-making in Commercial and BESS Operations. Multi-domain RAG deployed across Legal, Engineering, and HR. COM-1 (BESS dispatch optimisation) and COM-2 (generation forecasting) architecture defined and ready for 2027 deployment.</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div style="padding:16px 20px; background:rgba(29,158,117,.07); border:1px solid rgba(29,158,117,.2); border-radius:10px;">
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--green); margin-bottom:6px;">What this unlocks</div>
+      <div style="font-size:13px; color:var(--muted); line-height:1.7;">All 32 use cases in scope · Senior Data Engineer onboarding via HR (Sara) · LLM/ML Engineer for RAG architecture · Full MasdarMind platform capability</div>
+    </div>
+    <div style="padding:16px 20px; background:rgba(212,134,10,.07); border:1px solid rgba(212,134,10,.2); border-radius:10px;">
+      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent4); margin-bottom:6px;">Immediate actions</div>
+      <div style="font-size:13px; color:var(--muted); line-height:1.7;">Data Engineer contractor process in progress with Sara · Specialist tool vendor evaluations to begin Q2 · HQ sign-off for larger tooling items where required</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 11 — ASKS & DECISIONS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="asks">
+  <div class="slide-num">11 / 12</div>
+  <div class="s-label">10 · What we need</div>
+  <h2 class="section-title">Three asks for <em>this meeting</em></h2>
+
+  <div class="ask-grid">
+    <div class="ask-card urgent">
+      <h4>1 · Business owners per use case</h4>
+      <p>Each use case needs a named business owner to confirm scope, validate outputs, and drive adoption. Owners TBD — a short alignment session per function is proposed for May.</p>
+    </div>
+    <div class="ask-card">
+      <h4>2 · AI Champions per function</h4>
+      <p>One nominated AI Champion per functional pillar to bridge Digital & AI with their team, flag blockers early, and support change management as tools go live.</p>
+    </div>
+    <div class="ask-card info">
+      <h4>3 · HQ alignment cadence</h4>
+      <p>Agree a quarterly touchpoint with Abu Dhabi to ensure the UK roadmap feeds into the One Masdar AI Strategy 2030 group portfolio process — especially for long-term planning.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SLIDE 12 — NEXT STEPS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="slide" id="next" style="border-bottom:none;">
+  <div class="slide-num">12 / 12</div>
+  <div class="s-label">11 · What happens next</div>
+  <h2 class="section-title">Immediate next steps</h2>
+
+  <div class="next-grid">
+    <div class="next-card">
+      <div class="next-when">April 2026</div>
+      <h4>Investment confirmed</h4>
+      <p>SLT approval of Realistic scenario. Data Engineer contractor process accelerated with Sara.</p>
+    </div>
+    <div class="next-card">
+      <div class="next-when">May 2026</div>
+      <h4>Business owner alignment</h4>
+      <p>Short 30-min session per function to confirm use case scope, owners, and Q2 delivery targets.</p>
+    </div>
+    <div class="next-card">
+      <div class="next-when">May 2026</div>
+      <h4>AI Champions nominated</h4>
+      <p>One champion per pillar confirmed. Kick-off session and communication plan drafted.</p>
+    </div>
+    <div class="next-card">
+      <div class="next-when">Q2 2026</div>
+      <h4>First wave delivery</h4>
+      <p>Unity Catalog governance, SCADA ingestion, BD-05 tracker, FI-02 month-end controls, and BI governance standard go live.</p>
+    </div>
+    <div class="next-card">
+      <div class="next-when">Q3 2026</div>
+      <h4>Mid-year SLT review</h4>
+      <p>Progress report against roadmap, ROI tracking on live use cases, and roadmap re-calibration if needed.</p>
+    </div>
+    <div class="next-card">
+      <div class="next-when">Q3–Q4 2026</div>
+      <h4>HQ alignment initiated</h4>
+      <p>UK roadmap submitted to AI SteerCo. Long-term 2027+ trajectory co-developed with Abu Dhabi.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="closing-line">
+    The foundation is set. The use cases are identified, prioritised, and mapped.<br>
+    <em>Now we build.</em>
+  </div>
+
+  <div style="margin-top:32px; font-family:'DM Mono',monospace; font-size:11px; color:var(--muted);">
+    Mohamed · Digital & AI Strategy Manager · Masdar UK · April 24, 2026
+  </div>
+</div>
 
 <script>
-/* =============== GANTT DATA =============== */
-// status: live | flight | planned
-// span: {q1,q2,q3,q4} booleans, plus optional half: 'l' | 'r' for half bars
-const WORKSTREAMS = [
-  {
-    id:'foundations', label:'Data foundations & infrastructure', color:'var(--ws-foundations)',
-    items:[
-      {code:'DS-04', name:'Unity Catalog — accelerated governance', tags:['DE'], status:'flight', q2:true, detail:'Deploy Unity Catalog across MasdarMind. Data access controls, lineage, audit trail.'},
-      {code:'DS-03', name:'Data engineer — senior contractor', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Senior Data Engineer contractor to accelerate delivery. Month 5 to year-end.'},
-      {code:'AM-05', name:'SCADA full portfolio', tags:['DE'], status:'flight', q2:true, detail:'SCADA integration across Offshore Wind portfolio via ZTNA/PAM Permit-to-Work.'},
-      {code:'FI-01', name:'Xero API + JV data pipeline', tags:['DE'], status:'flight', q2:true, q3:true, detail:'Xero API ingestion into Databricks Bronze. JV partner data normalisation.'},
-      {code:'DS-05', name:'MasdarMind App Portal', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Databricks Apps portal. Business-facing access to AI agents and dashboards.'},
-    ]
-  },
-  {
-    id:'bess', label:'BESS delivery', color:'var(--ws-bess)',
-    items:[
-      {code:'BD-05', name:'Meeting action tracker & RFI log', tags:[], status:'flight', q2:true, detail:'Structured tracking for BESS project meetings. Actions, decisions, RFIs.'},
-      {code:'DS-01', name:'BESS Ops Intelligence Platform', tags:['DE'], status:'flight', q2:true, q3:true, detail:'Operational intelligence layer for BESS assets. Unified view across Royal Barn and Welcon Road.'},
-      {code:'BD-01', name:'PDN — BESS project dashboard', tags:['DE','PE'], status:'flight', q2:true, q3:true, q4:true, detail:'Project Delivery Nexus dashboard. Part of Project Endeavour scope.'},
-      {code:'BD-02', name:'Automated monthly report generation', tags:[], status:'planned', q3:true, q4:true, detail:'Automated monthly BESS operating report. 6 man-days/month saved.'},
-      {code:'BD-04', name:'SafetyCulture HSSE — paid licence', tags:[], status:'flight', q2:true, detail:'SafetyCulture rollout for HSSE. Already approved, paid licence.'},
-      {code:'BD-06', name:'TIPALTI PO data integration', tags:['DE'], status:'planned', q3:true, q4:true, detail:'TIPALTI purchase order data integration into MasdarMind.'},
-    ]
-  },
-  {
-    id:'commercial', label:'Commercial', color:'var(--ws-commercial)',
-    items:[
-      {code:'COM-2', name:'Generation forecasting — architecture', tags:[], status:'planned', q2:true, q3:true, q4:true, detail:'Architecture work for generation forecasting. Feeds into dispatch optimisation.'},
-      {code:'COM-1', name:'BESS dispatch optimisation — architecture', tags:[], status:'planned', q3:true, q4:true, detail:'Architecture for BESS dispatch optimisation. ROI 2.7 to 10.9× over five years.'},
-    ]
-  },
-  {
-    id:'ai', label:'AI & RAG', color:'var(--ws-ai)',
-    items:[
-      {code:'P&C-01a', name:'HR Policy Bot v1 — Copilot Studio (live)', tags:[], status:'live', q2:true, detail:'Live in production. Copilot Studio agent on SharePoint HR library.'},
-      {code:'P&C-01b', name:'HR Policy Bot v2 — Databricks (RAG)', tags:['DE'], status:'flight', q2:true, q3:true, detail:'Migration of HR Policy Bot from Copilot Studio to Databricks-native RAG.'},
-      {code:'AM-08', name:'RAG phase 1 — offshore wind', tags:['DE'], status:'flight', q2:true, q3:true, detail:'RAG on offshore wind contracts and technical corpora.'},
-      {code:'AM-08b', name:'RAG phase 2 — BESS & Legal', tags:['DE'], status:'planned', q3:true, q4:true, detail:'RAG extension to BESS documentation and Legal contracts.'},
-      {code:'M18', name:'Market intelligence platform', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Market intelligence for commercial and strategic decision-making.'},
-    ]
-  },
-  {
-    id:'finance', label:'Finance & reporting', color:'var(--ws-finance)',
-    items:[
-      {code:'FI-02', name:'Month-end controls', tags:[], status:'flight', q2:true, detail:'Automation of month-end financial controls. Replaces manual Excel checks.'},
-      {code:'FI-04', name:'Cash request digitisation', tags:['HQ APPROVAL','DE'], status:'planned', q3:true, q4:true, detail:'Digitisation of cash request process. £20M request currently takes half a day manually. HQ approval pending.'},
-      {code:'FI-05', name:'Budget vs actuals — full (OW + BESS)', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Full budget vs actuals dashboard across Offshore Wind and BESS.'},
-      {code:'FI-06', name:'HQ group finance standardisation', tags:['DE'], status:'planned', q4:true, detail:'Standardisation to HQ group finance submission format. Positions UK as most advanced entity.'},
-    ]
-  },
-  {
-    id:'governance', label:'Governance & audit', color:'var(--ws-governance)',
-    items:[
-      {code:'BS-04', name:'BI governance standard', tags:[], status:'flight', q2:true, detail:'Governance standard for BI reporting across Masdar UK.'},
-      {code:'BS-01', name:'Audit intelligence dashboard', tags:[], status:'flight', q2:true, q3:true, detail:'Audit dashboard. Phase 1 Excel-based, Phase 2 Teammate API. Built with Abdullah (internal audit).'},
-      {code:'BS-02', name:'Internal audit self-assessment', tags:[], status:'planned', q3:true, q4:true, detail:'Internal audit self-assessment workflow automation.'},
-      {code:'BS-03', name:'Cyber risk register — scoping', tags:[], status:'planned', q3:true, q4:true, detail:'Cyber risk register scoping, aligned with Bureau Veritas OT/SCADA webinar learnings.'},
-      {code:'LEG-1', name:'DOA/CRS workflow automation', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Delegation of Authority and Contract Review System workflow automation.'},
-    ]
-  },
-  {
-    id:'enablement', label:'Enablement & strategy', color:'var(--ws-enablement)',
-    items:[
-      {code:'ST-05', name:'Executive KPI dashboard — Husain', tags:['DE'], status:'flight', q2:true, q3:true, detail:'Executive KPI dashboard for Husain. Operational and commercial pane of glass.'},
-      {code:'ST-02', name:'Market intel + steering dashboards', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Market intelligence and steering committee dashboards.'},
-      {code:'P&C-03', name:'HRIS centralisation — selection', tags:[], status:'flight', q2:true, q3:true, detail:'HRIS platform selection and rollout. Sara leading procurement.'},
-      {code:'AM-06', name:'Asset performance benchmarking', tags:['DE'], status:'planned', q3:true, q4:true, detail:'Asset performance benchmarking across portfolio.'},
-    ]
-  },
-  {
-    id:'specialist', label:'Specialist tools', color:'var(--ws-specialist)',
-    items:[
-      {code:'ENG-03', name:'Alice AI — construction planning pilot', tags:['PE'], status:'planned', q2:true, q3:true, detail:'Alice AI pilot for construction planning. Weather delay optimisation. Project Endeavour scope.'},
-      {code:'EPM', name:'EPM platform — vendor evaluation', tags:['IND'], status:'planned', q2:true, q3:true, q4:true, detail:'Enterprise Performance Management vendor evaluation. Indicative only — subject to evaluation.'},
-      {code:'APM', name:'Asset Perf. Mgmt — vendor evaluation', tags:['IND','DE'], status:'planned', q3:true, q4:true, detail:'Asset Performance Management vendor evaluation. Indicative only.'},
-      {code:'DOC-AI', name:'Contract intelligence — vendor eval', tags:['IND','DE'], status:'planned', q3:true, q4:true, detail:'Contract intelligence vendor evaluation. Indicative only.'},
-    ]
-  },
-  {
-    id:'resource', label:'Resourcing', color:'var(--ws-resource)',
-    items:[
-      {code:'RES-01', name:'Run & capitalisation resource', tags:[], status:'planned', q4:true, detail:'Dedicated run and capitalisation resource for ongoing platform operations.'},
-    ]
-  },
-];
-
-/* =============== GANTT RENDER =============== */
-function renderGantt(){
-  const grid = document.getElementById('ganttGrid');
-  let html = '';
-  // header
-  html += `<div class="gantt-header">
-    <div class="first">Use case</div>
-    <div>Q2 2026</div>
-    <div>Q3 2026</div>
-    <div>Q4 2026</div>
-  </div>`;
-
-  WORKSTREAMS.forEach(ws => {
-    html += `<div class="ws-label"><span class="dot" style="background:${ws.color}"></span>${ws.label}</div>`;
-    ws.items.forEach(item => {
-      const tagHtml = (item.tags||[]).map(t=>{
-        const cls = t==='DE' ? 'tag-de' :
-                    t==='HQ APPROVAL' ? 'tag-hq' :
-                    t==='PE' ? 'tag-pe' :
-                    t==='IND' ? 'tag-ind' : 'tag-de';
-        const label = t==='PE' ? 'Project Endeavour' :
-                      t==='IND' ? 'Indicative' : t;
-        return `<span class="tag-pill ${cls}">${label}</span>`;
-      }).join('');
-
-      html += `<div class="gantt-row">
-        <div><span class="label"><span class="code">${item.code}</span>${item.name}<span class="tags">${tagHtml}</span></span></div>
-        <div class="gantt-cell">${item.q2 ? barHtml(item, 'q2') : ''}</div>
-        <div class="gantt-cell">${item.q3 ? barHtml(item, 'q3') : ''}</div>
-        <div class="gantt-cell">${item.q4 ? barHtml(item, 'q4') : ''}</div>
-      </div>`;
+  // Active nav link on scroll
+  const slides = document.querySelectorAll('.slide[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
     });
-  });
-
-  grid.innerHTML = html;
-  attachGanttTooltips();
-}
-
-function barHtml(item, q){
-  const cls = item.status==='live' ? 'bar-live' :
-              item.status==='flight' ? 'bar-flight' :
-              'bar-planned';
-  const color = WORKSTREAMS.find(w=>w.items.includes(item))?.color;
-  return `<div class="bar ${cls}" style="background:${color}"
-    data-name="${escapeHtml(item.name)}"
-    data-code="${item.code}"
-    data-status="${item.status}"
-    data-detail="${escapeHtml(item.detail||'')}"></div>`;
-}
-
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-
-function attachGanttTooltips(){
-  const tip = document.getElementById('ganttTip');
-  document.querySelectorAll('.bar').forEach(bar=>{
-    bar.addEventListener('mouseenter', e=>{
-      const d = e.target.dataset;
-      tip.innerHTML = `<strong>${d.code} · ${d.name}</strong>${d.detail}<br><span style="opacity:.7;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;display:inline-block">${d.status}</span>`;
-      tip.classList.add('show');
-    });
-    bar.addEventListener('mousemove', e=>{
-      const rect = tip.getBoundingClientRect();
-      let x = e.clientX + 14;
-      let y = e.clientY - 10;
-      if(x + rect.width > window.innerWidth - 20) x = e.clientX - rect.width - 14;
-      if(y + rect.height > window.innerHeight - 20) y = e.clientY - rect.height - 10;
-      tip.style.left = x + 'px';
-      tip.style.top = y + 'px';
-    });
-    bar.addEventListener('mouseleave', ()=>tip.classList.remove('show'));
-  });
-}
-
-/* =============== NAVIGATION =============== */
-const slides = document.querySelectorAll('.slide');
-const total = slides.length;
-let current = 0;
-
-function goto(idx){
-  if(idx<0 || idx>=total) return;
-  slides[current].classList.remove('active');
-  current = idx;
-  slides[current].classList.add('active');
-  updateUi();
-  if(current === 3) animateStats();
-}
-
-function updateUi(){
-  document.getElementById('navCounter').textContent = String(current+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
-  document.getElementById('progressFill').style.width = ((current+1)/total*100) + '%';
-  document.getElementById('prevBtn').disabled = current===0;
-  document.getElementById('nextBtn').disabled = current===total-1;
-  document.querySelectorAll('.dot-btn').forEach((d,i)=>d.classList.toggle('active', i===current));
-}
-
-function buildDots(){
-  const c = document.getElementById('navDots');
-  for(let i=0;i<total;i++){
-    const b = document.createElement('button');
-    b.className='dot-btn'+(i===0?' active':'');
-    b.addEventListener('click',()=>goto(i));
-    c.appendChild(b);
-  }
-}
-
-document.getElementById('prevBtn').addEventListener('click',()=>goto(current-1));
-document.getElementById('nextBtn').addEventListener('click',()=>goto(current+1));
-document.addEventListener('keydown', e=>{
-  if(e.key==='ArrowRight' || e.key===' ') { e.preventDefault(); goto(current+1); }
-  if(e.key==='ArrowLeft') { e.preventDefault(); goto(current-1); }
-  if(e.key==='Home') goto(0);
-  if(e.key==='End') goto(total-1);
-});
-
-/* swipe on touch */
-let touchX = null;
-document.addEventListener('touchstart', e=>{touchX = e.changedTouches[0].clientX}, {passive:true});
-document.addEventListener('touchend', e=>{
-  if(touchX===null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
-  if(Math.abs(dx)>60){ goto(current + (dx<0 ? 1 : -1)); }
-  touchX = null;
-});
-
-/* =============== STAT COUNTERS =============== */
-function animateStats(){
-  document.querySelectorAll('[data-slide="4"] .stat-num').forEach(el=>{
-    if(el.dataset.done) return;
-    el.dataset.done='1';
-    const target = parseInt(el.dataset.target,10);
-    let n = 0;
-    const step = Math.max(1, Math.ceil(target/32));
-    const iv = setInterval(()=>{
-      n += step;
-      if(n>=target){ n=target; clearInterval(iv); }
-      el.textContent = n;
-    }, 28);
-  });
-}
-
-/* =============== INIT =============== */
-renderGantt();
-buildDots();
-updateUi();
+  }, { threshold: 0.4 });
+  slides.forEach(s => observer.observe(s));
 </script>
 </body>
 </html>
