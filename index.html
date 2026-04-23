@@ -147,12 +147,12 @@
   .signal-num { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; color: var(--accent); line-height: 1; }
   .signal h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; letter-spacing: -.01em; }
   .signal p { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
-  .signal .quote { margin-top: 8px; font-size: 12px; font-style: italic; color: var(--accent); border-left: 2px solid var(--accent); padding-left: 10px; }
 
   /* MATURITY BARS */
   .maturity-grid { display: grid; gap: 5px; margin-bottom: 32px; }
-  .mat-row { display: grid; grid-template-columns: 200px 1fr 36px; gap: 12px; align-items: center; padding: 6px 0; }
+  .mat-row { display: grid; grid-template-columns: 240px 1fr 36px; gap: 12px; align-items: center; padding: 6px 0; }
   .mat-label { font-size: 13px; font-weight: 500; }
+  .mat-sublabel { font-size: 10px; color: var(--muted); font-weight: 400; }
   .mat-bar-bg { height: 18px; background: var(--faint); border-radius: 4px; overflow: hidden; }
   .mat-bar { height: 100%; border-radius: 4px; }
   .mat-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); text-align: right; }
@@ -211,28 +211,13 @@
   .roadmap-table tr:hover:not(.dept-row) td { background: #FAFAF7; }
   .bar { height: 14px; border-radius: 3px; display: block; }
   .bar-full { width: 90%; }
-  .bar-start { width: 90%; border-radius: 3px 0 0 3px; }
-  .bar-mid { width: 100%; border-radius: 0; }
-  .bar-end { width: 90%; border-radius: 0 3px 3px 0; }
-  .cell-empty { }
   .badge { font-size: 9px; font-family: 'DM Mono', monospace; padding: 2px 6px; border-radius: 3px; margin-left: 5px; text-transform: uppercase; letter-spacing: .04em; }
   .badge-live { background: rgba(29,158,117,.12); color: var(--green); border: 1px solid rgba(29,158,117,.3); }
   .badge-de { background: rgba(46,127,207,.1); color: var(--accent2); border: 1px solid rgba(46,127,207,.25); }
   .badge-hq { background: rgba(212,134,10,.1); color: var(--accent4); border: 1px solid rgba(212,134,10,.25); }
   .badge-ind { background: var(--faint); color: var(--muted); border: 1px solid var(--border); }
 
-  /* INVESTMENT */
-  .inv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 32px; }
-  .inv-card { padding: 28px 24px; border-right: 1px solid var(--border); }
-  .inv-card:last-child { border-right: none; }
-  .inv-card.recommended { background: var(--ink); color: var(--bg); }
-  .inv-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
-  .inv-amount { font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; letter-spacing: -.02em; line-height: 1; margin-bottom: 4px; }
-  .inv-meta { font-family: 'DM Mono', monospace; font-size: 10px; opacity: .5; margin-bottom: 14px; }
-  .inv-desc { font-size: 13px; line-height: 1.6; opacity: .7; font-weight: 300; }
-  .inv-badge { display: inline-block; font-size: 9px; font-family: 'DM Mono', monospace; padding: 3px 8px; border-radius: 4px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; background: var(--accent); color: white; }
-
-  /* VISION */
+  /* VISION / HQ STRATEGY */
   .vision-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 32px; }
   .vision-phase { padding: 28px 24px; border-right: 1px solid var(--border); }
   .vision-phase:last-child { border-right: none; }
@@ -243,6 +228,20 @@
   .vision-item::before { content: '—'; color: var(--border); flex-shrink: 0; margin-top: 1px; }
   .vision-hq { margin-top: 24px; padding: 16px 20px; background: rgba(70,104,179,.06); border: 1px solid rgba(70,104,179,.2); border-radius: 10px; font-size: 13px; color: var(--ink); line-height: 1.6; }
   .vision-hq strong { font-weight: 600; }
+
+  /* HQ STRATEGY PILLARS */
+  .hq-pillar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .hq-pillar {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px; border-left: 4px solid var(--accent);
+  }
+  .hq-pillar.p2 { border-left-color: var(--accent2); }
+  .hq-pillar.p3 { border-left-color: var(--green); }
+  .hq-pillar.p4 { border-left-color: var(--accent4); }
+  .hq-pillar .p-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+  .hq-pillar h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; letter-spacing: -.01em; }
+  .hq-pillar p { font-size: 12px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+  .hq-pillar .uk-tag { display: inline-block; margin-top: 10px; font-size: 10px; font-family: 'DM Mono', monospace; padding: 2px 8px; border-radius: 3px; background: rgba(70,104,179,.08); color: var(--accent); border: 1px solid rgba(70,104,179,.2); }
 
   /* ASKS */
   .ask-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 32px; }
@@ -271,7 +270,6 @@
 
   /* TWO COL */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
-  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 
   /* PROSE */
   .prose { font-size: 14px; color: var(--muted); line-height: 1.7; font-weight: 300; max-width: 700px; margin-bottom: 28px; }
@@ -298,8 +296,6 @@
   .fade-3 { opacity: 0; animation: fadeUp .6s ease .3s forwards; }
   .fade-4 { opacity: 0; animation: fadeUp .6s ease .4s forwards; }
 
-  /* TRANSVERSE TAG */
-  .tag-transverse { font-size: 9px; font-family: 'DM Mono', monospace; padding: 1px 5px; border-radius: 3px; margin-left: 4px; background: rgba(107,95,212,.1); color: var(--accent3); border: 1px solid rgba(107,95,212,.2); text-transform: uppercase; letter-spacing: .04em; }
   .tag-live { font-size: 9px; font-family: 'DM Mono', monospace; padding: 1px 5px; border-radius: 3px; margin-left: 4px; background: rgba(29,158,117,.1); color: var(--green); border: 1px solid rgba(29,158,117,.25); text-transform: uppercase; letter-spacing: .04em; }
 </style>
 </head>
@@ -317,8 +313,7 @@
     <a href="#ucmap">UC Map</a>
     <a href="#roadmap6m">Roadmap</a>
     <a href="#platform">Platform</a>
-    <a href="#vision">Vision</a>
-    <a href="#investment">Investment</a>
+    <a href="#vision">HQ Strategy</a>
     <a href="#asks">Asks</a>
     <a href="#next">Next</a>
   </div>
@@ -328,7 +323,7 @@
 <!-- SLIDE 1 — COVER -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="cover" style="min-height:100vh; border-bottom: 2px solid var(--ink);">
-  <div class="slide-num">01 / 12</div>
+  <div class="slide-num">01 / 11</div>
   <div class="s-label fade-1">SLT Meeting · April 24, 2026</div>
   <h1 class="display fade-2">Building the <em>Digital & AI</em><br>Foundation for Masdar UK</h1>
   <p class="sub fade-3">Discovery, prioritisation, and the 2026 roadmap</p>
@@ -360,7 +355,7 @@
 <!-- SLIDE 2 — DISCOVERY PROCESS -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="discovery">
-  <div class="slide-num">02 / 12</div>
+  <div class="slide-num">02 / 11</div>
   <div class="s-label">01 · How we worked</div>
   <h2 class="section-title">A structured <em>discovery process</em><br>across all 11 functions</h2>
 
@@ -403,7 +398,7 @@
 <!-- SLIDE 3 — 5 STRATEGIC SIGNALS -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="signals">
-  <div class="slide-num">03 / 12</div>
+  <div class="slide-num">03 / 11</div>
   <div class="s-label">02 · What we heard</div>
   <h2 class="section-title">Five <em>consistent themes</em><br>emerged from the interviews</h2>
   <div class="signals">
@@ -417,8 +412,8 @@
     <div class="signal">
       <div class="signal-num">2</div>
       <div>
-        <h3>MasdarMind maturity gap</h3>
-        <p>The Databricks/Azure platform exists but most functions aren't connected to it yet. The infrastructure investment is there — the gap is in ingestion, governance, and making it accessible to teams.</p>
+        <h3>MasdarMind: A strong foundation to build on</h3>
+        <p>The Databricks/Azure platform is live and operational. The next step is accelerating adoption, connecting more functions, scaling data ingestion, and unlocking value across teams.</p>
       </div>
     </div>
     <div class="signal">
@@ -449,51 +444,71 @@
 <!-- SLIDE 4 — DIGITAL MATURITY -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="maturity">
-  <div class="slide-num">04 / 12</div>
+  <div class="slide-num">04 / 11</div>
   <div class="s-label">03 · Where we stand</div>
-  <h2 class="section-title">Digital maturity by function —<br><em>most sit at Level 1–2</em></h2>
+  <h2 class="section-title">Digital maturity by function —<br><em>significant headroom across the board</em></h2>
   <div class="prose">
-    Functions were assessed on a 1–5 maturity scale across five dimensions: data availability, process digitisation, tool adoption, analytical capability, and AI readiness. <strong>The exception is Data Science</strong>, already operating at Level 3 with AI in production.
+    Functions assessed on a 1–5 maturity scale across five dimensions: data availability, process digitisation, tool adoption, analytical capability, and AI readiness. Data scientists embedded in Commercial (Tim) and Asset Management (Pouyan) are the exceptions — AI already in production in both teams.
   </div>
   <div class="maturity-grid">
     <div class="mat-row">
-      <div class="mat-label">Data Science</div>
+      <div class="mat-label">Commercial <span class="mat-sublabel">(incl. Tim — Data Science)</span></div>
       <div class="mat-bar-bg"><div class="mat-bar" style="width:60%; background:var(--accent);"></div></div>
       <div class="mat-val">3.0</div>
     </div>
     <div class="mat-row">
-      <div class="mat-label">Finance & Accounting</div>
+      <div class="mat-label">Asset Management <span class="mat-sublabel">(incl. Pouyan — AI in prod)</span></div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:48%; background:var(--accent2);"></div></div>
+      <div class="mat-val">2.4</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Technical & Innovation</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:40%; background:var(--accent2);"></div></div>
+      <div class="mat-val">2.0</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Finance</div>
       <div class="mat-bar-bg"><div class="mat-bar" style="width:36%; background:var(--accent4);"></div></div>
       <div class="mat-val">1.8</div>
     </div>
     <div class="mat-row">
-      <div class="mat-label">BESS Delivery</div>
+      <div class="mat-label">BESS Business Dev & Delivery</div>
       <div class="mat-bar-bg"><div class="mat-bar" style="width:30%; background:var(--accent2);"></div></div>
       <div class="mat-val">1.5</div>
     </div>
     <div class="mat-row">
-      <div class="mat-label">Asset Management (OW)</div>
-      <div class="mat-bar-bg"><div class="mat-bar" style="width:30%; background:var(--accent2);"></div></div>
-      <div class="mat-val">1.5</div>
-    </div>
-    <div class="mat-row">
-      <div class="mat-label">Business Support & Audit</div>
+      <div class="mat-label">Business Support</div>
       <div class="mat-bar-bg"><div class="mat-bar" style="width:28%; background:var(--accent5);"></div></div>
       <div class="mat-val">1.4</div>
     </div>
     <div class="mat-row">
-      <div class="mat-label">People & Culture</div>
+      <div class="mat-label">Global Business Development</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:26%; background:var(--accent5);"></div></div>
+      <div class="mat-val">1.3</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Strategy & Transformation</div>
       <div class="mat-bar-bg"><div class="mat-bar" style="width:22%; background:var(--accent6);"></div></div>
       <div class="mat-val">1.1</div>
     </div>
     <div class="mat-row">
-      <div class="mat-label">Legal & Contracts</div>
+      <div class="mat-label">Partnerships & Investments</div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:22%; background:var(--accent6);"></div></div>
+      <div class="mat-val">1.1</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-label">Legal</div>
       <div class="mat-bar-bg"><div class="mat-bar" style="width:20%; background:var(--accent6);"></div></div>
       <div class="mat-val">1.0</div>
     </div>
+    <div class="mat-row">
+      <div class="mat-label">QHSE <span class="mat-sublabel">(assessment ongoing)</span></div>
+      <div class="mat-bar-bg"><div class="mat-bar" style="width:18%; background:var(--muted);"></div></div>
+      <div class="mat-val">TBD</div>
+    </div>
   </div>
   <div style="padding:14px 20px; background:rgba(70,104,179,.06); border:1px solid rgba(70,104,179,.2); border-radius:10px; font-size:13px; line-height:1.6;">
-    <strong>Key insight:</strong> The gap between Data Science (3.0) and the rest of the business is the central challenge of 2026. The roadmap is designed to systematically close this gap — function by function.
+    <strong>Key insight:</strong> The 2026 roadmap is designed to systematically raise maturity across all functions — function by function — with Commercial and Asset Management as internal anchors and proof points.
   </div>
 </div>
 
@@ -501,7 +516,7 @@
 <!-- SLIDE 5 — PRIORITISATION METHOD -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="method">
-  <div class="slide-num">05 / 12</div>
+  <div class="slide-num">05 / 11</div>
   <div class="s-label">04 · How we chose</div>
   <h2 class="section-title">A structured, <em>consistent</em><br>prioritisation framework</h2>
   <div class="prose">
@@ -566,7 +581,7 @@
 <!-- SLIDE 6 — USE CASE MAP BY DEPARTMENT -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="ucmap">
-  <div class="slide-num">06 / 12</div>
+  <div class="slide-num">06 / 11</div>
   <div class="s-label">05 · What's in scope</div>
   <h2 class="section-title">Use cases mapped <em>to your team</em></h2>
   <div class="prose">32 use cases across 10 departments. Transverse use cases benefit all functions via the shared MasdarMind platform.</div>
@@ -575,7 +590,7 @@
 
     <!-- BESS DELIVERY -->
     <div class="dept-card" style="border-top-color: var(--accent2);">
-      <div class="dept-name" style="color:var(--accent2);">BESS Delivery</div>
+      <div class="dept-name" style="color:var(--accent2);">BESS Business Dev & Delivery</div>
       <div class="uc-list">
         <div class="uc-item live"><span class="live-dot"></span><span class="uc-id">DS-02</span>BESS Anomaly Detection (Pouyan) — Live</div>
         <div class="uc-item"><span class="uc-id">BD-05</span>Meeting action tracker & RFI log</div>
@@ -660,7 +675,7 @@
 
     <!-- STRATEGY -->
     <div class="dept-card" style="border-top-color: var(--ink);">
-      <div class="dept-name" style="color:var(--ink);">Strategy & Enablement</div>
+      <div class="dept-name" style="color:var(--ink);">Strategy & Transformation</div>
       <div class="uc-list">
         <div class="uc-item"><span class="uc-id">DS-03</span>Data engineer — senior contractor</div>
         <div class="uc-item"><span class="uc-id">ST-05</span>Executive KPI dashboard — Husain</div>
@@ -687,7 +702,7 @@
 <!-- SLIDE 7 — 6-MONTH ROADMAP -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="roadmap6m">
-  <div class="slide-num">07 / 12</div>
+  <div class="slide-num">07 / 11</div>
   <div class="s-label">06 · The plan</div>
   <h2 class="section-title">2026 roadmap — <em>next 6 months</em></h2>
   <div class="prose">Sequenced across Q2, Q3, and Q4 2026. Owners TBD per use case — to be confirmed with each function head.</div>
@@ -943,16 +958,16 @@
 <!-- SLIDE 8 — MASDAR MIND PLATFORM -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="platform">
-  <div class="slide-num">08 / 12</div>
+  <div class="slide-num">08 / 11</div>
   <div class="s-label">07 · The foundation</div>
   <h2 class="section-title"><em>MasdarMind</em> — the central platform<br>powering every use case</h2>
-  <div class="prose">All 32 use cases in this roadmap either feed into or are powered by MasdarMind — Masdar UK's data lakehouse on Databricks and Azure. The platform is already partially in use. The 2026 roadmap is about extending it systematically across the business.</div>
+  <div class="prose">All 32 use cases in this roadmap either feed into or are powered by MasdarMind — Masdar UK's data lakehouse on Databricks and Azure. The platform was architected and built by <strong>Tim</strong>, whose work forms the technical backbone of a big part of this roadmap. The 2026 roadmap is about extending it systematically across the business.</div>
 
   <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-bottom:28px;">
     <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px;">
       <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--green); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Bronze Layer</div>
       <div style="font-size:14px; font-weight:600; margin-bottom:6px;">Raw Ingestion</div>
-      <div style="font-size:12px; color:var(--muted); line-height:1.6;">SCADA, Xero, TIPALTI, SharePoint, Arenko, Accure feeds land here. No transformation, full history preserved.</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">SCADA, Xero, TIPALTI, SharePoint, Accure feeds land here. No transformation, full history preserved.</div>
     </div>
     <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px;">
       <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;">Silver Layer</div>
@@ -979,107 +994,131 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 9 — LONG-TERM VISION -->
+<!-- SLIDE 9 — HQ STRATEGY ALIGNMENT -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="vision">
-  <div class="slide-num">09 / 12</div>
-  <div class="s-label">08 · Where we're going</div>
-  <h2 class="section-title">The long-term vision —<br><em>in alignment with HQ</em></h2>
-  <div class="prose">The 2026 roadmap is the foundation. The longer-term trajectory will be built in alignment with the <strong>One Masdar AI Strategy 2030</strong> and the HQ AI SteerCo governance process. Below is a directional view — not a committed plan.</div>
+<div class="slide-num">09 / 11</div>
+<div class="s-label">08 · Strategic context</div>
+<h2 class="section-title">Aligned with <em>One Masdar AI Strategy 2030</em></h2>
+<div class="prose">
+  The 2026 UK roadmap maps directly onto the three-phase HQ ambition — Masdar UK is currently in the <strong>Near-Term phase</strong>, focused on AI readiness and early value delivery across People, Processes, and Technology.
+</div>
 
-  <div class="vision-strip">
-    <div class="vision-phase" style="background:rgba(70,104,179,.04);">
-      <div class="vision-year">2026 — Now</div>
-      <div class="vision-title">Build & Deliver</div>
-      <div class="vision-items">
-        <div class="vision-item">MasdarMind foundations live</div>
-        <div class="vision-item">Quick wins delivered per department</div>
-        <div class="vision-item">First AI agents in production</div>
-        <div class="vision-item">Data governance standard set</div>
-        <div class="vision-item">Digital maturity: Level 1→2 for all functions</div>
-      </div>
-    </div>
-    <div class="vision-phase" style="background:rgba(46,127,207,.04);">
-      <div class="vision-year">2027–2028</div>
-      <div class="vision-title">Scale & Integrate</div>
-      <div class="vision-items">
-        <div class="vision-item">MasdarMind as single source of truth</div>
-        <div class="vision-item">Multi-domain RAG across all BUs</div>
-        <div class="vision-item">Predictive analytics in operations</div>
-        <div class="vision-item">Commercial AI models in production</div>
-        <div class="vision-item">Digital maturity: Level 3 for key functions</div>
-      </div>
-    </div>
-    <div class="vision-phase" style="background:rgba(107,95,212,.04);">
-      <div class="vision-year">2029–2031</div>
-      <div class="vision-title">AI-Native Business</div>
-      <div class="vision-items">
-        <div class="vision-item">Autonomous reporting & controls</div>
-        <div class="vision-item">AI-assisted investment decisions</div>
-        <div class="vision-item">Full BESS dispatch optimisation</div>
-        <div class="vision-item">Masdar UK as digital benchmark within group</div>
-      </div>
-    </div>
+<!-- PHASE HEADER STRIP -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:20px;">
+  <div style="background:var(--ink); color:var(--bg); padding:16px 20px; border-right:1px solid rgba(255,255,255,.12);">
+    <div style="font-family:'DM Mono',monospace; font-size:9px; opacity:.45; text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px;">Near-Term · 18 months ← We are here</div>
+    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:18px; font-weight:400; line-height:1.2;">AI Readiness &amp; Early Value Delivery</div>
   </div>
-
-  <div class="vision-hq">
-    <strong>Note on long-term roadmap:</strong> The 2027+ trajectory will be developed in close alignment with Abu Dhabi HQ and the One Masdar AI Strategy 2030 governance framework. UK priorities will be submitted to the AI SteerCo as part of the group portfolio process. No long-term commitments are made without HQ alignment.
+  <div style="padding:16px 20px; border-right:1px solid var(--border); opacity:.7;">
+    <div style="font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px;">3-Year Ambition</div>
+    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:18px; font-weight:400; line-height:1.2; color:var(--ink);">Industrialized AI</div>
+  </div>
+  <div style="padding:16px 20px; opacity:.5;">
+    <div style="font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px;">Long-Term Aspiration · 2030+</div>
+    <div style="font-family:'Instrument Serif',Georgia,serif; font-size:18px; font-weight:400; line-height:1.2; color:var(--ink);">AI-Driven Leadership</div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 10 — INVESTMENT (VALIDATED) -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide" id="investment">
-  <div class="slide-num">10 / 12</div>
-  <div class="s-label">09 · Investment</div>
-  <h2 class="section-title">Investment approved <br><em> </em> </h2>
-  <div class="prose">All figures are incremental costs only — existing Microsoft licences and current infrastructure are excluded.</div>
+<!-- PPT GRID : 3 dimensions x 3 phases -->
+<div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:20px;">
 
-  <div style="background:var(--ink); color:var(--bg); border-radius:16px; padding:36px 40px; margin-bottom:24px;">
-    <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.4; text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px;">Validated by Husain Al Meer · April 2026</div>
-    <div style="display:flex; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:20px;">
-      <div>
-        <div style="font-family:'Instrument Serif',Georgia,serif; font-size:72px; font-weight:400; letter-spacing:-.03em; line-height:1;">~£160k</div>
-        <div style="font-family:'DM Mono',monospace; font-size:11px; opacity:.45; margin-top:4px;">incl. contingency · incremental only</div>
-      </div>
-      <div style="display:flex; gap:20px; padding-bottom:12px; flex-wrap:wrap;">
-        <div style="text-align:center;">
-          <div style="font-size:28px; font-weight:700; letter-spacing:-.02em;">32+</div>
-          <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.45; text-transform:uppercase; letter-spacing:.07em; margin-top:2px;">Use cases</div>
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:28px; font-weight:700; letter-spacing:-.02em;">1–2</div>
-          <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.45; text-transform:uppercase; letter-spacing:.07em; margin-top:2px;">Contractors</div>
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:28px; font-weight:700; letter-spacing:-.02em;">5+</div>
-          <div style="font-family:'DM Mono',monospace; font-size:10px; opacity:.45; text-transform:uppercase; letter-spacing:.07em; margin-top:2px;">AI in prod</div>
-        </div>
-      </div>
-    </div>
-    <div style="font-size:14px; opacity:.65; line-height:1.7; max-width:680px;">Full roadmap delivery with two specialist contractors. AI-assisted decision-making in Commercial and BESS Operations. Multi-domain RAG deployed across Legal, Engineering, and HR. COM-1 (BESS dispatch optimisation) and COM-2 (generation forecasting) architecture defined and ready for 2027 deployment.</div>
+  <!-- COLUMN HEADERS -->
+  <div style="display:grid; grid-template-columns:100px 1fr 1fr 1fr; background:var(--faint); border-bottom:1px solid var(--border);">
+    <div></div>
+    <div style="padding:8px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--ink); border-left:1px solid var(--border);">Near-Term</div>
+    <div style="padding:8px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); border-left:1px solid var(--border);">3 Years</div>
+    <div style="padding:8px 14px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); border-left:1px solid var(--border);">2030+</div>
   </div>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-    <div style="padding:16px 20px; background:rgba(29,158,117,.07); border:1px solid rgba(29,158,117,.2); border-radius:10px;">
-      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--green); margin-bottom:6px;">What this unlocks</div>
-      <div style="font-size:13px; color:var(--muted); line-height:1.7;">All 32 use cases in scope · Senior Data Engineer onboarding via HR (Sara) · LLM/ML Engineer for RAG architecture · Full MasdarMind platform capability</div>
+  <!-- PEOPLE ROW -->
+  <div style="display:grid; grid-template-columns:100px 1fr 1fr 1fr; border-bottom:1px solid var(--border);">
+    <div style="padding:14px 12px; background:rgba(70,104,179,.05); display:flex; align-items:center; justify-content:center;">
+      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); text-align:center; line-height:1.4;">People</div>
     </div>
-    <div style="padding:16px 20px; background:rgba(212,134,10,.07); border:1px solid rgba(212,134,10,.2); border-radius:10px;">
-      <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent4); margin-bottom:6px;">Immediate actions</div>
-      <div style="font-size:13px; color:var(--muted); line-height:1.7;">Data Engineer contractor process in progress with Sara · Specialist tool vendor evaluations to begin Q2 · HQ sign-off for larger tooling items where required</div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); background:rgba(70,104,179,.03);">
+      <div style="font-size:12px; color:var(--ink); line-height:1.6; margin-bottom:5px;">Lean, central <strong>AI CoE</strong> staffed with "AI Pioneers" — bridging business and tech.</div>
+      <div style="font-size:12px; color:var(--ink); line-height:1.6;">Formal <strong>upskilling program</strong> on data literacy and AI fundamentals.</div>
+      <div style="margin-top:8px; font-size:10px; font-family:'DM Mono',monospace; padding:3px 8px; background:rgba(70,104,179,.08); color:var(--accent); border-radius:4px; display:inline-block;">UK: AI Champions programme</div>
     </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); opacity:.65;">
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Expand CoE with <strong>specialized roles</strong> (data scientists, ML engineers). Mature external partner ecosystem.</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); opacity:.45;">
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">AI &amp; data skills embedded across all functions. CoE becomes a <strong>strategic advisory body</strong>.</div>
+    </div>
+  </div>
+
+  <!-- PROCESSES ROW -->
+  <div style="display:grid; grid-template-columns:100px 1fr 1fr 1fr; border-bottom:1px solid var(--border);">
+    <div style="padding:14px 12px; background:rgba(29,158,117,.05); display:flex; align-items:center; justify-content:center;">
+      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--green); text-align:center; line-height:1.4;">Processes</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); background:rgba(29,158,117,.03);">
+      <div style="font-size:12px; color:var(--ink); line-height:1.6; margin-bottom:5px;"><strong>Data governance</strong> program — unified business glossary.</div>
+      <div style="font-size:12px; color:var(--ink); line-height:1.6;">Deliver <strong>quick-win AI use cases</strong> by activating AI in enterprise software.</div>
+      <div style="margin-top:8px; font-size:10px; font-family:'DM Mono',monospace; padding:3px 8px; background:rgba(29,158,117,.08); color:var(--green); border-radius:4px; display:inline-block;">UK: Unity Catalog · 32 use cases</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); opacity:.65;">
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Robust framework to prioritise "buy" vs "build" use cases. Data governance fully operational and enforced.</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); opacity:.45;">
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">AI fully integrated into the operating model. Culture of <strong>data-driven experimentation</strong> is pervasive.</div>
+    </div>
+  </div>
+
+  <!-- TECHNOLOGY ROW -->
+  <div style="display:grid; grid-template-columns:100px 1fr 1fr 1fr;">
+    <div style="padding:14px 12px; background:rgba(212,134,10,.05); display:flex; align-items:center; justify-content:center;">
+      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--accent4); text-align:center; line-height:1.4;">Technology</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); background:rgba(212,134,10,.03);">
+      <div style="font-size:12px; color:var(--ink); line-height:1.6; margin-bottom:5px;">Unified, cloud-based <strong>enterprise data platform</strong>.</div>
+      <div style="font-size:12px; color:var(--ink); line-height:1.6;">Enterprise-wide AI productivity tools delivering <strong>measurable value</strong>.</div>
+      <div style="margin-top:8px; font-size:10px; font-family:'DM Mono',monospace; padding:3px 8px; background:rgba(212,134,10,.08); color:var(--accent4); border-radius:4px; display:inline-block;">UK: MasdarMind</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); opacity:.65;">
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Enterprise data platform as <strong>single source of truth</strong>. Scaling proven, high-ROI use cases in O&amp;M and Commercial.</div>
+    </div>
+    <div style="padding:14px 16px; border-left:1px solid var(--border); opacity:.45;">
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Portfolio of <strong>scaled, proprietary AI solutions</strong>. API-driven architecture integrating new technologies continuously.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MATURITY AMBITION BANDS -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-bottom:20px;">
+  <div style="padding:12px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
+    <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:5px;">A · Growth</div>
+    <div style="font-size:11px; color:var(--muted); line-height:1.5;">Scale to ~100 GW by 2030</div>
+  </div>
+  <div style="padding:12px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
+    <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:5px;">B · Value Creation</div>
+    <div style="font-size:11px; color:var(--muted); line-height:1.5;">Increase portfolio returns</div>
+  </div>
+  <div style="padding:12px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;">
+    <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:5px;">C · Execution Optim.</div>
+    <div style="font-size:11px; color:var(--muted); line-height:1.5;">Attain operational excellence</div>
+  </div>
+  <div style="padding:12px 14px; background:rgba(70,104,179,.06); border:1px solid rgba(70,104,179,.2); border-radius:8px;">
+    <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--accent); margin-bottom:5px;">D · Capability-building ← UK focus 2026</div>
+    <div style="font-size:11px; color:var(--accent); line-height:1.5;">Build strong foundations</div>
   </div>
 </div>
 
+<div class="vision-hq">
+</div>
+  
+</div>
+
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 11 — ASKS & DECISIONS -->
+<!-- SLIDE 10 — ASKS & DECISIONS -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="asks">
-  <div class="slide-num">11 / 12</div>
-  <div class="s-label">10 · What we need</div>
-  <h2 class="section-title">Two asks for <em>this meeting</em></h2>
+  <div class="slide-num">10 / 11</div>
+  <div class="s-label">09 · What we need</div>
+  <h2 class="section-title">Three asks for <em>this meeting</em></h2>
 
   <div class="ask-grid">
     <div class="ask-card urgent">
@@ -1090,22 +1129,26 @@
       <h4>2 · AI Champions per function</h4>
       <p>One nominated AI Champion per functional pillar to bridge Digital & AI with their team, flag blockers early, and support change management as tools go live.</p>
     </div>
+    <div class="ask-card info">
+      <h4>3 · Keep Digital & AI in the loop</h4>
+      <p>As new business priorities emerge or strategic context shifts, please flag new use case ideas and priorities to Mohamed directly. The roadmap is a living document — it should reflect what matters most to the business in real time.</p>
+    </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 12 — NEXT STEPS -->
+<!-- SLIDE 11 — NEXT STEPS -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="slide" id="next" style="border-bottom:none;">
-  <div class="slide-num">12 / 12</div>
-  <div class="s-label">11 · What happens next</div>
+  <div class="slide-num">11 / 11</div>
+  <div class="s-label">10 · What happens next</div>
   <h2 class="section-title">Immediate next steps</h2>
 
   <div class="next-grid">
     <div class="next-card">
       <div class="next-when">April 2026</div>
       <h4>Investment confirmed</h4>
-      <p>SLT approval of Realistic scenario. Data Engineer contractor process accelerated with Sara.</p>
+      <p>Data Engineer contractor process accelerated with Sara. Specialist tool vendor evaluations to begin Q2.</p>
     </div>
     <div class="next-card">
       <div class="next-when">May 2026</div>
@@ -1128,9 +1171,9 @@
       <p>Progress report against roadmap, ROI tracking on live use cases, and roadmap re-calibration if needed.</p>
     </div>
     <div class="next-card">
-      <div class="next-when">Q3–Q4 2026</div>
-      <h4>HQ alignment initiated</h4>
-      <p>UK roadmap submitted to AI SteerCo. Long-term 2027+ trajectory co-developed with Abu Dhabi.</p>
+      <div class="next-when">Ongoing</div>
+      <h4>HQ alignment — continuous</h4>
+      <p>UK roadmap submitted to AI SteerCo and updated in step with HQ strategy cycles throughout 2026 and beyond.</p>
     </div>
   </div>
 
