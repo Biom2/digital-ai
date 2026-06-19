@@ -1,1 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CEO office · Contacts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCFCFB; --surface:#F5F4F1; --surface2:#FAFAF8; --ink:#23272E; --ink2:#3C4148;
+    --muted:#6E7279; --faint:#9CA0A6; --hair:#E8E6E1; --hair2:#DCDAD4; --accent:#445463;
+    --active:#4F7A64; --steady:#8C7338; --cooling:#A2A6AC;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 26px}
+  a{color:inherit}
+
+  .appbar{border-bottom:1px solid var(--hair);background:var(--surface2)}
+  .appbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}
+  .brand i{font-size:19px;color:var(--ink2)}
+  .brand .sub{font-weight:400;color:var(--faint);font-size:13px;border-left:1px solid var(--hair2);padding-left:9px;margin-left:2px}
+  .who{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em;display:flex;align-items:center;gap:6px}
+  .who i{font-size:14px}
+
+  .toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 14px}
+  .search{position:relative;flex:1;min-width:220px}
+  .search i{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--faint)}
+  .search input{width:100%;height:38px;padding:0 12px 0 34px;border:1px solid var(--hair2);border-radius:7px;background:#fff;font-family:var(--sans);font-size:14px;color:var(--ink)}
+  .search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(68,84,99,.10)}
+  .chips{display:flex;gap:6px}
+  .chip{font-size:12.5px;padding:7px 13px;border:1px solid var(--hair2);border-radius:20px;background:#fff;color:var(--muted);cursor:pointer;font-family:var(--sans)}
+  .chip:hover{border-color:var(--hair2);background:var(--surface)}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:#F4F3F0}
+  .count{font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.04em;white-space:nowrap}
+
+  table{width:100%;border-collapse:collapse;table-layout:fixed}
+  thead th{text-align:left;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;color:var(--faint);padding:0 12px 9px;border-bottom:1px solid var(--hair2)}
+  th.c,td.c{text-align:center}
+  tbody tr{border-bottom:1px solid var(--hair);cursor:pointer}
+  tbody tr:hover{background:var(--surface)}
+  tbody td{padding:13px 12px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nm{display:flex;align-items:center;gap:11px;min-width:0}
+  .av{width:32px;height:32px;border-radius:50%;background:var(--surface);border:1px solid var(--hair2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--ink2);flex-shrink:0}
+  .nm .t{min-width:0}
+  .nm .t b{font-weight:500;font-size:14px;display:block;overflow:hidden;text-overflow:ellipsis}
+  .nm .t span{font-size:12px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis}
+  td .org{font-size:14px;display:block;overflow:hidden;text-overflow:ellipsis}
+  td .sec{font-size:12px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis}
+  .owner{font-size:13px;color:var(--ink2)}
+  .mtgs{font-family:var(--mono);font-size:14px}
+  .last{font-size:13px;color:var(--muted)}
+  .stat{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2)}
+  .stat .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+  .record{display:none;padding:22px 0 60px}
+  .back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em;background:none;border:none;cursor:pointer;padding:0;margin-bottom:20px}
+  .back:hover{color:var(--ink)}
+  .rhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .rhead .left{display:flex;gap:14px}
+  .rhead .av{width:46px;height:46px;font-size:15px}
+  .rname{font-size:20px;font-weight:600;letter-spacing:-.01em}
+  .rrole{font-size:14px;color:var(--muted);margin-top:1px}
+  .badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .badge{font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--hair);border-radius:5px;padding:3px 9px;display:inline-flex;align-items:center;gap:5px}
+  .badge i{font-size:13px}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:8px;overflow:hidden;margin:6px 0 22px}
+  .stats .s{background:var(--surface2);padding:13px 16px}
+  .stats .s .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--faint);margin-bottom:5px}
+  .stats .s .v{font-size:16px;font-weight:500}
+
+  .summary{border:1px solid var(--hair2);border-left:3px solid var(--accent);border-radius:0 7px 7px 0;background:var(--surface2);padding:14px 16px;margin-bottom:26px}
+  .summary .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+  .summary p{margin:0;font-size:14px;line-height:1.6;color:var(--ink2)}
+
+  .sectitle{font-size:13px;font-weight:600;letter-spacing:.01em;margin:0 0 4px;display:flex;align-items:center;justify-content:space-between}
+  .sectitle .n{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--faint)}
+
+  .mlist{margin-top:12px}
+  .mtg{display:flex;gap:18px;padding:15px 0;border-top:1px solid var(--hair)}
+  .mtg:first-child{border-top:none}
+  .mtg.up{background:var(--surface2);margin:0 -14px;padding:15px 14px;border-radius:8px;border:1px solid var(--hair2)}
+  .mdate{font-family:var(--mono);font-size:12px;color:var(--muted);width:104px;flex-shrink:0;padding-top:2px}
+  .mbody{flex:1;min-width:0}
+  .mtop{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .msub{font-size:14.5px;font-weight:500}
+  .mtype{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--faint)}
+  .mtag{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--accent);border:1px solid var(--hair2);border-radius:4px;padding:2px 7px}
+  .mmeta{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .mdoc{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);margin-top:8px;background:#fff;border:1px solid var(--hair2);border-radius:5px;padding:5px 9px}
+  .mdoc i{font-size:14px;color:var(--muted)}
+  .mdoc .st{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.04em;margin-left:2px}
+
+  @media (max-width:680px){
+    thead th.hide,tbody td.hide{display:none}
+    .wrap{padding:0 16px}
+    .appbar .wrap{padding:12px 16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="appbar">
+  <div class="wrap">
+    <div class="brand"><i class="ti ti-address-book"></i>CEO office<span class="sub">Contacts</span></div>
+    <div class="who"><i class="ti ti-lock"></i>EA · CEO office</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div id="dbView">
+    <div class="toolbar">
+      <div class="search"><i class="ti ti-search"></i><input id="q" type="text" placeholder="Search name or organisation" oninput="render()"></div>
+      <div class="chips">
+        <button class="chip on" data-f="all" onclick="setFilter('all')">All</button>
+        <button class="chip" data-f="active" onclick="setFilter('active')">Active</button>
+        <button class="chip" data-f="steady" onclick="setFilter('steady')">Steady</button>
+        <button class="chip" data-f="cooling" onclick="setFilter('cooling')">Cooling</button>
+      </div>
+      <span class="count" id="count"></span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Contact</th>
+          <th class="hide">Organisation</th>
+          <th class="hide">Owner</th>
+          <th class="c">Mtgs / 12m</th>
+          <th>Last contact</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="record" id="record"></div>
+
+</div>
+
+<script>
+const T={active:{c:'var(--active)',l:'Active'},steady:{c:'var(--steady)',l:'Steady'},cooling:{c:'var(--cooling)',l:'Cooling'}};
+const D=[
+{in:'EW',name:'Eleanor Whitcombe',role:'Director, Marine Leasing',org:'The Crown Estate',sector:'Seabed leasing',country:'United Kingdom',owner:'Husain Al Meer',temp:'active',last:'5 weeks ago',
+sum:"Owns the commercial and spatial design of the next offshore wind leasing round. Last contact five weeks ago on Round 5 sequencing and extension zones. Cadence regular — six meetings over twelve months. Pre-qualification criteria expected September; next meeting in four days.",
+stats:{m:'6',cad:'~9 wks',last:'5 weeks ago',next:'in 4 days'},
+mtg:[
+{up:1,d:'23 Jun 2026',s:'Round 5 pre-qualification',ty:'Working meeting',who:'Husain Al Meer · Eleanor Whitcombe',doc:'Talking points — Round 5.docx',st:'prepared'},
+{d:'14 May 2026',s:'Round 5 calendar & extension zones',ty:'Working meeting',who:'Husain Al Meer · Eleanor Whitcombe',doc:'Talking points — Round 5.docx',st:'logged'},
+{d:'03 Mar 2026',s:'Quarterly OFSW portfolio review',ty:'Review',who:'Husain Al Meer · Sahil',doc:'Notes — point Q1.docx',st:'logged'},
+{d:'12 Dec 2025',s:'Introduction to Masdar UK strategy',ty:'Introduction',who:'Husain Al Meer',doc:'Brief intro.docx',st:'logged'}]},
+
+{in:'PN',name:'Dr. Priya Nair',role:'Deputy Director',org:'DESNZ',sector:'Policy / regulation',country:'United Kingdom',owner:'Husain Al Meer',temp:'steady',last:'3 weeks ago',
+sum:"Contact on the offshore regulatory framework and capacity market. Last contact three weeks ago on the grid connection reform consultation. Cadence stable — four meetings over twelve months. Next follow-up on the consultation in early July.",
+stats:{m:'4',cad:'~7 wks',last:'3 weeks ago',next:'in 2 weeks'},
+mtg:[
+{up:1,d:'03 Jul 2026',s:'Grid connection reform — follow-up',ty:'Working meeting',who:'Husain Al Meer · Priya Nair',doc:'—',st:'not started'},
+{d:'29 May 2026',s:'Grid connection reform consultation',ty:'Working meeting',who:'Husain Al Meer · Priya Nair',doc:'Talking points — grid reform.docx',st:'logged'},
+{d:'10 Apr 2026',s:'Capacity market & BESS',ty:'Working meeting',who:'Husain Al Meer',doc:'Notes CM.docx',st:'logged'}]},
+
+{in:'SL',name:'Søren Lindqvist',role:'Partner',org:'Bain & Company',sector:'Strategy advisory',country:'UK / Nordics',owner:'Kate (VP Strategy)',temp:'steady',last:'2 weeks ago',
+sum:"Leads the advisory engagement on the digital & AI use-case bank. Last contact two weeks ago on scope and information exchange. Relationship owned by Kate. Point to watch: frame the sharing of the internal bank before formal engagement. Three meetings over twelve months.",
+stats:{m:'3',cad:'~6 wks',last:'2 weeks ago',next:'to schedule'},
+mtg:[
+{d:'05 Jun 2026',s:'Engagement scope & information sharing',ty:'Working meeting',who:'Kate · Mohamed · Søren Lindqvist',doc:'Talking points — scope Bain.docx',st:'logged'},
+{d:'28 Apr 2026',s:'Initial use-case framing',ty:'Introduction',who:'Mohamed · Søren Lindqvist',doc:'Notes cadrage.docx',st:'logged'}]},
+
+{in:'JO',name:'James Okonkwo',role:'Head of Infrastructure',org:'Meridian Pension Partners',sector:'Co-investment / LP',country:'United Kingdom',owner:'Kate (VP Strategy)',temp:'cooling',last:'4 months ago',
+sum:"Potential co-investor on the UK BESS pipeline. Last contact four months ago — relationship cooling, no follow-up since. Two meetings over twelve months. Recommendation: re-establish contact before quarter-end to keep the link warm.",
+stats:{m:'2',cad:'~5 mo',last:'4 months ago',next:'none'},
+mtg:[
+{d:'18 Feb 2026',s:'UK BESS pipeline & co-invest appetite',ty:'Working meeting',who:'Kate · James Okonkwo',doc:'Talking points — BESS pipeline.docx',st:'logged'},
+{d:'02 Oct 2025',s:'First contact',ty:'Introduction',who:'Kate · James Okonkwo',doc:'Notes intro.docx',st:'logged'}]}
+];
+
+let filter='all';
+function setFilter(f){filter=f;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.f===f));render();}
+function visible(){
+  const q=document.getElementById('q').value.toLowerCase();
+  return D.map((c,i)=>({c,i})).filter(({c})=>
+    (filter==='all'||c.temp===filter) &&
+    (!q||(c.name+' '+c.org).toLowerCase().includes(q)));
+}
+function render(){
+  const v=visible();
+  document.getElementById('count').textContent=v.length+(v.length===1?' contact':' contacts');
+  document.getElementById('rows').innerHTML=v.map(({c,i})=>{
+    const t=T[c.temp];
+    return `<tr onclick="openRecord(${i})">
+      <td><div class="nm"><div class="av">${c.in}</div><div class="t"><b>${c.name}</b><span>${c.role}</span></div></div></td>
+      <td class="hide"><span class="org">${c.org}</span><span class="sec">${c.sector}</span></td>
+      <td class="hide owner">${c.owner}</td>
+      <td class="c mtgs">${c.stats.m}</td>
+      <td class="last">${c.last}</td>
+      <td><span class="stat"><span class="dot" style="background:${t.c}"></span>${t.l}</span></td>
+    </tr>`;
+  }).join('');
+}
+function openRecord(i){
+  const c=D[i];const t=T[c.temp];
+  document.getElementById('record').innerHTML=`
+    <button class="back" onclick="closeRecord()"><i class="ti ti-arrow-left" style="font-size:14px"></i>All contacts</button>
+    <div class="rhead">
+      <div class="left">
+        <div class="av">${c.in}</div>
+        <div>
+          <div class="rname">${c.name}</div>
+          <div class="rrole">${c.role} · ${c.org}</div>
+          <div class="badges">
+            <span class="badge"><i class="ti ti-map-pin"></i>${c.country}</span>
+            <span class="badge"><i class="ti ti-tag"></i>${c.sector}</span>
+            <span class="badge"><i class="ti ti-user"></i>${c.owner}</span>
+          </div>
+        </div>
+      </div>
+      <span class="stat"><span class="dot" style="background:${t.c}"></span>${t.l}</span>
+    </div>
+    <div class="stats">
+      <div class="s"><div class="k">Meetings / 12m</div><div class="v">${c.stats.m}</div></div>
+      <div class="s"><div class="k">Avg cadence</div><div class="v">${c.stats.cad}</div></div>
+      <div class="s"><div class="k">Last contact</div><div class="v">${c.stats.last}</div></div>
+      <div class="s"><div class="k">Next</div><div class="v">${c.stats.next}</div></div>
+    </div>
+    <div class="summary">
+      <div class="lbl"><i class="ti ti-sparkles" style="font-size:12px"></i>Relationship summary · generated</div>
+      <p>${c.sum}</p>
+    </div>
+    <div class="sectitle">Meeting history<span class="n">${c.mtg.length} records</span></div>
+    <div class="mlist">
+      ${c.mtg.map(m=>`<div class="mtg ${m.up?'up':''}">
+        <div class="mdate">${m.d}</div>
+        <div class="mbody">
+          <div class="mtop"><span class="msub">${m.s}</span>${m.up?'<span class="mtag">upcoming</span>':`<span class="mtype">${m.ty}</span>`}</div>
+          <div class="mmeta">${m.who}</div>
+          ${m.doc!=='—'?`<div class="mdoc"><i class="ti ti-file-description"></i>${m.doc}<span class="st">${m.st}</span></div>`:''}
+        </div>
+      </div>`).join('')}
+    </div>`;
+  document.getElementById('dbView').style.display='none';
+  document.getElementById('record').style.display='block';
+  window.scrollTo(0,0);
+}
+function closeRecord(){
+  document.getElementById('record').style.display='none';
+  document.getElementById('dbView').style.display='block';
+}
+render();
+</script>
+</body>
+</html>
 
