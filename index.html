@@ -1,259 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CEO office · Contacts</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masdar UK — Use Case Prioritisation Matrix</title>
 <style>
   :root{
-    --paper:#FCFCFB; --surface:#F5F4F1; --surface2:#FAFAF8; --ink:#23272E; --ink2:#3C4148;
-    --muted:#6E7279; --faint:#9CA0A6; --hair:#E8E6E1; --hair2:#DCDAD4; --accent:#445463;
-    --active:#4F7A64; --steady:#8C7338; --cooling:#A2A6AC;
-    --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --bg:#0C1826; --panel:#132436; --panel2:#0F1E2E; --line:#22384E;
+    --cyan:#3FB6E8; --green:#4FC98F; --amber:#E8A64B; --grey:#7E93A8;
+    --text:#E8F1F8; --muted:#9DB2C4; --faint:#5E7488;
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55}
-  .wrap{max-width:1020px;margin:0 auto;padding:0 26px}
-  a{color:inherit}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--text); font-family:"Segoe UI", -apple-system, Roboto, Arial, sans-serif; font-size:14px; line-height:1.45;}
+  .wrap{max-width:1280px; margin:0 auto; padding:28px 24px 60px;}
+  header{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:20px;}
+  h1{font-size:22px; font-weight:600; letter-spacing:.2px;}
+  h1 span{color:var(--cyan);}
+  .sub{color:var(--muted); font-size:13px; margin-top:4px;}
+  .stamp{text-align:right; color:var(--faint); font-size:11px; line-height:1.5;}
 
-  .appbar{border-bottom:1px solid var(--hair);background:var(--surface2)}
-  .appbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px}
-  .brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px}
-  .brand i{font-size:19px;color:var(--ink2)}
-  .brand .sub{font-weight:400;color:var(--faint);font-size:13px;border-left:1px solid var(--hair2);padding-left:9px;margin-left:2px}
-  .who{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em;display:flex;align-items:center;gap:6px}
-  .who i{font-size:14px}
+  .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px;}
+  .chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{border:1px solid var(--line); background:var(--panel2); color:var(--muted); border-radius:20px; padding:5px 12px; font-size:12px; cursor:pointer; user-select:none; transition:all .15s;}
+  .chip:hover{border-color:var(--cyan); color:var(--text);}
+  .chip.on{background:var(--cyan); border-color:var(--cyan); color:#06202F; font-weight:600;}
+  input[type=search]{background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:7px 12px; font-size:13px; width:230px; outline:none;}
+  input[type=search]:focus{border-color:var(--cyan);}
+  .toggle{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--muted); cursor:pointer; user-select:none;}
+  .toggle input{accent-color:var(--cyan); width:15px; height:15px; cursor:pointer;}
 
-  .toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 14px}
-  .search{position:relative;flex:1;min-width:220px}
-  .search i{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--faint)}
-  .search input{width:100%;height:38px;padding:0 12px 0 34px;border:1px solid var(--hair2);border-radius:7px;background:#fff;font-family:var(--sans);font-size:14px;color:var(--ink)}
-  .search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(68,84,99,.10)}
-  .chips{display:flex;gap:6px}
-  .chip{font-size:12.5px;padding:7px 13px;border:1px solid var(--hair2);border-radius:20px;background:#fff;color:var(--muted);cursor:pointer;font-family:var(--sans)}
-  .chip:hover{border-color:var(--hair2);background:var(--surface)}
-  .chip.on{background:var(--ink);border-color:var(--ink);color:#F4F3F0}
-  .count{font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.04em;white-space:nowrap}
+  .counts{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px;}
+  .count{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--muted);}
+  .dotk{width:10px; height:10px; border-radius:50%;}
 
-  table{width:100%;border-collapse:collapse;table-layout:fixed}
-  thead th{text-align:left;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;color:var(--faint);padding:0 12px 9px;border-bottom:1px solid var(--hair2)}
-  th.c,td.c{text-align:center}
-  tbody tr{border-bottom:1px solid var(--hair);cursor:pointer}
-  tbody tr:hover{background:var(--surface)}
-  tbody td{padding:13px 12px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .nm{display:flex;align-items:center;gap:11px;min-width:0}
-  .av{width:32px;height:32px;border-radius:50%;background:var(--surface);border:1px solid var(--hair2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--ink2);flex-shrink:0}
-  .nm .t{min-width:0}
-  .nm .t b{font-weight:500;font-size:14px;display:block;overflow:hidden;text-overflow:ellipsis}
-  .nm .t span{font-size:12px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis}
-  td .org{font-size:14px;display:block;overflow:hidden;text-overflow:ellipsis}
-  td .sec{font-size:12px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis}
-  .owner{font-size:13px;color:var(--ink2)}
-  .mtgs{font-family:var(--mono);font-size:14px}
-  .last{font-size:13px;color:var(--muted)}
-  .stat{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink2)}
-  .stat .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .layout{display:grid; grid-template-columns:1fr 320px; gap:18px;}
+  @media (max-width:980px){.layout{grid-template-columns:1fr;}}
 
-  .record{display:none;padding:22px 0 60px}
-  .back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em;background:none;border:none;cursor:pointer;padding:0;margin-bottom:20px}
-  .back:hover{color:var(--ink)}
-  .rhead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
-  .rhead .left{display:flex;gap:14px}
-  .rhead .av{width:46px;height:46px;font-size:15px}
-  .rname{font-size:20px;font-weight:600;letter-spacing:-.01em}
-  .rrole{font-size:14px;color:var(--muted);margin-top:1px}
-  .badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-  .badge{font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--hair);border-radius:5px;padding:3px 9px;display:inline-flex;align-items:center;gap:5px}
-  .badge i{font-size:13px}
+  .chartbox{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px;}
+  svg{width:100%; height:auto; display:block;}
+  .qlabel{font-size:12px; fill:var(--faint); font-weight:600; letter-spacing:.6px;}
+  .qsub{font-size:9.5px; fill:var(--faint);}
+  .axis{font-size:10.5px; fill:var(--faint);}
+  .axname{font-size:11.5px; fill:var(--muted); font-weight:600; letter-spacing:.8px;}
+  .dot{cursor:pointer; transition:r .12s;}
+  .dot:hover{stroke:#fff; stroke-width:1.5;}
+  .dot.dim{opacity:.12; pointer-events:none;}
+  .dot.sel{stroke:#fff; stroke-width:2;}
+  .flag-ring{fill:none; stroke:#fff; stroke-width:1; opacity:.85; pointer-events:none;}
 
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:8px;overflow:hidden;margin:6px 0 22px}
-  .stats .s{background:var(--surface2);padding:13px 16px}
-  .stats .s .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--faint);margin-bottom:5px}
-  .stats .s .v{font-size:16px;font-weight:500}
+  .side{display:flex; flex-direction:column; gap:14px;}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px;}
+  .card h3{font-size:13px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.8px; margin-bottom:10px;}
+  #detail .name{font-size:15px; font-weight:600; margin-bottom:6px;}
+  #detail .meta{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
+  .badge{font-size:11px; padding:3px 9px; border-radius:12px; font-weight:600;}
+  #detail .note{color:var(--muted); font-size:13px;}
+  #detail .scores{display:flex; gap:18px; margin:10px 0;}
+  #detail .sc{text-align:center;}
+  #detail .sc b{display:block; font-size:22px; font-family:Consolas, monospace; color:var(--cyan);}
+  #detail .sc span{font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.5px;}
+  .empty{color:var(--faint); font-size:13px;}
+  .legend-q{display:flex; flex-direction:column; gap:8px; font-size:12px; color:var(--muted);}
+  .legend-q div{display:flex; gap:8px; align-items:flex-start;}
+  .legend-q b{color:var(--text); font-weight:600;}
 
-  .summary{border:1px solid var(--hair2);border-left:3px solid var(--accent);border-radius:0 7px 7px 0;background:var(--surface2);padding:14px 16px;margin-bottom:26px}
-  .summary .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:6px}
-  .summary p{margin:0;font-size:14px;line-height:1.6;color:var(--ink2)}
-
-  .sectitle{font-size:13px;font-weight:600;letter-spacing:.01em;margin:0 0 4px;display:flex;align-items:center;justify-content:space-between}
-  .sectitle .n{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--faint)}
-
-  .mlist{margin-top:12px}
-  .mtg{display:flex;gap:18px;padding:15px 0;border-top:1px solid var(--hair)}
-  .mtg:first-child{border-top:none}
-  .mtg.up{background:var(--surface2);margin:0 -14px;padding:15px 14px;border-radius:8px;border:1px solid var(--hair2)}
-  .mdate{font-family:var(--mono);font-size:12px;color:var(--muted);width:104px;flex-shrink:0;padding-top:2px}
-  .mbody{flex:1;min-width:0}
-  .mtop{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .msub{font-size:14.5px;font-weight:500}
-  .mtype{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--faint)}
-  .mtag{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--accent);border:1px solid var(--hair2);border-radius:4px;padding:2px 7px}
-  .mmeta{font-size:12.5px;color:var(--muted);margin-top:4px}
-  .mdoc{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);margin-top:8px;background:#fff;border:1px solid var(--hair2);border-radius:5px;padding:5px 9px}
-  .mdoc i{font-size:14px;color:var(--muted)}
-  .mdoc .st{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.04em;margin-left:2px}
-
-  @media (max-width:680px){
-    thead th.hide,tbody td.hide{display:none}
-    .wrap{padding:0 16px}
-    .appbar .wrap{padding:12px 16px}
-  }
+  table{width:100%; border-collapse:collapse; margin-top:24px; font-size:12.5px;}
+  th{text-align:left; color:var(--faint); font-weight:600; text-transform:uppercase; font-size:10.5px; letter-spacing:.6px; padding:8px 10px; border-bottom:1px solid var(--line); cursor:pointer; user-select:none;}
+  th:hover{color:var(--cyan);}
+  td{padding:7px 10px; border-bottom:1px solid #1A2C3F; color:var(--muted);}
+  td:first-child{color:var(--text);}
+  tr:hover td{background:#16283C;}
+  .qtag{display:inline-block; width:18px; text-align:center; border-radius:4px; font-weight:700; font-size:11px; color:#06202F; padding:1px 0;}
+  .fstar{color:var(--cyan); font-size:11px; margin-left:5px;}
+  footer{margin-top:26px; color:var(--faint); font-size:11px; border-top:1px solid var(--line); padding-top:14px; line-height:1.6;}
 </style>
 </head>
 <body>
-
-<div class="appbar">
-  <div class="wrap">
-    <div class="brand"><i class="ti ti-address-book"></i>CEO office<span class="sub">Contacts</span></div>
-    <div class="who"><i class="ti ti-lock"></i>EA · CEO office</div>
-  </div>
-</div>
-
 <div class="wrap">
-
-  <div id="dbView">
-    <div class="toolbar">
-      <div class="search"><i class="ti ti-search"></i><input id="q" type="text" placeholder="Search name or organisation" oninput="render()"></div>
-      <div class="chips">
-        <button class="chip on" data-f="all" onclick="setFilter('all')">All</button>
-        <button class="chip" data-f="active" onclick="setFilter('active')">Active</button>
-        <button class="chip" data-f="steady" onclick="setFilter('steady')">Steady</button>
-        <button class="chip" data-f="cooling" onclick="setFilter('cooling')">Cooling</button>
-      </div>
-      <span class="count" id="count"></span>
+  <header>
+    <div>
+      <h1>Masdar UK <span>·</span> AI &amp; Digital Use Case Prioritisation</h1>
+      <div class="sub">Impact vs Feasibility &amp; Urgency — full Use Case Bank, scored per MASD-BD-PRO-I-001-2026</div>
     </div>
+    <div class="stamp">Indicative scoring — pending function owner validation<br>Digital &amp; AI Strategy · July 2026 · Internal</div>
+  </header>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Contact</th>
-          <th class="hide">Organisation</th>
-          <th class="hide">Owner</th>
-          <th class="c">Mtgs / 12m</th>
-          <th>Last contact</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search use cases...">
+    <div class="chips" id="pillarChips"></div>
+    <label class="toggle"><input type="checkbox" id="flagOnly"> Flagship 6 only (Michelle email)</label>
+  </div>
+  <div class="counts" id="counts"></div>
+
+  <div class="layout">
+    <div class="chartbox"><svg id="chart" viewBox="0 0 760 640" xmlns="http://www.w3.org/2000/svg"></svg></div>
+    <div class="side">
+      <div class="card" id="detail"><h3>Use case detail</h3><div class="empty">Hover or click a dot to see details.</div></div>
+      <div class="card">
+        <h3>Quadrants</h3>
+        <div class="legend-q">
+          <div><span class="dotk" style="background:var(--cyan); margin-top:4px;"></span><div><b>A — Strategic Priority</b> · I≥4, F≥3. High-impact, proven. Backbone of the portfolio.</div></div>
+          <div><span class="dotk" style="background:var(--green); margin-top:4px;"></span><div><b>B — Quick Win</b> · F≥4. Fast, visible impact with existing tools. Credibility builders.</div></div>
+          <div><span class="dotk" style="background:var(--amber); margin-top:4px;"></span><div><b>D — Next Horizon</b> · I≥3, F≤2. High upside, blocked near-term (data, JV, procurement). Re-scored quarterly.</div></div>
+          <div><span class="dotk" style="background:var(--grey); margin-top:4px;"></span><div><b>C — Deferred / Monitor</b> · Remain in the bank, monitored for readiness.</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="record" id="record"></div>
+  <table id="tbl">
+    <thead><tr>
+      <th data-k="name">Use case</th><th data-k="pillar">Pillar</th>
+      <th data-k="i">Impact</th><th data-k="f">Feasibility</th>
+      <th data-k="total">Total</th><th data-k="q">Quadrant</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
 
+  <footer>
+    Scoring basis: each axis is the rounded average of five sub-criteria (1–5) per the Use Case Scoring &amp; Prioritisation Framework. Total = Impact + Feasibility, out of 10.
+    Quadrant thresholds: A (I≥4, F≥3) · B (F≥4) · D (I≥3, F≤2) · C (remainder). Scores shown are the Digital &amp; AI Strategy Manager's initial assessment based on stakeholder interview evidence and delivery status; validation with function owners and Data Council review pending. White-ringed dots are the six flagship use cases shared with HQ (July 2026).
+  </footer>
 </div>
 
 <script>
-const T={active:{c:'var(--active)',l:'Active'},steady:{c:'var(--steady)',l:'Steady'},cooling:{c:'var(--cooling)',l:'Cooling'}};
+// I = Impact (1-5), F = Feasibility & Urgency (1-5). flag = one of the 6 shared with Michelle.
 const D=[
-{in:'EW',name:'Eleanor Whitcombe',role:'Director, Marine Leasing',org:'The Crown Estate',sector:'Seabed leasing',country:'United Kingdom',owner:'Husain Al Meer',temp:'active',last:'5 weeks ago',
-sum:"Owns the commercial and spatial design of the next offshore wind leasing round. Last contact five weeks ago on Round 5 sequencing and extension zones. Cadence regular — six meetings over twelve months. Pre-qualification criteria expected September; next meeting in four days.",
-stats:{m:'6',cad:'~9 wks',last:'5 weeks ago',next:'in 4 days'},
-mtg:[
-{up:1,d:'23 Jun 2026',s:'Round 5 pre-qualification',ty:'Working meeting',who:'Husain Al Meer · Eleanor Whitcombe',doc:'Talking points — Round 5.docx',st:'prepared'},
-{d:'14 May 2026',s:'Round 5 calendar & extension zones',ty:'Working meeting',who:'Husain Al Meer · Eleanor Whitcombe',doc:'Talking points — Round 5.docx',st:'logged'},
-{d:'03 Mar 2026',s:'Quarterly OFSW portfolio review',ty:'Review',who:'Husain Al Meer · Sahil',doc:'Notes — point Q1.docx',st:'logged'},
-{d:'12 Dec 2025',s:'Introduction to Masdar UK strategy',ty:'Introduction',who:'Husain Al Meer',doc:'Brief intro.docx',st:'logged'}]},
-
-{in:'PN',name:'Dr. Priya Nair',role:'Deputy Director',org:'DESNZ',sector:'Policy / regulation',country:'United Kingdom',owner:'Husain Al Meer',temp:'steady',last:'3 weeks ago',
-sum:"Contact on the offshore regulatory framework and capacity market. Last contact three weeks ago on the grid connection reform consultation. Cadence stable — four meetings over twelve months. Next follow-up on the consultation in early July.",
-stats:{m:'4',cad:'~7 wks',last:'3 weeks ago',next:'in 2 weeks'},
-mtg:[
-{up:1,d:'03 Jul 2026',s:'Grid connection reform — follow-up',ty:'Working meeting',who:'Husain Al Meer · Priya Nair',doc:'—',st:'not started'},
-{d:'29 May 2026',s:'Grid connection reform consultation',ty:'Working meeting',who:'Husain Al Meer · Priya Nair',doc:'Talking points — grid reform.docx',st:'logged'},
-{d:'10 Apr 2026',s:'Capacity market & BESS',ty:'Working meeting',who:'Husain Al Meer',doc:'Notes CM.docx',st:'logged'}]},
-
-{in:'SL',name:'Søren Lindqvist',role:'Partner',org:'Bain & Company',sector:'Strategy advisory',country:'UK / Nordics',owner:'Kate (VP Strategy)',temp:'steady',last:'2 weeks ago',
-sum:"Leads the advisory engagement on the digital & AI use-case bank. Last contact two weeks ago on scope and information exchange. Relationship owned by Kate. Point to watch: frame the sharing of the internal bank before formal engagement. Three meetings over twelve months.",
-stats:{m:'3',cad:'~6 wks',last:'2 weeks ago',next:'to schedule'},
-mtg:[
-{d:'05 Jun 2026',s:'Engagement scope & information sharing',ty:'Working meeting',who:'Kate · Mohamed · Søren Lindqvist',doc:'Talking points — scope Bain.docx',st:'logged'},
-{d:'28 Apr 2026',s:'Initial use-case framing',ty:'Introduction',who:'Mohamed · Søren Lindqvist',doc:'Notes cadrage.docx',st:'logged'}]},
-
-{in:'JO',name:'James Okonkwo',role:'Head of Infrastructure',org:'Meridian Pension Partners',sector:'Co-investment / LP',country:'United Kingdom',owner:'Kate (VP Strategy)',temp:'cooling',last:'4 months ago',
-sum:"Potential co-investor on the UK BESS pipeline. Last contact four months ago — relationship cooling, no follow-up since. Two meetings over twelve months. Recommendation: re-establish contact before quarter-end to keep the link warm.",
-stats:{m:'2',cad:'~5 mo',last:'4 months ago',next:'none'},
-mtg:[
-{d:'18 Feb 2026',s:'UK BESS pipeline & co-invest appetite',ty:'Working meeting',who:'Kate · James Okonkwo',doc:'Talking points — BESS pipeline.docx',st:'logged'},
-{d:'02 Oct 2025',s:'First contact',ty:'Introduction',who:'Kate · James Okonkwo',doc:'Notes intro.docx',st:'logged'}]}
+// Platform & Data
+{n:"Data Governance Framework & Unity Catalog Activation",p:"Platform & Data",i:4,f:4,note:"Foundational; framework built, activation on existing MasdarMind stack."},
+{n:"Data Engineering Function & ETL Orchestration",p:"Platform & Data",i:4,f:3,note:"Senior DE hire landed; orchestration build 1-3 months."},
+{n:"API Connectivity & Data Governance",p:"Platform & Data",i:4,f:3,note:"Platform enabler for multiple downstream use cases."},
+{n:"Databricks Apps Enablement (UAE DC Unblock)",p:"Platform & Data",i:4,f:2,note:"Binary gate on HQ/UAE data centre; blocks several app use cases."},
+{n:"MasdarMind Internal App Portal",p:"Platform & Data",i:3,f:2,note:"Depends on Databricks Apps unblock."},
+{n:"Power BI CoE / BI Governance Standard",p:"Platform & Data",i:3,f:4,note:"Governance framework drafted; rollout is process work."},
+{n:"Baltic Eagle SCADA Data Linkage (Gen & Availability)",p:"Platform & Data",i:4,f:3,note:"Identified quick-win path; JV data dependency managed."},
+{n:"SCADA Data Access — Baltic Eagle Quick Win",p:"Platform & Data",i:4,f:3,note:"Remote access architecture agreed with cyber (bastion, PAM)."},
+// O&M / Assets
+{n:"BESS Anomaly Detection & Alerting",p:"O&M & Assets",i:4,f:5,note:"In production, built internally on MasdarMind. Flagship.",flag:1},
+{n:"BESS Operational Intelligence Platform",p:"O&M & Assets",i:4,f:3,note:"Extends anomaly detection; Accure cell-level analytics feed."},
+{n:"Predictive Maintenance (Component Degradation/Failure)",p:"O&M & Assets",i:5,f:2,note:"High value pool; JV SCADA access is the constraint."},
+{n:"Asset Performance Benchmarking Tool",p:"O&M & Assets",i:4,f:2,note:"Cross-asset data availability limited by JV stakes."},
+{n:"Deep Learning Surrogates for O&M Simulations",p:"O&M & Assets",i:4,f:1,note:"Experimental; potential Edinburgh/EPCC research angle."},
+{n:"Generative O&M Scheduling (Weather & Vessel Dispatch)",p:"O&M & Assets",i:4,f:2,note:"Operator-side dependency; no direct control on JV assets."},
+{n:"Autonomous Robots / Drone Inspections & Repairs",p:"O&M & Assets",i:4,f:1,note:"Operator domain; monitor market."},
+{n:"AI Maintenance Assistant (In-Person Diagnostics)",p:"O&M & Assets",i:3,f:2,note:"Field capability not yet in UK scope."},
+{n:"O&M Strategy Modelling Tool",p:"O&M & Assets",i:4,f:2,note:"Significant build; ties to HiGHS/optimisation overlap with Tim."},
+{n:"Field Force Routing & Scheduling for O&M",p:"O&M & Assets",i:3,f:2,note:"Operator-side; not near-term."},
+{n:"Marine Logistics & Vessel Management Optimisation",p:"O&M & Assets",i:4,f:1,note:"OFSW-specific gap; heavy data and partner dependency."},
+{n:"Dynamic Curtailment & Grid Constraint Management",p:"O&M & Assets",i:4,f:2,note:"Grid data and trading interface needed."},
+// Commercial & Trading
+{n:"BESS Commercial Optimisation / Trading",p:"Commercial & Trading",i:5,f:2,note:"Under RfP; limited scope at this stage. Flagship.",flag:1},
+{n:"Battery Dispatch Optimisation (T7)",p:"Commercial & Trading",i:5,f:2,note:"Arenko dispatch partnership context; internal build blocked near-term."},
+{n:"Generation Forecasting (T1)",p:"Commercial & Trading",i:4,f:3,note:"Data partially in MasdarMind; proven approaches exist."},
+{n:"Short-Term Price Outlook (T2)",p:"Commercial & Trading",i:4,f:2,note:"Market data procurement needed."},
+{n:"Bid Shaping Engine (T4)",p:"Commercial & Trading",i:4,f:2,note:"Depends on T1/T2 maturity."},
+{n:"Algorithmic Day-Ahead Bidding (T5)",p:"Commercial & Trading",i:5,f:1,note:"Major programme; regulatory and risk controls required."},
+{n:"Intraday Rebalancing (T6)",p:"Commercial & Trading",i:4,f:1,note:"Downstream of T5."},
+{n:"Curtailment Risk Optimisation (T8)",p:"Commercial & Trading",i:4,f:2,note:"Grid constraint data dependency."},
+{n:"Market Intelligence & Portfolio Strategy",p:"Commercial & Trading",i:3,f:3,note:"Pharos-type vendor option; scoping."},
+{n:"Market Intelligence Aggregation",p:"Commercial & Trading",i:2,f:4,note:"Lightweight aggregation feasible with existing tools."},
+// Development & M&A
+{n:"Asset Origination & Evaluation (BESS Site Acquisitions)",p:"Development & M&A",i:4,f:3,note:"dvlp.energy signed/near-signed for DE/IT screening. Flagship.",flag:1},
+{n:"Greenfield Site Screening & Grid Connection Analysis",p:"Development & M&A",i:4,f:3,note:"Covered by dvlp.energy scope."},
+{n:"M&A / Transaction Asset Assessment",p:"Development & M&A",i:4,f:3,note:"Extends screening stack to M&A due diligence."},
+{n:"Automated Site Risk Assessment for M&A",p:"Development & M&A",i:3,f:3,note:"Component of DD automation; scoping."},
+{n:"AI-Driven Site Suitability & Turbine Layout",p:"Development & M&A",i:4,f:2,note:"OFSW-specific; specialist tooling procurement."},
+{n:"Supply Base Expansion & Screening",p:"Development & M&A",i:3,f:3,note:"Part of BESS origination scope with vendors."},
+{n:"Autonomous Water Environment Screening (eDNA)",p:"Development & M&A",i:2,f:1,note:"Experimental; environmental niche."},
+{n:"Document Scoring & Assessment (Bidding / DD)",p:"Development & M&A",i:3,f:3,note:"Scoping; overlaps data room management."},
+{n:"Intelligent Data Room Management",p:"Development & M&A",i:3,f:3,note:"Vendor scan needed."},
+{n:"Automated Permitting Drafting & Bid Proposal Generation",p:"Development & M&A",i:4,f:2,note:"High leverage but consenting-grade quality bar."},
+// Construction & EPC
+{n:"ALICE — AI Construction Scheduling (DBS)",p:"Construction & EPC",i:5,f:4,note:"Contract signed, implementation in progress on Dogger Bank South. Flagship.",flag:1},
+{n:"ALICE — UK BESS Extension",p:"Construction & EPC",i:4,f:3,note:"In commercial negotiations; MSA terms under review."},
+{n:"Dynamic AI-Driven Schedule Optimisation",p:"Construction & EPC",i:4,f:3,note:"Delivered through ALICE optioneering."},
+{n:"Claims Management & Contract Variations",p:"Construction & EPC",i:4,f:3,note:"Scoping with vendors, OFW first. Flagship.",flag:1},
+{n:"Value Capture Cockpit (Milestone Tracking)",p:"Construction & EPC",i:3,f:3,note:"Requires structured milestone data feed."},
+{n:"Construction Scheduling Unified View",p:"Construction & EPC",i:3,f:3,note:"Aggregation layer over P6/ALICE outputs."},
+{n:"Centralised Project Management Dashboard",p:"Construction & EPC",i:3,f:4,note:"Power BI on existing project data."},
+{n:"Meeting Action Tracker & RFI Log (BESS Construction)",p:"Construction & EPC",i:2,f:4,note:"Lists + Power Automate build."},
+{n:"Automated Monthly Report Generation",p:"Construction & EPC",i:3,f:4,note:"Templated generation from existing reporting data."},
+{n:"Document Mgmt & Contractor Interface (Aconex)",p:"Construction & EPC",i:3,f:3,note:"Aconex API scoping."},
+{n:"Aconex Metadata Completion Check",p:"Construction & EPC",i:2,f:4,note:"Rule-based check; quick automation."},
+{n:"Partner Document Intake Portal & Aconex Integration",p:"Construction & EPC",i:3,f:2,note:"Integration build plus partner onboarding."},
+{n:"Iterative Design & Cost Estimation",p:"Construction & EPC",i:3,f:2,note:"Engineering tool procurement needed."},
+{n:"RAG AI Assistant for Project Documents",p:"Construction & EPC",i:4,f:3,note:"MasdarMind + vector search; strong interview demand."},
+{n:"Technical Document Q&A Agent (Contracts & Specs)",p:"Construction & EPC",i:4,f:3,note:"Same stack as project RAG assistant."},
+// Legal & Procurement
+{n:"AI-Enabled T&C Negotiations & Contract Lifecycle Mgmt",p:"Legal & Procurement",i:4,f:2,note:"CLM platform procurement; HQ alignment needed."},
+{n:"Automated Contract Approvals (DOA → CRS → DocuSign)",p:"Legal & Procurement",i:3,f:4,note:"Power Automate build on existing flow (KYC precedent)."},
+{n:"CRS Auto-Population (DOA & Azure AD)",p:"Legal & Procurement",i:2,f:4,note:"Low-code, clear logic."},
+{n:"Centralised Contract Repository (Version Control)",p:"Legal & Procurement",i:3,f:3,note:"SharePoint restructure plus adoption."},
+{n:"NDA Template Automation (Locked Fields)",p:"Legal & Procurement",i:2,f:5,note:"Configuration only; immediate."},
+{n:"Centralised Template Repository",p:"Legal & Procurement",i:2,f:4,note:"Governance and housekeeping."},
+{n:"Automated Tender Drafting & Review",p:"Legal & Procurement",i:3,f:3,note:"Copilot-assisted drafting; QA bar high."},
+{n:"AI-Powered Spend Analytics",p:"Legal & Procurement",i:3,f:4,note:"TIPALTI/Xero data landing in MasdarMind."},
+{n:"Procurement Committee Workflow Digitalisation",p:"Legal & Procurement",i:3,f:3,note:"Process redesign plus tooling."},
+{n:"Procurement Process Agent",p:"Legal & Procurement",i:3,f:3,note:"Agent build once workflow digitised."},
+{n:"AI-Assisted Approval Slide Deck Generation (SSIC/IC)",p:"Legal & Procurement",i:3,f:4,note:"Cowork/Copilot templated generation."},
+{n:"Internal Document Q&A (Project Finance / Legal)",p:"Legal & Procurement",i:3,f:3,note:"Confidentiality controls define pace."},
+{n:"Document Comparison Automation",p:"Legal & Procurement",i:3,f:5,note:"Existing tool capability; configuration."},
+// Finance
+{n:"Xero API → Databricks Financial Pipeline (All Entities)",p:"Finance",i:3,f:4,note:"Pipeline pattern established; extend entity coverage."},
+{n:"TIPALTI PO Data Integration (BESS Delivery)",p:"Finance",i:3,f:4,note:"API integration into Bronze layer."},
+{n:"JV Partner Financial Data Normalisation",p:"Finance",i:3,f:2,note:"Partner formats heterogeneous; manual dependency."},
+{n:"Automated Budget vs Actuals (Power BI, OFW Extension)",p:"Finance",i:3,f:4,note:"Extends existing dashboard pattern."},
+{n:"Automated Finance Reporting & Variance Analysis",p:"Finance",i:3,f:4,note:"On top of Xero pipeline."},
+{n:"Automated Monthly Reporting Pipeline",p:"Finance",i:3,f:4,note:"Consolidation of existing feeds."},
+{n:"OPEX Consolidation Dashboard",p:"Finance",i:3,f:4,note:"Power BI on landed data."},
+{n:"Cash Request Digitisation & Approval Workflow",p:"Finance",i:2,f:4,note:"Forms + Power Automate."},
+{n:"HQ Group Finance Submission Standardisation",p:"Finance",i:3,f:3,note:"HQ template alignment required."},
+{n:"Automated ESG Reporting & Asset Regulation",p:"Finance",i:3,f:3,note:"Data sourcing across JV assets."},
+{n:"Digital Emissions Tracking & Optimisation",p:"Finance",i:2,f:3,note:"Monitor; group-level tooling likely."},
+// People & Culture
+{n:"AI Agent HR Policy Assistant (Nura)",p:"People & Culture",i:2,f:5,note:"Live in Copilot Studio."},
+{n:"Digital & AI Internal Policy Assistant",p:"People & Culture",i:2,f:5,note:"Same pattern as Nura."},
+{n:"AI-Powered CV Screening & Interview Automation",p:"People & Culture",i:2,f:4,note:"SmartRecruiters capability; bias controls needed."},
+{n:"SmartRecruiters Full Configuration",p:"People & Culture",i:3,f:4,note:"Licenced, not yet configured."},
+{n:"Onboarding Automation",p:"People & Culture",i:3,f:4,note:"Power Automate checklist flows."},
+{n:"Core HRIS Centralization",p:"People & Culture",i:3,f:2,note:"Platform decision with HQ."},
+{n:"Automated HR Analytics & Reporting",p:"People & Culture",i:3,f:4,note:"Training needs dashboard pattern exists."},
+{n:"Proactive Profile Identification (AI Searches)",p:"People & Culture",i:2,f:4,note:"Sourcing augmentation."},
+{n:"Agile Engagement Surveys",p:"People & Culture",i:2,f:4,note:"Forms based; low effort."},
+{n:"Dynamic Internal Newsletter",p:"People & Culture",i:1,f:4,note:"Nice-to-have."},
+{n:"P&C Power BI Dashboard",p:"People & Culture",i:3,f:5,note:"Delivered (training needs analysis)."},
+// HSSE, Audit & Risk
+{n:"HSSE Digital Audit & Reporting (SafetyCulture)",p:"HSSE, Audit & Risk",i:3,f:4,note:"Tool in use; reporting extension."},
+{n:"Automated Workplace Safety Analysis (Predictive)",p:"HSSE, Audit & Risk",i:3,f:2,note:"Incident data volume insufficient today."},
+{n:"Root Cause Analysis for H&S Risk",p:"HSSE, Audit & Risk",i:3,f:3,note:"Method plus data structuring."},
+{n:"HSE Knowledge Chatbot (SharePoint Procedures)",p:"HSSE, Audit & Risk",i:2,f:4,note:"Copilot Studio pattern, Nura precedent."},
+{n:"AI-Assisted HSE Awareness Content",p:"HSSE, Audit & Risk",i:2,f:4,note:"Low effort content generation."},
+{n:"Environmental AI Applications",p:"HSSE, Audit & Risk",i:2,f:2,note:"Exploratory follow-up from May."},
+{n:"Audit Intelligence Dashboard",p:"HSSE, Audit & Risk",i:3,f:5,note:"Delivered with Internal Audit (TeamMate exports)."},
+{n:"Proactive Internal Audit Self-Assessment Framework",p:"HSSE, Audit & Risk",i:3,f:3,note:"Framework design phase."},
+{n:"Cyber Security Risk Register & Governance",p:"HSSE, Audit & Risk",i:3,f:4,note:"Register built with HQ cyber (Romesh)."},
+{n:"Regulatory Monitoring & Market Shaping Support",p:"HSSE, Audit & Risk",i:2,f:3,note:"Structured watch; vendor or Copilot based."},
+{n:"Regulatory Watch",p:"HSSE, Audit & Risk",i:2,f:4,note:"Lightweight automated monitoring."},
+// Corporate & Exec
+{n:"AI-Enabled Director's Office",p:"Corporate & Exec",i:3,f:5,note:"POCs launched on Cowork: talking points, stakeholder prioritisation, travel packs. Flagship.",flag:1},
+{n:"CEO / Chairman Talking Points Assistant",p:"Corporate & Exec",i:3,f:5,note:"Component of Director's office POC."},
+{n:"CEO Meetings Lightweight CRM",p:"Corporate & Exec",i:2,f:4,note:"Lists based; low effort."},
+{n:"KPI Tracking Dashboard (Husain)",p:"Corporate & Exec",i:3,f:4,note:"Power BI pattern established."},
+{n:"Monthly SteerCo Live Dashboards",p:"Corporate & Exec",i:3,f:4,note:"Extends existing roadmap dashboard."},
+{n:"Centralised Document Repository",p:"Corporate & Exec",i:3,f:3,note:"Information architecture plus adoption."}
 ];
 
-let filter='all';
-function setFilter(f){filter=f;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.f===f));render();}
-function visible(){
-  const q=document.getElementById('q').value.toLowerCase();
-  return D.map((c,i)=>({c,i})).filter(({c})=>
-    (filter==='all'||c.temp===filter) &&
-    (!q||(c.name+' '+c.org).toLowerCase().includes(q)));
+// Quadrant assignment — clean 2.5 split on each axis (scores are integers, so >=3 vs <=2)
+function quad(d){
+  const hiI=d.i>=3, hiF=d.f>=3;
+  if(hiI && hiF) return "A";   // top-right: high impact, high feasibility
+  if(!hiI && hiF) return "B";  // bottom-right: quick win
+  if(hiI && !hiF) return "D";  // top-left: next horizon
+  return "C";                  // bottom-left: deferred
 }
+const QC={A:"#3FB6E8",B:"#4FC98F",D:"#E8A64B",C:"#7E93A8"};
+const QN={A:"Strategic Priority",B:"Quick Win",D:"Next Horizon",C:"Deferred / Monitor"};
+D.forEach((d,ix)=>{d.q=quad(d); d.total=d.i+d.f; d.id=ix;});
+
+// ---- Layout constants
+const W=760,H=640,mL=60,mR=20,mT=30,mB=70;
+const pw=W-mL-mR, ph=H-mT-mB;
+const fx=v=>mL+(v-0.5)/4.5*pw;      // feasibility 0.5..5 → x
+const fy=v=>mT+ph-(v-0.5)/4.5*ph;   // impact → y (inverted)
+
+// jitter overlapping points deterministically in a small ring
+const groups={};
+D.forEach(d=>{const k=d.i+"_"+d.f;(groups[k]=groups[k]||[]).push(d);});
+Object.values(groups).forEach(g=>{
+  if(g.length===1){g[0].x=fx(g[0].f); g[0].y=fy(g[0].i); return;}
+  const R=Math.min(26,8+g.length*2.2);
+  g.forEach((d,i)=>{
+    const a=(i/g.length)*2*Math.PI - Math.PI/2;
+    const r=g.length>6?R*(0.55+0.45*((i%2))):R*0.8;
+    d.x=fx(d.f)+r*Math.cos(a); d.y=fy(d.i)+r*Math.sin(a);
+  });
+});
+
+// ---- Build SVG
+const svg=document.getElementById("chart");
+const NS="http://www.w3.org/2000/svg";
+function el(t,attrs,parent){const e=document.createElementNS(NS,t);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e;}
+
+// quadrant background shading — split at 2.5 on each axis
+const midX=fx(2.5), midY=fy(2.5);
+el("rect",{x:midX,y:mT,width:mL+pw-midX,height:midY-mT,fill:"#123049",opacity:.55,rx:6});   // top-right A
+el("rect",{x:midX,y:midY,width:mL+pw-midX,height:mT+ph-midY,fill:"#12352A",opacity:.45,rx:6}); // bottom-right B
+el("rect",{x:mL,y:mT,width:midX-mL,height:midY-mT,fill:"#33270F",opacity:.45,rx:6});        // top-left D
+el("rect",{x:mL,y:midY,width:midX-mL,height:mT+ph-midY,fill:"#1A2532",opacity:.5,rx:6});    // bottom-left C
+
+// gridlines + axis ticks
+for(let v=1;v<=5;v++){
+  el("line",{x1:fx(v),y1:mT,x2:fx(v),y2:mT+ph,stroke:"#22384E","stroke-width":.6,"stroke-dasharray":"3 4"});
+  el("line",{x1:mL,y1:fy(v),x2:mL+pw,y2:fy(v),stroke:"#22384E","stroke-width":.6,"stroke-dasharray":"3 4"});
+  const tx=el("text",{x:fx(v),y:mT+ph+20,"text-anchor":"middle",class:"axis"});tx.textContent=v;
+  const ty=el("text",{x:mL-14,y:fy(v)+4,"text-anchor":"end",class:"axis"});ty.textContent=v;
+}
+// quadrant labels
+function qlab(x,y,t,s,anchor){
+  const a=el("text",{x:x,y:y,class:"qlabel","text-anchor":anchor});a.textContent=t;
+  const b=el("text",{x:x,y:y+14,class:"qsub","text-anchor":anchor});b.textContent=s;
+}
+qlab(mL+pw-8,mT+20,"A — STRATEGIC PRIORITY","High impact · deliverable now","end");
+qlab(mL+pw-8,mT+ph-24,"B — QUICK WIN","Fast, visible, existing tools","end");
+qlab(mL+8,mT+20,"D — NEXT HORIZON","High upside · blocked near-term","start");
+qlab(mL+8,mT+ph-24,"C — DEFERRED / MONITOR","Low priority today","start");
+// axis names
+const ax=el("text",{x:mL+pw/2,y:H-16,"text-anchor":"middle",class:"axname"});ax.textContent="FEASIBILITY & URGENCY →";
+const ay=el("text",{x:18,y:mT+ph/2,"text-anchor":"middle",class:"axname",transform:`rotate(-90 18 ${mT+ph/2})`});ay.textContent="IMPACT →";
+
+// dots
+const dotEls={};
+let selected=null;
+D.forEach(d=>{
+  if(d.flag) el("circle",{cx:d.x,cy:d.y,r:11,class:"flag-ring","data-ring":d.id});
+  const c=el("circle",{cx:d.x,cy:d.y,r:d.flag?7:5.5,fill:QC[d.q],class:"dot","data-id":d.id,opacity:.92});
+  c.addEventListener("mouseenter",()=>showDetail(d));
+  c.addEventListener("click",()=>{selected=(selected===d.id)?null:d.id; render(); showDetail(d);});
+  dotEls[d.id]=c;
+});
+
+// ---- Detail card
+function showDetail(d){
+  document.getElementById("detail").innerHTML=
+    `<h3>Use case detail</h3>
+     <div class="name">${d.n}${d.flag?'<span class="fstar">&#9733; flagship</span>':''}</div>
+     <div class="meta">
+       <span class="badge" style="background:${QC[d.q]};color:#06202F">${d.q} · ${QN[d.q]}</span>
+       <span class="badge" style="background:var(--panel2);color:var(--muted);border:1px solid var(--line)">${d.p}</span>
+     </div>
+     <div class="scores">
+       <div class="sc"><b>${d.i}</b><span>Impact</span></div>
+       <div class="sc"><b>${d.f}</b><span>Feasibility</span></div>
+       <div class="sc"><b>${d.total}</b><span>Total / 10</span></div>
+     </div>
+     <div class="note">${d.note}</div>`;
+}
+
+// ---- Filters
+const pillars=[...new Set(D.map(d=>d.p))];
+const chipBox=document.getElementById("pillarChips");
+let activePillars=new Set();
+pillars.forEach(p=>{
+  const c=document.createElement("div"); c.className="chip"; c.textContent=p;
+  c.onclick=()=>{c.classList.toggle("on"); c.classList.contains("on")?activePillars.add(p):activePillars.delete(p); render();};
+  chipBox.appendChild(c);
+});
+const searchEl=document.getElementById("search");
+const flagEl=document.getElementById("flagOnly");
+searchEl.addEventListener("input",render);
+flagEl.addEventListener("change",render);
+
+function visible(d){
+  if(flagEl.checked && !d.flag) return false;
+  if(activePillars.size && !activePillars.has(d.p)) return false;
+  const q=searchEl.value.trim().toLowerCase();
+  if(q && !d.n.toLowerCase().includes(q)) return false;
+  return true;
+}
+
+// ---- Table
+let sortK="total", sortDir=-1;
+document.querySelectorAll("th").forEach(th=>{
+  th.onclick=()=>{const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=(k==="name"||k==="pillar"||k==="q")?1:-1;} render();};
+});
 function render(){
-  const v=visible();
-  document.getElementById('count').textContent=v.length+(v.length===1?' contact':' contacts');
-  document.getElementById('rows').innerHTML=v.map(({c,i})=>{
-    const t=T[c.temp];
-    return `<tr onclick="openRecord(${i})">
-      <td><div class="nm"><div class="av">${c.in}</div><div class="t"><b>${c.name}</b><span>${c.role}</span></div></div></td>
-      <td class="hide"><span class="org">${c.org}</span><span class="sec">${c.sector}</span></td>
-      <td class="hide owner">${c.owner}</td>
-      <td class="c mtgs">${c.stats.m}</td>
-      <td class="last">${c.last}</td>
-      <td><span class="stat"><span class="dot" style="background:${t.c}"></span>${t.l}</span></td>
-    </tr>`;
-  }).join('');
-}
-function openRecord(i){
-  const c=D[i];const t=T[c.temp];
-  document.getElementById('record').innerHTML=`
-    <button class="back" onclick="closeRecord()"><i class="ti ti-arrow-left" style="font-size:14px"></i>All contacts</button>
-    <div class="rhead">
-      <div class="left">
-        <div class="av">${c.in}</div>
-        <div>
-          <div class="rname">${c.name}</div>
-          <div class="rrole">${c.role} · ${c.org}</div>
-          <div class="badges">
-            <span class="badge"><i class="ti ti-map-pin"></i>${c.country}</span>
-            <span class="badge"><i class="ti ti-tag"></i>${c.sector}</span>
-            <span class="badge"><i class="ti ti-user"></i>${c.owner}</span>
-          </div>
-        </div>
-      </div>
-      <span class="stat"><span class="dot" style="background:${t.c}"></span>${t.l}</span>
-    </div>
-    <div class="stats">
-      <div class="s"><div class="k">Meetings / 12m</div><div class="v">${c.stats.m}</div></div>
-      <div class="s"><div class="k">Avg cadence</div><div class="v">${c.stats.cad}</div></div>
-      <div class="s"><div class="k">Last contact</div><div class="v">${c.stats.last}</div></div>
-      <div class="s"><div class="k">Next</div><div class="v">${c.stats.next}</div></div>
-    </div>
-    <div class="summary">
-      <div class="lbl"><i class="ti ti-sparkles" style="font-size:12px"></i>Relationship summary · generated</div>
-      <p>${c.sum}</p>
-    </div>
-    <div class="sectitle">Meeting history<span class="n">${c.mtg.length} records</span></div>
-    <div class="mlist">
-      ${c.mtg.map(m=>`<div class="mtg ${m.up?'up':''}">
-        <div class="mdate">${m.d}</div>
-        <div class="mbody">
-          <div class="mtop"><span class="msub">${m.s}</span>${m.up?'<span class="mtag">upcoming</span>':`<span class="mtype">${m.ty}</span>`}</div>
-          <div class="mmeta">${m.who}</div>
-          ${m.doc!=='—'?`<div class="mdoc"><i class="ti ti-file-description"></i>${m.doc}<span class="st">${m.st}</span></div>`:''}
-        </div>
-      </div>`).join('')}
-    </div>`;
-  document.getElementById('dbView').style.display='none';
-  document.getElementById('record').style.display='block';
-  window.scrollTo(0,0);
-}
-function closeRecord(){
-  document.getElementById('record').style.display='none';
-  document.getElementById('dbView').style.display='block';
+  // dots
+  D.forEach(d=>{
+    const v=visible(d);
+    dotEls[d.id].classList.toggle("dim",!v);
+    dotEls[d.id].classList.toggle("sel",selected===d.id);
+    const ring=svg.querySelector(`[data-ring="${d.id}"]`);
+    if(ring) ring.style.opacity=v?.85:.08;
+  });
+  // counts
+  const vis=D.filter(visible);
+  const cnt={A:0,B:0,C:0,D:0}; vis.forEach(d=>cnt[d.q]++);
+  document.getElementById("counts").innerHTML=
+    ["A","B","D","C"].map(q=>`<div class="count"><span class="dotk" style="background:${QC[q]}"></span>${q} ${QN[q]}: <b style="color:var(--text)">&nbsp;${cnt[q]}</b></div>`).join("")+
+    `<div class="count" style="margin-left:auto">Showing <b style="color:var(--text)">&nbsp;${vis.length}</b>&nbsp;of ${D.length}</div>`;
+  // table
+  const rows=[...vis].sort((a,b)=>{
+    const va=a[sortK], vb=b[sortK];
+    return (typeof va==="string"? va.localeCompare(vb) : va-vb)*sortDir;
+  });
+  document.querySelector("#tbl tbody").innerHTML=rows.map(d=>
+    `<tr data-id="${d.id}">
+      <td>${d.n}${d.flag?'<span class="fstar">&#9733;</span>':''}</td>
+      <td>${d.p}</td><td>${d.i}</td><td>${d.f}</td><td><b style="color:var(--text)">${d.total}</b></td>
+      <td><span class="qtag" style="background:${QC[d.q]}">${d.q}</span></td>
+    </tr>`).join("");
+  document.querySelectorAll("#tbl tbody tr").forEach(tr=>{
+    tr.onclick=()=>{const d=D[+tr.dataset.id]; selected=d.id; render(); showDetail(d); window.scrollTo({top:0,behavior:"smooth"});};
+  });
 }
 render();
 </script>
 </body>
 </html>
-
