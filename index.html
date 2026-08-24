@@ -1,399 +1,562 @@
-<!DOCTYPE html>  
-<html lang="en">  
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Masdar UK — Use Case Prioritisation Matrix</title>
-<style>  
-  :root{
-    --bg:#0C1826; --panel:#132436; --panel2:#0F1E2E; --line:#22384E;
-    --cyan:#3FB6E8; --green:#4FC98F; --amber:#E8A64B; --grey:#7E93A8;
-    --text:#E8F1F8; --muted:#9DB2C4; --faint:#5E7488;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--bg); color:var(--text); font-family:"Segoe UI", -apple-system, Roboto, Arial, sans-serif; font-size:14px; line-height:1.45;}
-  .wrap{max-width:1280px; margin:0 auto; padding:28px 24px 60px;}
-  header{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:20px;}
-  h1{font-size:22px; font-weight:600; letter-spacing:.2px;}
-  h1 span{color:var(--cyan);}
-  .sub{color:var(--muted); font-size:13px; margin-top:4px;}
-  .stamp{text-align:right; color:var(--faint); font-size:11px; line-height:1.5;}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commercial Dashboard — Calow Green</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b3f6b;--navy-deep:#153455;--blue:#2e6da4;--azure:#62a5c7;--sky:#9ad1ec;--aqua:#eaf4fa;
+  --ink:#14273f;--ink-soft:#3a4d64;--muted:#65788d;--line:#dde4ed;--line-soft:#eef2f7;--canvas:#f3f6fa;--card:#fff;
+  --pos:#2a8550;--pos-wash:#e6f2ec;--amber:#b6741a;--amber-wash:#f5ead5;--neg:#c04040;--neg-wash:#f7e5e5;--neu-wash:#eaf4fa;
+  --display:"Archivo",system-ui,sans-serif;--body:"Figtree",system-ui,sans-serif;
+  --shadow:0 1px 2px rgba(20,39,63,.04),0 4px 16px rgba(20,39,63,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--body);line-height:1.45;-webkit-font-smoothing:antialiased}
 
-  .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px;}
-  .chips{display:flex; flex-wrap:wrap; gap:6px;}
-  .chip{border:1px solid var(--line); background:var(--panel2); color:var(--muted); border-radius:20px; padding:5px 12px; font-size:12px; cursor:pointer; user-select:none; transition:all .15s;}
-  .chip:hover{border-color:var(--cyan); color:var(--text);}
-  .chip.on{background:var(--cyan); border-color:var(--cyan); color:#06202F; font-weight:600;}
-  input[type=search]{background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:7px 12px; font-size:13px; width:230px; outline:none;}
-  input[type=search]:focus{border-color:var(--cyan);}
-  .toggle{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--muted); cursor:pointer; user-select:none;}
-  .toggle input{accent-color:var(--cyan); width:15px; height:15px; cursor:pointer;}
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:0 26px;height:56px;background:var(--navy);color:#cdd9e6;position:sticky;top:0;z-index:100}
+.lockup{display:flex;align-items:center;gap:12px;flex:none}
+.lockup .mark{font-family:var(--display);font-weight:700;letter-spacing:.2em;color:#fff;font-size:15px}
+.lockup .div{width:1px;height:20px;background:rgba(255,255,255,.22)}
+.lockup .unit{font-size:12px;color:#a9bdd2}
+.toolset{display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#e6eef5;padding:5px 11px;border-radius:6px;font-size:12px}
+.pill b{color:#fff;font-weight:600}.pill .car{opacity:.6;font-size:10px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--sky);flex:none}
 
-  .counts{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px;}
-  .count{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--muted);}
-  .dotk{width:10px; height:10px; border-radius:50%;}
+/* ── NAV TABS ── */
+.tabs{display:flex;gap:0;background:var(--navy-deep);padding:0 26px;border-bottom:1px solid rgba(255,255,255,.1)}
+.tab{font-family:var(--body);font-size:13px;font-weight:500;color:#8eafc8;padding:11px 18px;cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+.tab:hover{color:#c8dcea}
+.tab.active{color:#fff;border-bottom-color:var(--sky)}
 
-  .layout{display:grid; grid-template-columns:1fr 320px; gap:18px;}
-  @media (max-width:980px){.layout{grid-template-columns:1fr;}}
+/* ── PAGES ── */
+.page{display:none;max-width:1140px;margin:0 auto;padding:24px 26px 60px}
+.page.active{display:block}
+header.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+header.ph h1{font-family:var(--display);font-weight:700;font-size:26px;color:var(--ink);letter-spacing:-.01em;margin-top:6px}
+header.ph .sub{color:var(--muted);font-size:13.5px;max-width:54ch;margin-top:3px}
+.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.ctag{display:inline-flex;align-items:center;gap:8px;background:var(--aqua);color:var(--navy);border:1px solid #cfe2ee;border-radius:6px;padding:7px 12px;font-size:12px;font-weight:500;white-space:nowrap}
 
-  .chartbox{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px;}
-  svg{width:100%; height:auto; display:block;}
-  .qlabel{font-size:12px; fill:var(--faint); font-weight:600; letter-spacing:.6px;}
-  .qsub{font-size:9.5px; fill:var(--faint);}
-  .axis{font-size:10.5px; fill:var(--faint);}
-  .axname{font-size:11.5px; fill:var(--muted); font-weight:600; letter-spacing:.8px;}
-  .dot{cursor:pointer; transition:r .12s;}
-  .dot:hover{stroke:#fff; stroke-width:1.5;}
-  .dot.dim{opacity:.12; pointer-events:none;}
-  .dot.sel{stroke:#fff; stroke-width:2;}
-  .flag-ring{fill:none; stroke:#fff; stroke-width:1; opacity:.85; pointer-events:none;}
+/* ── SECTION HEAD ── */
+.sh{display:flex;align-items:center;gap:12px;margin:24px 0 14px}
+.sh-tick{width:3px;height:18px;background:var(--navy);border-radius:2px;flex:none}
+.sh h2{font-family:var(--display);font-weight:600;font-size:16px;color:var(--ink)}
+.sh .rule{flex:1;height:1px;background:var(--line)}
+.sh .hint{font-size:12px;color:var(--muted)}
 
-  .side{display:flex; flex-direction:column; gap:14px;}
-  .card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px;}
-  .card h3{font-size:13px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.8px; margin-bottom:10px;}
-  #detail .name{font-size:15px; font-weight:600; margin-bottom:6px;}
-  #detail .meta{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
-  .badge{font-size:11px; padding:3px 9px; border-radius:12px; font-weight:600;}
-  #detail .note{color:var(--muted); font-size:13px;}
-  #detail .scores{display:flex; gap:18px; margin:10px 0;}
-  #detail .sc{text-align:center;}
-  #detail .sc b{display:block; font-size:22px; font-family:Consolas, monospace; color:var(--cyan);}
-  #detail .sc span{font-size:10.5px; color:var(--faint); text-transform:uppercase; letter-spacing:.5px;}
-  .empty{color:var(--faint); font-size:13px;}
-  .legend-q{display:flex; flex-direction:column; gap:8px; font-size:12px; color:var(--muted);}
-  .legend-q div{display:flex; gap:8px; align-items:flex-start;}
-  .legend-q b{color:var(--text); font-weight:600;}
+/* ── HERO BAR ── */
+.hero{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:var(--shadow);margin-bottom:14px}
+.hero-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.hero-top .lbl{font-size:13px;color:var(--muted)}
+.hero-top .big{font-family:var(--display);font-weight:700;font-size:21px}.hero-top .big small{font-family:var(--body);font-size:13px;color:var(--muted);margin-left:5px}
+.hbar{display:flex;height:42px;border-radius:8px;overflow:hidden;background:var(--line-soft);border:1px solid var(--line)}
+.seg{height:100%;display:flex;align-items:center;padding:0 12px;color:#fff;font-size:12px;white-space:nowrap;overflow:hidden}
+.seg small{opacity:.85;margin-left:3px}
+.seg.s1{background:var(--navy)}.seg.s2{background:var(--blue)}.seg.s3{background:var(--azure)}
+.bar-leg{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px}
+.blg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft)}
+.bsw{width:10px;height:10px;border-radius:3px;flex:none}
+.bsw.s1{background:var(--navy)}.bsw.s2{background:var(--blue)}.bsw.s3{background:var(--azure)}
 
-  table{width:100%; border-collapse:collapse; margin-top:24px; font-size:12.5px;}
-  th{text-align:left; color:var(--faint); font-weight:600; text-transform:uppercase; font-size:10.5px; letter-spacing:.6px; padding:8px 10px; border-bottom:1px solid var(--line); cursor:pointer; user-select:none;}
-  th:hover{color:var(--cyan);}
-  td{padding:7px 10px; border-bottom:1px solid #1A2C3F; color:var(--muted);}
-  td:first-child{color:var(--text);}
-  tr:hover td{background:#16283C;}
-  .qtag{display:inline-block; width:18px; text-align:center; border-radius:4px; font-weight:700; font-size:11px; color:#06202F; padding:1px 0;}
-  .fstar{color:var(--cyan); font-size:11px; margin-left:5px;}
-  footer{margin-top:26px; color:var(--faint); font-size:11px; border-top:1px solid var(--line); padding-top:14px; line-height:1.6;}
+/* ── KPI STRIP ── */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px;box-shadow:var(--shadow)}
+.kpi .kl{font-size:12px;color:var(--muted);margin-bottom:9px;min-height:2.3em}
+.kpi .kv{font-family:var(--display);font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-.01em}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;margin-top:9px}
+.chip.pos{background:var(--pos-wash);color:var(--pos)}
+.chip.neu{background:var(--neu-wash);color:var(--blue)}
+.chip.amb{background:var(--amber-wash);color:var(--amber)}
+
+/* ── CONTRACTS ── */
+.contracts{display:flex;flex-direction:column;gap:10px}
+.ct{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.ct-main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr 1.25fr auto;gap:16px;align-items:center;padding:15px 18px}
+.ct-id .code{font-family:var(--display);font-weight:600;font-size:15px}
+.ct-id .vend{font-size:12px;color:var(--muted);margin-top:2px}
+.met{display:flex;flex-direction:column;gap:3px}
+.met .ml{font-size:11px;color:var(--muted)}
+.met .mv{font-weight:500;font-size:14px;color:var(--ink-soft)}
+.met.exp .mv{color:var(--navy);font-weight:700}
+.mflag{font-size:10.5px;color:var(--amber);margin-top:2px;font-weight:600}
+.mflag.ok{color:var(--muted)}
+.prog{display:flex;flex-direction:column;gap:5px}
+.prog .ml{font-size:11px;color:var(--muted)}
+.track{height:6px;border-radius:99px;background:var(--line-soft);overflow:hidden}
+.fill{height:100%;background:var(--blue);border-radius:99px}
+.prog .pc{font-size:11px;color:var(--ink-soft)}
+.drill{border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;border-radius:7px;padding:8px 12px;font-family:var(--body);font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:background .15s,border-color .15s}
+.drill:hover{background:var(--aqua);border-color:#c8dceb}
+.drill .car{font-size:10px;transition:transform .25s}
+.ct.open .drill .car{transform:rotate(180deg)}
+.detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.ct.open .detail{grid-template-rows:1fr}
+.di{overflow:hidden}
+.dp{padding:2px 18px 18px;border-top:1px solid var(--line-soft)}
+.dp .dt{font-size:12px;color:var(--muted);margin:12px 0 10px}
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.vc{border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:#fafbfc}
+.vc .vl{font-size:11px;color:var(--muted);margin-bottom:5px}
+.vc .vv{font-family:var(--display);font-weight:700;font-size:17px}
+.vc.add .vv{color:var(--pos)}.vc.omit .vv{color:var(--neg)}.vc.net .vv{color:var(--navy)}
+.vlist{border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.vhdr,.vrow{display:grid;gap:12px;padding:9px 14px;font-size:12.5px;border-top:1px solid var(--line-soft)}
+.vhdr{border-top:none;background:#f4f7fa;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.vrow:first-of-type{border-top:none}
+.tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.tag.add{background:var(--pos-wash);color:var(--pos)}.tag.omit{background:var(--neg-wash);color:var(--neg)}.tag.acc{background:var(--neu-wash);color:var(--blue)}.tag.rej{background:#f0f0f0;color:#888}
+.amt{font-weight:500;text-align:right;color:var(--ink-soft)}
+.st{font-size:11px;color:var(--muted)}
+.empty-d{padding:14px 4px 4px;color:var(--muted);font-size:13px}
+
+/* ── VARIATION PAGE ── */
+.var-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.vfbtn{font-family:var(--body);font-size:12px;font-weight:600;padding:7px 14px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .15s}
+.vfbtn:hover{border-color:var(--blue);color:var(--navy)}
+.vfbtn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.var-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.vs{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.vs .vsl{font-size:11.5px;color:var(--muted);margin-bottom:7px}
+.vs .vsv{font-family:var(--display);font-weight:700;font-size:20px}
+.vs.vadd .vsv{color:var(--pos)}.vs.vomit .vsv{color:var(--neg)}.vs.vnet .vsv{color:var(--navy)}.vs.vtot .vsv{color:var(--ink)}
+.var-table{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.var-table .vthdr,.var-table .vtrow{display:grid;grid-template-columns:70px 80px 1fr 120px 120px 110px 70px;gap:10px;padding:10px 14px;font-size:12.5px;border-top:1px solid var(--line-soft);align-items:center}
+.var-table .vthdr{border-top:none;background:#f4f7fa;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.var-table .vtrow:first-of-type{border-top:none}
+.var-table .vtrow.hidden{display:none}
+.reason-badge{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--aqua);color:var(--navy);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── MILESTONES PAGE ── */
+.ms-tabs{display:flex;gap:0;background:var(--line-soft);border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:18px;flex-wrap:wrap;gap:4px}
+.ms-tab{font-family:var(--body);font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:7px;border:none;background:none;color:var(--muted);cursor:pointer;transition:all .15s}
+.ms-tab.active{background:var(--navy);color:#fff}
+.ms-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.ms-s{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.ms-s .msl{font-size:11.5px;color:var(--muted);margin-bottom:7px}
+.ms-s .msv{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink)}
+.ms-table{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.ms-table .mthdr,.ms-table .mtrow{display:grid;grid-template-columns:100px 1fr 80px 120px 120px 100px 110px;gap:10px;padding:10px 14px;font-size:12.5px;border-top:1px solid var(--line-soft);align-items:center}
+.ms-table .mthdr{border-top:none;background:#f4f7fa;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.ms-table .mtrow:first-of-type{border-top:none}
+.ms-table .mtrow.hidden{display:none}
+.pstat{font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap}
+.pstat.paid{background:var(--pos-wash);color:var(--pos)}
+.pstat.sub{background:var(--amber-wash);color:var(--amber)}
+.pstat.none{background:var(--line-soft);color:var(--muted)}
+.ret-note{font-size:11px;color:var(--muted)}
+
+/* ── PROGRAMME PAGE ── */
+.prog-legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.pleg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft)}
+.psw{width:13px;height:13px;border-radius:3px;flex:none}
+.psw.r1{background:var(--pos)}.psw.r2{background:var(--amber)}.psw.r3{background:var(--neg)}.psw.rc{background:#bbb}
+.prog-table{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.prog-table .pthdr,.prog-table .ptrow{display:grid;grid-template-columns:1fr 110px 110px 110px 80px 80px 50px;gap:10px;padding:10px 16px;font-size:12.5px;border-top:1px solid var(--line-soft);align-items:center}
+.prog-table .pthdr{border-top:none;background:#f4f7fa;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.prog-table .ptrow:first-of-type{border-top:none}
+.prog-table .ptrow.completed{opacity:.6}
+.rag{display:inline-flex;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;align-items:center;justify-content:center;color:#fff}
+.rag.r1{background:var(--pos)}.rag.r2{background:var(--amber)}.rag.r3{background:var(--neg)}.rag.rc{background:#bbb}
+.blv{font-size:11px;color:var(--muted)}
+.delta{font-size:11px;font-weight:600}
+.delta.ahead{color:var(--pos)}.delta.late{color:var(--neg)}.delta.ok{color:var(--muted)}
+.comp-badge{font-size:14px;color:var(--pos)}
+
+/* ── FOOTNOTE ── */
+footer.fn{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;gap:9px;align-items:flex-start}
+footer.fn b{color:var(--ink-soft);font-weight:600}
+
+@media(max-width:900px){
+  .kpis,.var-summary,.ms-summary{grid-template-columns:repeat(2,1fr)}
+  .ct-main{grid-template-columns:1fr 1fr;gap:12px}
+  .ct-main .drill{grid-column:1/-1;justify-content:center}
+  .vg{grid-template-columns:1fr}
+  .var-table .vthdr,.var-table .vtrow,
+  .ms-table .mthdr,.ms-table .mtrow,
+  .prog-table .pthdr,.prog-table .ptrow{grid-template-columns:1fr 1fr;gap:6px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="lockup">
+    <span class="mark">MASDAR</span>
+    <span class="div"></span>
+    <span class="unit">Global Offshore Wind &amp; UK, Delivery</span>
+  </div>
+  <div class="toolset">
+    <span class="pill">Project <b>Calow Green</b> <span class="car">&#9660;</span></span>
+    <span class="pill">Period <b>May 2026</b> <span class="car">&#9660;</span></span>
+    <span class="pill"><span class="dot"></span> Refreshed 06:00, scheduled</span>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="nav('p1',this)">Commercial overview</button>
+  <button class="tab" onclick="nav('p2',this)">Variations register</button>
+  <button class="tab" onclick="nav('p3',this)">Payment milestones</button>
+  <button class="tab" onclick="nav('p4',this)">Programme</button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 — COMMERCIAL OVERVIEW
+═══════════════════════════════════════════ -->
+<div id="p1" class="page active">
+  <header class="ph">
     <div>
-      <h1>Masdar UK <span>·</span> AI &amp; Digital Use Case Prioritisation</h1>
-      <div class="sub">Impact vs Feasibility &amp; Urgency — full Use Case Bank, scored per MASD-BD-PRO-I-001-2026</div>
+      <div class="eyebrow">Concept layout · page 1 of 4</div>
+      <h1>Commercial position</h1>
+      <div class="sub">Headline view of budget, IRR and contract exposure. Select a contract to reveal variations in evaluation.</div>
     </div>
-    <div class="stamp">Indicative scoring — pending function owner validation<br>Digital &amp; AI Strategy · July 2026 · Internal</div>
+    <div class="ctag">Illustrative concept, not the final design</div>
   </header>
 
-  <div class="controls">
-    <input type="search" id="search" placeholder="Search use cases...">
-    <div class="chips" id="pillarChips"></div>
-    <label class="toggle"><input type="checkbox" id="flagOnly"> Flagship 6 only (Michelle email)</label>
-  </div>
-  <div class="counts" id="counts"></div>
-
-  <div class="layout">
-    <div class="chartbox"><svg id="chart" viewBox="0 0 760 640" xmlns="http://www.w3.org/2000/svg"></svg></div>
-    <div class="side">
-      <div class="card" id="detail"><h3>Use case detail</h3><div class="empty">Hover or click a dot to see details.</div></div>
-      <div class="card">
-        <h3>Quadrants</h3>
-        <div class="legend-q">
-          <div><span class="dotk" style="background:var(--cyan); margin-top:4px;"></span><div><b>A — Strategic Priority</b> · I≥4, F≥3. High-impact, proven. Backbone of the portfolio.</div></div>
-          <div><span class="dotk" style="background:var(--green); margin-top:4px;"></span><div><b>B — Quick Win</b> · F≥4. Fast, visible impact with existing tools. Credibility builders.</div></div>
-          <div><span class="dotk" style="background:var(--amber); margin-top:4px;"></span><div><b>D — Next Horizon</b> · I≥3, F≤2. High upside, blocked near-term (data, JV, procurement). Re-scored quarterly.</div></div>
-          <div><span class="dotk" style="background:var(--grey); margin-top:4px;"></span><div><b>C — Deferred / Monitor</b> · Remain in the bank, monitored for readiness.</div></div>
-        </div>
-      </div>
+  <div class="hero">
+    <div class="hero-top">
+      <div class="lbl">Budget consumption against project budget</div>
+      <div class="big">&pound;48.41m <small>project budget</small></div>
+    </div>
+    <div class="hbar">
+      <div class="seg s1" style="width:33.4%">&pound;16.18m <small>spent</small></div>
+      <div class="seg s2" style="width:65.6%">&pound;31.76m <small>committed</small></div>
+      <div class="seg s3" style="width:1.0%" title="Remaining contingency £461,550"></div>
+    </div>
+    <div class="bar-leg">
+      <span class="blg"><span class="bsw s1"></span> Spent to date</span>
+      <span class="blg"><span class="bsw s2"></span> Committed, not yet spent</span>
+      <span class="blg"><span class="bsw s3"></span> Remaining contingency — headroom to budget</span>
     </div>
   </div>
 
-  <table id="tbl">
-    <thead><tr>
-      <th data-k="name">Use case</th><th data-k="pillar">Pillar</th>
-      <th data-k="i">Impact</th><th data-k="f">Feasibility</th>
-      <th data-k="total">Total</th><th data-k="q">Quadrant</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
+  <div class="kpis">
+    <div class="kpi"><div class="kl">Current project value</div><div class="kv">&pound;47.95m</div><span class="chip neu">Forecast final</span></div>
+    <div class="kpi"><div class="kl">Expenditure to date</div><div class="kv">&pound;16.18m</div><span class="chip neu">33% of budget</span></div>
+    <div class="kpi"><div class="kl">Variance to budget</div><div class="kv">&#8722;&pound;0.46m</div><span class="chip pos">&#9660; Under budget</span></div>
+    <div class="kpi"><div class="kl">Current IRR vs 12.0% at IC</div><div class="kv">12.8%</div><span class="chip pos">&#9650; +0.8 pts</span></div>
+    <div class="kpi"><div class="kl">Remaining contingency</div><div class="kv">&pound;0.46m</div><span class="chip pos">52% remaining</span></div>
+  </div>
 
-  <footer>
-    Scoring basis: each axis is the rounded average of five sub-criteria (1–5) per the Use Case Scoring &amp; Prioritisation Framework. Total = Impact + Feasibility, out of 10.
-    Quadrant thresholds: A (I≥4, F≥3) · B (F≥4) · D (I≥3, F≤2) · C (remainder). Scores shown are the Digital &amp; AI Strategy Manager's initial assessment based on stakeholder interview evidence and delivery status; validation with function owners and Data Council review pending. White-ringed dots are the six flagship use cases shared with HQ (July 2026).
-  </footer>
+  <div class="sh"><span class="sh-tick"></span><h2>Contracts</h2><div class="rule"></div><div class="hint">Select a contract to reveal variations in evaluation</div></div>
+
+  <div class="contracts">
+    <!-- DNO/TNO -->
+    <div class="ct" id="ct-dno">
+      <div class="ct-main">
+        <div class="ct-id"><div class="code">DNO / TNO</div><div class="vend">NGED</div></div>
+        <div class="met"><span class="ml">Baseline</span><span class="mv">&pound;1,170,788</span></div>
+        <div class="met"><span class="ml">Current value</span><span class="mv">&pound;1,170,788</span></div>
+        <div class="met exp"><span class="ml">Current exposure</span><span class="mv">&pound;1,500,746</span><span class="mflag">+&pound;329,958 in evaluation</span></div>
+        <div class="prog"><span class="ml">Milestones paid</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="pc">9 of 9 &nbsp;·&nbsp; retention &pound;0</span></div>
+        <button class="drill" onclick="toggle('ct-dno',this)">Drill through <span class="car">&#9660;</span></button>
+      </div>
+      <div class="detail"><div class="di"><div class="dp">
+        <div class="dt">Variations in evaluation — not yet reflected in current contract value</div>
+        <div class="vg">
+          <div class="vc add"><div class="vl">Additions in evaluation</div><div class="vv">+&pound;329,958</div></div>
+          <div class="vc omit"><div class="vl">Omissions in evaluation</div><div class="vv">&pound;0</div></div>
+          <div class="vc net"><div class="vl">Net in evaluation</div><div class="vv">+&pound;329,958</div></div>
+        </div>
+        <div class="vlist">
+          <div class="vhdr" style="grid-template-columns:60px 1fr 100px 110px"><span>Type</span><span>Description</span><span>Value</span><span>Status</span></div>
+          <div class="vrow" style="grid-template-columns:60px 1fr 100px 110px"><span class="tag add">Add</span><span>Increased works costs over and above baseline scope (NGED-VR-01)</span><span class="amt">&pound;329,958</span><span class="st">In evaluation</span></div>
+        </div>
+      </div></div></div>
+    </div>
+    <!-- BoP -->
+    <div class="ct" id="ct-bop">
+      <div class="ct-main">
+        <div class="ct-id"><div class="code">BoP</div><div class="vend">H&amp;MV</div></div>
+        <div class="met"><span class="ml">Baseline</span><span class="mv">&pound;20,887,025</span></div>
+        <div class="met"><span class="ml">Current value</span><span class="mv">&pound;21,305,750</span></div>
+        <div class="met exp"><span class="ml">Current exposure</span><span class="mv">&pound;21,305,750</span><span class="mflag ok">net &pound;0 in evaluation</span></div>
+        <div class="prog"><span class="ml">Milestones paid</span><div class="track"><div class="fill" style="width:16%"></div></div><span class="pc">4 of 25 &nbsp;·&nbsp; retention &pound;501,289</span></div>
+        <button class="drill" onclick="toggle('ct-bop',this)">Drill through <span class="car">&#9660;</span></button>
+      </div>
+      <div class="detail"><div class="di"><div class="dp">
+        <div class="dt">Agreed variations in current value: &pound;418,725 &nbsp;·&nbsp; Variations in evaluation net to &pound;0</div>
+        <div class="vg">
+          <div class="vc add"><div class="vl">Additions in evaluation</div><div class="vv">+&pound;91,500</div></div>
+          <div class="vc omit"><div class="vl">Omissions in evaluation</div><div class="vv">&#8722;&pound;91,500</div></div>
+          <div class="vc net"><div class="vl">Net in evaluation</div><div class="vv">&pound;0</div></div>
+        </div>
+        <div class="vlist">
+          <div class="vhdr" style="grid-template-columns:60px 1fr 100px 110px"><span>Type</span><span>Description</span><span>Value</span><span>Status</span></div>
+          <div class="vrow" style="grid-template-columns:60px 1fr 100px 110px"><span class="tag add">Add</span><span>Fire fighting water storage tank (CM007)</span><span class="amt">TBC</span><span class="st">In evaluation</span></div>
+          <div class="vrow" style="grid-template-columns:60px 1fr 100px 110px"><span class="tag add">Add</span><span>Removal / disposal of waste from HV works (CM011)</span><span class="amt">TBC</span><span class="st">In evaluation</span></div>
+          <div class="vrow" style="grid-template-columns:60px 1fr 100px 110px"><span class="tag omit">Omit</span><span>Removal of spare 1500 kVA auxiliary transformer (CM013)</span><span class="amt">TBC</span><span class="st">In evaluation</span></div>
+          <div class="vrow" style="grid-template-columns:60px 1fr 100px 110px"><span class="tag omit">Omit</span><span>Removal of 2000A auto changeover board (CM014) + others</span><span class="amt">TBC</span><span class="st">In evaluation</span></div>
+        </div>
+      </div></div></div>
+    </div>
+    <!-- BESS -->
+    <div class="ct" id="ct-bess">
+      <div class="ct-main">
+        <div class="ct-id"><div class="code">BESS</div><div class="vend">Envision</div></div>
+        <div class="met"><span class="ml">Baseline</span><span class="mv">&pound;25,230,000</span></div>
+        <div class="met"><span class="ml">Current value</span><span class="mv">&pound;25,230,000</span></div>
+        <div class="met exp"><span class="ml">Current exposure</span><span class="mv">&pound;25,230,000</span><span class="mflag ok">no variations</span></div>
+        <div class="prog"><span class="ml">Milestones paid</span><div class="track"><div class="fill" style="width:17%"></div></div><span class="pc">2 of 12 &nbsp;·&nbsp; no retention</span></div>
+        <button class="drill" onclick="toggle('ct-bess',this)">Drill through <span class="car">&#9660;</span></button>
+      </div>
+      <div class="detail"><div class="di"><div class="dp">
+        <div class="empty-d">No variations recorded against this contract. Two preliminary variations under consideration (CM009, CM010) — not yet raised formally.</div>
+      </div></div></div>
+    </div>
+    <!-- SCADA -->
+    <div class="ct" id="ct-scada">
+      <div class="ct-main">
+        <div class="ct-id"><div class="code">SCADA</div><div class="vend">Core Controls</div></div>
+        <div class="met"><span class="ml">Baseline</span><span class="mv">&pound;240,000</span></div>
+        <div class="met"><span class="ml">Current value</span><span class="mv">&pound;240,000</span></div>
+        <div class="met exp"><span class="ml">Current exposure</span><span class="mv">&pound;240,000</span><span class="mflag ok">no variations</span></div>
+        <div class="prog"><span class="ml">Milestones paid</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="pc">Not yet commenced &nbsp;·&nbsp; no retention</span></div>
+        <button class="drill" onclick="toggle('ct-scada',this)">Drill through <span class="car">&#9660;</span></button>
+      </div>
+      <div class="detail"><div class="di"><div class="dp">
+        <div class="empty-d">No variations recorded. Payment milestones not yet commenced.</div>
+      </div></div></div>
+    </div>
+  </div>
+
+  <footer class="fn"><span>&#9432;</span><div><b>Concept only.</b> Figures from the Calow Green commercial workbook. Positive / caution / negative treatments follow the conditional rules in the Dashboard tab. In production the page refreshes from the underlying data on a schedule — not live.</div></footer>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — VARIATIONS REGISTER
+═══════════════════════════════════════════ -->
+<div id="p2" class="page">
+  <header class="ph">
+    <div>
+      <div class="eyebrow">Concept layout · page 2 of 4</div>
+      <h1>Variations register</h1>
+      <div class="sub">All variations across the four contracts — filter by contract or status. Agreed variations are in the current contract value; in-evaluation variations drive exposure.</div>
+    </div>
+    <div class="ctag">Illustrative concept</div>
+  </header>
+
+  <div class="var-summary">
+    <div class="vs vtot"><div class="vsl">Total variations recorded</div><div class="vsv">15</div></div>
+    <div class="vs vadd"><div class="vsl">Net additions (agreed)</div><div class="vsv">+&pound;418,725</div></div>
+    <div class="vs vomit"><div class="vsl">Net omissions (agreed)</div><div class="vsv">&pound;0</div></div>
+    <div class="vs vnet"><div class="vsl">Net in evaluation</div><div class="vsv">+&pound;329,958</div></div>
+  </div>
+
+  <div class="var-filter">
+    <button class="vfbtn active" onclick="filterVar('all',this)">All contracts</button>
+    <button class="vfbtn" onclick="filterVar('DNO',this)">DNO / TNO</button>
+    <button class="vfbtn" onclick="filterVar('BoP',this)">BoP</button>
+    <button class="vfbtn" onclick="filterVar('BESS',this)">BESS</button>
+    <button class="vfbtn" onclick="filterVar('SCADA',this)">SCADA</button>
+    <button class="vfbtn" onclick="filterStatus('In Evaluation',this)" style="margin-left:10px">In evaluation only</button>
+    <button class="vfbtn" onclick="filterStatus('Accepted',this)">Accepted only</button>
+    <button class="vfbtn" onclick="filterStatus('Rejected',this)">Rejected only</button>
+  </div>
+
+  <div class="var-table">
+    <div class="vthdr"><span>Ref</span><span>Contract</span><span>Description</span><span>Reason</span><span>Value</span><span>Type</span><span>Status</span></div>
+    <!-- DNO/TNO -->
+    <div class="vtrow" data-ct="DNO" data-status="In Evaluation"><span>NGED-VR-01</span><span>DNO / TNO</span><span>Increased works costs over and above baseline scope</span><span><span class="reason-badge">Additional Works</span></span><span class="amt">&pound;329,958</span><span class="tag add">Add</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <!-- BoP -->
+    <div class="vtrow" data-ct="BoP" data-status="Accepted"><span>CM005</span><span>BoP</span><span>CCTV system</span><span><span class="reason-badge">Employer Scope</span></span><span class="amt">&pound;198,907</span><span class="tag add">Add</span><span class="tag acc">Accepted</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="Rejected"><span>CM006</span><span>BoP</span><span>Fire fighting water (original scope error)</span><span><span class="reason-badge">Employer Scope</span></span><span class="amt">&pound;1,500</span><span class="tag add">Add</span><span class="tag rej">Rejected</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="In Evaluation"><span>CM007</span><span>BoP</span><span>Fire fighting water storage tank (revised)</span><span><span class="reason-badge">Employer Scope</span></span><span class="amt">TBC</span><span class="tag add">Add</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="Rejected"><span>CM008</span><span>BoP</span><span>Removal of AC Twinskid Transformer bunds</span><span><span class="reason-badge">Employer Scope</span></span><span class="amt">&pound;90,000</span><span class="tag omit">Omit</span><span class="tag rej">Rejected</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="In Evaluation"><span>CM011</span><span>BoP</span><span>Removal / disposal of waste from HV works</span><span><span class="reason-badge">Employer Scope</span></span><span class="amt">TBC</span><span class="tag add">Add</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="In Evaluation"><span>CM012</span><span>BoP</span><span>Removal of 1 x outgoer from 33kV switchgear</span><span><span class="reason-badge">Contractor Scope</span></span><span class="amt">TBC</span><span class="tag omit">Omit</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="In Evaluation"><span>CM013</span><span>BoP</span><span>Removal of spare 1500 kVA auxiliary transformer</span><span><span class="reason-badge">Contractor Scope</span></span><span class="amt">TBC</span><span class="tag omit">Omit</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="In Evaluation"><span>CM014</span><span>BoP</span><span>Removal of 2000A auto changeover board</span><span><span class="reason-badge">Contractor Scope</span></span><span class="amt">TBC</span><span class="tag omit">Omit</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="In Evaluation"><span>CM015–018</span><span>BoP</span><span>Reduced costs — auxiliary transformer, distribution board, NGED fibre cables (x2)</span><span><span class="reason-badge">Contractor Scope</span></span><span class="amt">TBC</span><span class="tag omit">Omit</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="Accepted"><span>CM019</span><span>BoP</span><span>Notice of Claim 005 — 132kV cable procurement delay</span><span><span class="reason-badge">Contractor Scope</span></span><span class="amt">&pound;107,397</span><span class="tag add">Add</span><span class="tag acc">Accepted</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="Accepted"><span>CM020</span><span>BoP</span><span>Adverse site conditions — asbestos</span><span><span class="reason-badge">Additional Works</span></span><span class="amt">&pound;2,689</span><span class="tag add">Add</span><span class="tag acc">Accepted</span></div>
+    <div class="vtrow" data-ct="BoP" data-status="Accepted"><span>CM021</span><span>BoP</span><span>H&amp;MV INSTRU_1 — soil disposal instruction</span><span><span class="reason-badge">PC Sum</span></span><span class="amt">&pound;109,732</span><span class="tag add">Add</span><span class="tag acc">Accepted</span></div>
+    <!-- BESS -->
+    <div class="vtrow" data-ct="BESS" data-status="In Evaluation"><span>CM009</span><span>BESS</span><span>Preliminary change request (details pending)</span><span><span class="reason-badge">Under review</span></span><span class="amt">TBC</span><span class="tag add">Add</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+    <div class="vtrow" data-ct="BESS" data-status="In Evaluation"><span>CM010</span><span>BESS</span><span>Offer received — under commercial review</span><span><span class="reason-badge">Under review</span></span><span class="amt">TBC</span><span class="tag add">Add</span><span class="tag" style="background:var(--amber-wash);color:var(--amber)">In eval.</span></div>
+  </div>
+
+  <footer class="fn"><span>&#9432;</span><div><b>Concept only.</b> Variation values marked TBC have no agreed quantum — these drive current exposure risk, not current contract value. In Power BI this table refreshes from the variation register in the source workbook.</div></footer>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 — PAYMENT MILESTONES
+═══════════════════════════════════════════ -->
+<div id="p3" class="page">
+  <header class="ph">
+    <div>
+      <div class="eyebrow">Concept layout · page 3 of 4</div>
+      <h1>Payment milestones</h1>
+      <div class="sub">Milestone progress, retention and payment status by contract. Select a contract tab to filter.</div>
+    </div>
+    <div class="ctag">Illustrative concept</div>
+  </header>
+
+  <div class="ms-tabs">
+    <button class="ms-tab active" onclick="filterMs('all',this)">All contracts</button>
+    <button class="ms-tab" onclick="filterMs('DNO',this)">DNO / TNO — NGED</button>
+    <button class="ms-tab" onclick="filterMs('BoP',this)">BoP — H&amp;MV</button>
+    <button class="ms-tab" onclick="filterMs('BESS',this)">BESS — Envision</button>
+    <button class="ms-tab" onclick="filterMs('SCADA',this)">SCADA — Core Controls</button>
+  </div>
+
+  <div class="ms-summary">
+    <div class="ms-s"><div class="msl">Total milestones</div><div class="msv">49</div></div>
+    <div class="ms-s"><div class="msl">Milestones paid</div><div class="msv" style="color:var(--pos)">15</div></div>
+    <div class="ms-s"><div class="msl">Total paid to date</div><div class="msv">&pound;16.18m</div></div>
+    <div class="ms-s"><div class="msl">Retention currently held</div><div class="msv" style="color:var(--amber)">&pound;501,289</div></div>
+  </div>
+
+  <div class="ms-table">
+    <div class="mthdr"><span>Ref</span><span>Milestone</span><span>Value</span><span>Scheduled date</span><span>Due date</span><span>Retention</span><span>Status</span></div>
+    <!-- DNO/TNO -->
+    <div class="mtrow" data-ct="DNO"><span>NG-PM01</span><span>Fees</span><span class="amt">&pound;9,488</span><span class="blv">—</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM02</span><span>Initial acceptance fee</span><span class="amt">&pound;10,000</span><span class="blv">—</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM03</span><span>Commence surveys</span><span class="amt">&pound;20,000</span><span class="blv">—</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM04</span><span>132kV bay design</span><span class="amt">&pound;50,000</span><span class="blv">—</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM05</span><span>Procurement for material</span><span class="amt">&pound;524,000</span><span class="blv">Jan 2025</span><span class="blv">Jan 2025</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM06</span><span>Prior to commencing works</span><span class="amt">&pound;285,502</span><span class="blv">Mar 2026</span><span class="blv">Mar 2026</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM06-1</span><span>Harmonics study</span><span class="amt">&pound;15,080</span><span class="blv">Oct 2025</span><span class="blv">Oct 2025</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM06-2</span><span>Civils — bay construction</span><span class="amt">&pound;139,640</span><span class="blv">Oct 2025</span><span class="blv">Oct 2025</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="DNO"><span>NG-PM07</span><span>Final payment prior to energisation</span><span class="amt">&pound;117,079</span><span class="blv">Jun 2027</span><span class="blv">Jun 2027</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <!-- BoP -->
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM01</span><span>Contract execution</span><span class="amt">&pound;1,932,050</span><span class="blv">22 Aug 2025</span><span class="blv">17 Sep 2025</span><span class="ret-note">&pound;156,653</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM02</span><span>Detailed design commenced</span><span class="amt">&pound;966,025</span><span class="blv">5 Sep 2025</span><span class="blv">25 Sep 2025</span><span class="ret-note">&pound;78,326</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM03</span><span>Detailed design completed</span><span class="amt">&pound;966,025</span><span class="blv">16 Jul 2026</span><span class="blv">—</span><span class="ret-note">&pound;78,326</span><span class="pstat none">No submission</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM04</span><span>Procurement of transformer</span><span class="amt">&pound;966,025</span><span class="blv">5 Sep 2025</span><span class="blv">25 Sep 2025</span><span class="ret-note">&pound;78,326</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM05</span><span>Procurement of 132kV switchgear</span><span class="amt">&pound;966,025</span><span class="blv">14 Nov 2025</span><span class="blv">5 Jan 2026</span><span class="ret-note">&pound;78,326</span><span class="pstat sub">Submitted</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM06</span><span>Mobilise to site</span><span class="amt">&pound;2,318,460</span><span class="blv">23 Mar 2026</span><span class="blv">9 Apr 2026</span><span class="ret-note">&pound;187,983</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM07</span><span>Commencement of customer compound</span><span class="amt">&pound;772,820</span><span class="blv">8 Apr 2026</span><span class="blv">16 Jun 2026</span><span class="ret-note">&pound;62,661</span><span class="pstat sub">Submitted</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM08</span><span>Completion of customer compound</span><span class="amt">&pound;386,410</span><span class="blv">2 Jun 2026</span><span class="blv">—</span><span class="ret-note">&pound;31,331</span><span class="pstat none">No submission</span></div>
+    <div class="mtrow" data-ct="BoP"><span>HMV-PM09–25</span><span>Remaining BoP milestones (17 items)</span><span class="amt">&pound;13,057,359</span><span class="blv">Jun 2026 – Oct 2027</span><span class="blv">—</span><span class="ret-note">7.5%</span><span class="pstat none">No submission</span></div>
+    <!-- BESS -->
+    <div class="mtrow" data-ct="BESS"><span>ENV-PM01</span><span>NTP / contract signature (bonds in place)</span><span class="amt">&pound;7,569,000</span><span class="blv">22 Aug 2025</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="BESS"><span>ENV-PM02</span><span>Delivery of project-specific BESS design</span><span class="amt">&pound;1,261,500</span><span class="blv">20 Mar 2026</span><span class="blv">17 Apr 2026</span><span class="ret-note">nil</span><span class="pstat paid">Paid</span></div>
+    <div class="mtrow" data-ct="BESS"><span>ENV-PM03</span><span>Factory acceptance testing (FAT)</span><span class="amt">&pound;1,261,500</span><span class="blv">14 Sep 2026</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat none">No submission</span></div>
+    <div class="mtrow" data-ct="BESS"><span>ENV-PM04.1–04.3</span><span>Equipment deliveries to site (AC + DC batches)</span><span class="amt">&pound;10,092,000</span><span class="blv">Dec 2026</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat none">No submission</span></div>
+    <div class="mtrow" data-ct="BESS"><span>ENV-PM05–09</span><span>Commissioning, handover &amp; final acceptance</span><span class="amt">&pound;5,046,000</span><span class="blv">Sep – Dec 2027</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat none">No submission</span></div>
+    <!-- SCADA -->
+    <div class="mtrow" data-ct="SCADA"><span>SCADA</span><span>All milestones — schedule not yet populated</span><span class="amt">&pound;240,000</span><span class="blv">TBC</span><span class="blv">—</span><span class="ret-note">nil</span><span class="pstat none">Not commenced</span></div>
+  </div>
+
+  <div class="sh" style="margin-top:24px"><span class="sh-tick"></span><h2>Retention summary — BoP (H&amp;MV)</h2><div class="rule"></div></div>
+  <div class="ms-summary">
+    <div class="ms-s"><div class="msl">Total retention accrued</div><div class="msv">&pound;501,289</div></div>
+    <div class="ms-s"><div class="msl">Retention paid / released</div><div class="msv" style="color:var(--muted)">&pound;0</div></div>
+    <div class="ms-s"><div class="msl">CR01 — release at take-over (5%)</div><div class="msv" style="font-size:16px">&pound;1,065,288</div></div>
+    <div class="ms-s"><div class="msl">CR02 — release after defects period (2.5%)</div><div class="msv" style="font-size:16px">&pound;426,115</div></div>
+  </div>
+
+  <footer class="fn"><span>&#9432;</span><div><b>Concept only.</b> The milestone tracker in Power BI would highlight overdue submitted items in amber and unpaid items past due date in red. Dates and values are drawn directly from the contract tabs in the source workbook.</div></footer>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — PROGRAMME
+═══════════════════════════════════════════ -->
+<div id="p4" class="page">
+  <header class="ph">
+    <div>
+      <div class="eyebrow">Concept layout · page 4 of 4</div>
+      <h1>Programme</h1>
+      <div class="sub">Key milestones tracked against baseline. RAG reflects baseline vs this month (BL v TM). A tick indicates completion.</div>
+    </div>
+    <div class="ctag">Illustrative concept</div>
+  </header>
+
+  <div class="prog-legend">
+    <span class="pleg"><span class="psw r1"></span> On track (BL v TM)</span>
+    <span class="pleg"><span class="psw r2"></span> Delayed &lt; 1 month</span>
+    <span class="pleg"><span class="psw r3"></span> Delayed &gt; 1 month</span>
+    <span class="pleg"><span class="psw rc"></span> Complete</span>
+  </div>
+
+  <div class="prog-table">
+    <div class="pthdr"><span>Task</span><span>Baseline</span><span>Last month</span><span>This month</span><span>BL v TM</span><span>LM v TM</span><span>Done</span></div>
+    <!-- completed items -->
+    <div class="ptrow completed"><span>132/33kV Grid Transformer Ordered</span><span class="blv">5 Sep 2025</span><span class="blv">3 Sep 2025</span><span class="blv">3 Sep 2025</span><span><div class="rag rc">C</div></span><span><div class="rag r1">1</div></span><span class="comp-badge">&#10003;</span></div>
+    <div class="ptrow completed"><span>132kV Circuit Breaker Ordered</span><span class="blv">14 Nov 2025</span><span class="blv">12 Dec 2025</span><span class="blv">12 Dec 2025</span><span><div class="rag r3">3</div></span><span><div class="rag r1">1</div></span><span class="comp-badge">&#10003;</span></div>
+    <div class="ptrow completed"><span>132kV Cable Ordered</span><span class="blv">12 Jan 2026</span><span class="blv">20 Apr 2026</span><span class="blv">11 Jun 2026</span><span><div class="rag r3">3</div></span><span><div class="rag r3">3</div></span><span class="comp-badge">&#10003;</span></div>
+    <div class="ptrow completed"><span>33kV Switchboard Ordered</span><span class="blv">31 Oct 2025</span><span class="blv">19 Feb 2026</span><span class="blv">19 Feb 2026</span><span><div class="rag r3">3</div></span><span><div class="rag r1">1</div></span><span class="comp-badge">&#10003;</span></div>
+    <div class="ptrow completed"><span>Mobilisation</span><span class="blv">23 Mar 2026</span><span class="blv">23 Mar 2026</span><span class="blv">23 Mar 2026</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span class="comp-badge">&#10003;</span></div>
+    <div class="ptrow completed"><span>Enabling Works</span><span class="blv">13 May 2026</span><span class="blv">28 Apr 2026</span><span class="blv">28 Apr 2026</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span class="comp-badge">&#10003;</span></div>
+    <div class="ptrow completed"><span>BESS Design</span><span class="blv">20 Mar 2026</span><span class="blv">26 Mar 2026</span><span class="blv">26 Mar 2026</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span class="comp-badge">&#10003;</span></div>
+    <!-- in progress / future -->
+    <div class="ptrow"><span>Civil Works</span><span class="blv">15 Feb 2027</span><span class="blv">19 Feb 2027</span><span class="blv">2 Mar 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r2">2</div></span><span></span></div>
+    <div class="ptrow"><span>Electrical Works</span><span class="blv">20 Apr 2027</span><span class="blv">26 Apr 2027</span><span class="blv">26 Apr 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>General Works</span><span class="blv">20 Apr 2027</span><span class="blv">20 Apr 2027</span><span class="blv">29 Apr 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r2">2</div></span><span></span></div>
+    <div class="ptrow"><span>BESS Procurement &amp; Manufacturing</span><span class="blv">14 Sep 2026</span><span class="blv">14 Sep 2026</span><span class="blv">19 Aug 2026</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>BESS Transportation</span><span class="blv">14 Dec 2026</span><span class="blv">14 Dec 2026</span><span class="blv">17 Nov 2026</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>BESS Site Installation</span><span class="blv">13 Jan 2027</span><span class="blv">13 Jan 2027</span><span class="blv">6 Jan 2027</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>HV Cable Route</span><span class="blv">7 May 2027</span><span class="blv">14 Jul 2027</span><span class="blv">29 Apr 2027</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>33kV Cable Route</span><span class="blv">7 May 2027</span><span class="blv">16 Mar 2027</span><span class="blv">24 Feb 2027</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>Cold Commissioning</span><span class="blv">1 Jul 2027</span><span class="blv">28 Jul 2027</span><span class="blv">19 Jul 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>Energisation</span><span class="blv">12 Jul 2027</span><span class="blv">6 Aug 2027</span><span class="blv">28 Jul 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>BESS Commissioning &amp; Testing</span><span class="blv">6 Aug 2027</span><span class="blv">2 Sep 2027</span><span class="blv">24 Aug 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span>Post Energisation Commissioning (Hot)</span><span class="blv">3 Sep 2027</span><span class="blv">3 Sep 2027</span><span class="blv">21 Sep 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r2">2</div></span><span></span></div>
+    <div class="ptrow"><span>Demobilisation</span><span class="blv">17 Sep 2027</span><span class="blv">14 Oct 2027</span><span class="blv">5 Oct 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow" style="font-weight:600;background:#f8fafc"><span>COD (Commercial Operation Date)</span><span class="blv">15 Oct 2027</span><span class="blv">11 Nov 2027</span><span class="blv">2 Nov 2027</span><span><div class="rag r2">2</div></span><span><div class="rag r1">1</div></span><span></span></div>
+    <div class="ptrow"><span style="color:var(--muted)">NGED Calow Bay Programme Complete</span><span class="blv">30 Mar 2027</span><span class="blv">30 Mar 2027</span><span class="blv">30 Mar 2027</span><span><div class="rag r1">1</div></span><span><div class="rag r1">1</div></span><span></span></div>
+  </div>
+
+  <footer class="fn"><span>&#9432;</span><div><b>Concept only.</b> RAG scores are computed from the date deltas in the Programme tab (BL v TM: 1 = on track, 2 = delayed &lt;1 month, 3 = delayed &gt;1 month). In Power BI these become calculated columns. Completed items (tick) are greyed automatically. COD highlighted as the headline milestone.</div></footer>
 </div>
 
 <script>
-// I = Impact (1-5), F = Feasibility & Urgency (1-5). flag = one of the 6 shared with Michelle.
-const D=[
-// Platform & Data
-{n:"Data Governance Framework & Unity Catalog Activation",p:"Platform & Data",i:4,f:4,note:"Foundational; framework built, activation on existing MasdarMind stack."},
-{n:"Data Engineering Function & ETL Orchestration",p:"Platform & Data",i:4,f:3,note:"Senior DE hire landed; orchestration build 1-3 months."},
-{n:"API Connectivity & Data Governance",p:"Platform & Data",i:4,f:3,note:"Platform enabler for multiple downstream use cases."},
-{n:"Databricks Apps Enablement (UAE DC Unblock)",p:"Platform & Data",i:4,f:2,note:"Binary gate on HQ/UAE data centre; blocks several app use cases."},
-{n:"MasdarMind Internal App Portal",p:"Platform & Data",i:3,f:2,note:"Depends on Databricks Apps unblock."},
-{n:"Power BI CoE / BI Governance Standard",p:"Platform & Data",i:3,f:4,note:"Governance framework drafted; rollout is process work."},
-{n:"Baltic Eagle SCADA Data Linkage (Gen & Availability)",p:"Platform & Data",i:4,f:3,note:"Identified quick-win path; JV data dependency managed."},
-{n:"SCADA Data Access — Baltic Eagle Quick Win",p:"Platform & Data",i:4,f:3,note:"Remote access architecture agreed with cyber (bastion, PAM)."},
-// O&M / Assets
-{n:"BESS Anomaly Detection & Alerting",p:"O&M & Assets",i:4,f:5,note:"In production, built internally on MasdarMind. Flagship.",flag:1},
-{n:"BESS Operational Intelligence Platform",p:"O&M & Assets",i:4,f:3,note:"Extends anomaly detection; Accure cell-level analytics feed."},
-{n:"Predictive Maintenance (Component Degradation/Failure)",p:"O&M & Assets",i:5,f:2,note:"High value pool; JV SCADA access is the constraint."},
-{n:"Asset Performance Benchmarking Tool",p:"O&M & Assets",i:4,f:2,note:"Cross-asset data availability limited by JV stakes."},
-{n:"Deep Learning Surrogates for O&M Simulations",p:"O&M & Assets",i:4,f:1,note:"Experimental; potential Edinburgh/EPCC research angle."},
-{n:"Generative O&M Scheduling (Weather & Vessel Dispatch)",p:"O&M & Assets",i:4,f:2,note:"Operator-side dependency; no direct control on JV assets."},
-{n:"Autonomous Robots / Drone Inspections & Repairs",p:"O&M & Assets",i:4,f:1,note:"Operator domain; monitor market."},
-{n:"AI Maintenance Assistant (In-Person Diagnostics)",p:"O&M & Assets",i:3,f:2,note:"Field capability not yet in UK scope."},
-{n:"O&M Strategy Modelling Tool",p:"O&M & Assets",i:4,f:2,note:"Significant build; ties to HiGHS/optimisation overlap with Tim."},
-{n:"Field Force Routing & Scheduling for O&M",p:"O&M & Assets",i:3,f:2,note:"Operator-side; not near-term."},
-{n:"Marine Logistics & Vessel Management Optimisation",p:"O&M & Assets",i:4,f:1,note:"OFSW-specific gap; heavy data and partner dependency."},
-{n:"Dynamic Curtailment & Grid Constraint Management",p:"O&M & Assets",i:4,f:2,note:"Grid data and trading interface needed."},
-// Commercial & Trading
-{n:"BESS Commercial Optimisation / Trading",p:"Commercial & Trading",i:5,f:2,note:"Under RfP; limited scope at this stage. Flagship.",flag:1},
-{n:"Battery Dispatch Optimisation (T7)",p:"Commercial & Trading",i:5,f:2,note:"Arenko dispatch partnership context; internal build blocked near-term."},
-{n:"Generation Forecasting (T1)",p:"Commercial & Trading",i:4,f:3,note:"Data partially in MasdarMind; proven approaches exist."},
-{n:"Short-Term Price Outlook (T2)",p:"Commercial & Trading",i:4,f:2,note:"Market data procurement needed."},
-{n:"Bid Shaping Engine (T4)",p:"Commercial & Trading",i:4,f:2,note:"Depends on T1/T2 maturity."},
-{n:"Algorithmic Day-Ahead Bidding (T5)",p:"Commercial & Trading",i:5,f:1,note:"Major programme; regulatory and risk controls required."},
-{n:"Intraday Rebalancing (T6)",p:"Commercial & Trading",i:4,f:1,note:"Downstream of T5."},
-{n:"Curtailment Risk Optimisation (T8)",p:"Commercial & Trading",i:4,f:2,note:"Grid constraint data dependency."},
-{n:"Market Intelligence & Portfolio Strategy",p:"Commercial & Trading",i:3,f:3,note:"Pharos-type vendor option; scoping."},
-{n:"Market Intelligence Aggregation",p:"Commercial & Trading",i:2,f:4,note:"Lightweight aggregation feasible with existing tools."},
-// Development & M&A
-{n:"Asset Origination & Evaluation (BESS Site Acquisitions)",p:"Development & M&A",i:4,f:3,note:"dvlp.energy signed/near-signed for DE/IT screening. Flagship.",flag:1},
-{n:"Greenfield Site Screening & Grid Connection Analysis",p:"Development & M&A",i:4,f:3,note:"Covered by dvlp.energy scope."},
-{n:"M&A / Transaction Asset Assessment",p:"Development & M&A",i:4,f:3,note:"Extends screening stack to M&A due diligence."},
-{n:"Automated Site Risk Assessment for M&A",p:"Development & M&A",i:3,f:3,note:"Component of DD automation; scoping."},
-{n:"AI-Driven Site Suitability & Turbine Layout",p:"Development & M&A",i:4,f:2,note:"OFSW-specific; specialist tooling procurement."},
-{n:"Supply Base Expansion & Screening",p:"Development & M&A",i:3,f:3,note:"Part of BESS origination scope with vendors."},
-{n:"Autonomous Water Environment Screening (eDNA)",p:"Development & M&A",i:2,f:1,note:"Experimental; environmental niche."},
-{n:"Document Scoring & Assessment (Bidding / DD)",p:"Development & M&A",i:3,f:3,note:"Scoping; overlaps data room management."},
-{n:"Intelligent Data Room Management",p:"Development & M&A",i:3,f:3,note:"Vendor scan needed."},
-{n:"Automated Permitting Drafting & Bid Proposal Generation",p:"Development & M&A",i:4,f:2,note:"High leverage but consenting-grade quality bar."},
-// Construction & EPC
-{n:"ALICE — AI Construction Scheduling (DBS)",p:"Construction & EPC",i:5,f:4,note:"Contract signed, implementation in progress on Dogger Bank South. Flagship.",flag:1},
-{n:"ALICE — UK BESS Extension",p:"Construction & EPC",i:4,f:3,note:"In commercial negotiations; MSA terms under review."},
-{n:"Dynamic AI-Driven Schedule Optimisation",p:"Construction & EPC",i:4,f:3,note:"Delivered through ALICE optioneering."},
-{n:"Claims Management & Contract Variations",p:"Construction & EPC",i:4,f:3,note:"Scoping with vendors, OFW first. Flagship.",flag:1},
-{n:"Value Capture Cockpit (Milestone Tracking)",p:"Construction & EPC",i:3,f:3,note:"Requires structured milestone data feed."},
-{n:"Construction Scheduling Unified View",p:"Construction & EPC",i:3,f:3,note:"Aggregation layer over P6/ALICE outputs."},
-{n:"Centralised Project Management Dashboard",p:"Construction & EPC",i:3,f:4,note:"Power BI on existing project data."},
-{n:"Meeting Action Tracker & RFI Log (BESS Construction)",p:"Construction & EPC",i:2,f:4,note:"Lists + Power Automate build."},
-{n:"Automated Monthly Report Generation",p:"Construction & EPC",i:3,f:4,note:"Templated generation from existing reporting data."},
-{n:"Document Mgmt & Contractor Interface (Aconex)",p:"Construction & EPC",i:3,f:3,note:"Aconex API scoping."},
-{n:"Aconex Metadata Completion Check",p:"Construction & EPC",i:2,f:4,note:"Rule-based check; quick automation."},
-{n:"Partner Document Intake Portal & Aconex Integration",p:"Construction & EPC",i:3,f:2,note:"Integration build plus partner onboarding."},
-{n:"Iterative Design & Cost Estimation",p:"Construction & EPC",i:3,f:2,note:"Engineering tool procurement needed."},
-{n:"RAG AI Assistant for Project Documents",p:"Construction & EPC",i:4,f:3,note:"MasdarMind + vector search; strong interview demand."},
-{n:"Technical Document Q&A Agent (Contracts & Specs)",p:"Construction & EPC",i:4,f:3,note:"Same stack as project RAG assistant."},
-// Legal & Procurement
-{n:"AI-Enabled T&C Negotiations & Contract Lifecycle Mgmt",p:"Legal & Procurement",i:4,f:2,note:"CLM platform procurement; HQ alignment needed."},
-{n:"Automated Contract Approvals (DOA → CRS → DocuSign)",p:"Legal & Procurement",i:3,f:4,note:"Power Automate build on existing flow (KYC precedent)."},
-{n:"CRS Auto-Population (DOA & Azure AD)",p:"Legal & Procurement",i:2,f:4,note:"Low-code, clear logic."},
-{n:"Centralised Contract Repository (Version Control)",p:"Legal & Procurement",i:3,f:3,note:"SharePoint restructure plus adoption."},
-{n:"NDA Template Automation (Locked Fields)",p:"Legal & Procurement",i:2,f:5,note:"Configuration only; immediate."},
-{n:"Centralised Template Repository",p:"Legal & Procurement",i:2,f:4,note:"Governance and housekeeping."},
-{n:"Automated Tender Drafting & Review",p:"Legal & Procurement",i:3,f:3,note:"Copilot-assisted drafting; QA bar high."},
-{n:"AI-Powered Spend Analytics",p:"Legal & Procurement",i:3,f:4,note:"TIPALTI/Xero data landing in MasdarMind."},
-{n:"Procurement Committee Workflow Digitalisation",p:"Legal & Procurement",i:3,f:3,note:"Process redesign plus tooling."},
-{n:"Procurement Process Agent",p:"Legal & Procurement",i:3,f:3,note:"Agent build once workflow digitised."},
-{n:"AI-Assisted Approval Slide Deck Generation (SSIC/IC)",p:"Legal & Procurement",i:3,f:4,note:"Cowork/Copilot templated generation."},
-{n:"Internal Document Q&A (Project Finance / Legal)",p:"Legal & Procurement",i:3,f:3,note:"Confidentiality controls define pace."},
-{n:"Document Comparison Automation",p:"Legal & Procurement",i:3,f:5,note:"Existing tool capability; configuration."},
-// Finance
-{n:"Xero API → Databricks Financial Pipeline (All Entities)",p:"Finance",i:3,f:4,note:"Pipeline pattern established; extend entity coverage."},
-{n:"TIPALTI PO Data Integration (BESS Delivery)",p:"Finance",i:3,f:4,note:"API integration into Bronze layer."},
-{n:"JV Partner Financial Data Normalisation",p:"Finance",i:3,f:2,note:"Partner formats heterogeneous; manual dependency."},
-{n:"Automated Budget vs Actuals (Power BI, OFW Extension)",p:"Finance",i:3,f:4,note:"Extends existing dashboard pattern."},
-{n:"Automated Finance Reporting & Variance Analysis",p:"Finance",i:3,f:4,note:"On top of Xero pipeline."},
-{n:"Automated Monthly Reporting Pipeline",p:"Finance",i:3,f:4,note:"Consolidation of existing feeds."},
-{n:"OPEX Consolidation Dashboard",p:"Finance",i:3,f:4,note:"Power BI on landed data."},
-{n:"Cash Request Digitisation & Approval Workflow",p:"Finance",i:2,f:4,note:"Forms + Power Automate."},
-{n:"HQ Group Finance Submission Standardisation",p:"Finance",i:3,f:3,note:"HQ template alignment required."},
-{n:"Automated ESG Reporting & Asset Regulation",p:"Finance",i:3,f:3,note:"Data sourcing across JV assets."},
-{n:"Digital Emissions Tracking & Optimisation",p:"Finance",i:2,f:3,note:"Monitor; group-level tooling likely."},
-// People & Culture
-{n:"AI Agent HR Policy Assistant (Nura)",p:"People & Culture",i:2,f:5,note:"Live in Copilot Studio."},
-{n:"Digital & AI Internal Policy Assistant",p:"People & Culture",i:2,f:5,note:"Same pattern as Nura."},
-{n:"AI-Powered CV Screening & Interview Automation",p:"People & Culture",i:2,f:4,note:"SmartRecruiters capability; bias controls needed."},
-{n:"SmartRecruiters Full Configuration",p:"People & Culture",i:3,f:4,note:"Licenced, not yet configured."},
-{n:"Onboarding Automation",p:"People & Culture",i:3,f:4,note:"Power Automate checklist flows."},
-{n:"Core HRIS Centralization",p:"People & Culture",i:3,f:2,note:"Platform decision with HQ."},
-{n:"Automated HR Analytics & Reporting",p:"People & Culture",i:3,f:4,note:"Training needs dashboard pattern exists."},
-{n:"Proactive Profile Identification (AI Searches)",p:"People & Culture",i:2,f:4,note:"Sourcing augmentation."},
-{n:"Agile Engagement Surveys",p:"People & Culture",i:2,f:4,note:"Forms based; low effort."},
-{n:"Dynamic Internal Newsletter",p:"People & Culture",i:1,f:4,note:"Nice-to-have."},
-{n:"P&C Power BI Dashboard",p:"People & Culture",i:3,f:5,note:"Delivered (training needs analysis)."},
-// HSSE, Audit & Risk
-{n:"HSSE Digital Audit & Reporting (SafetyCulture)",p:"HSSE, Audit & Risk",i:3,f:4,note:"Tool in use; reporting extension."},
-{n:"Automated Workplace Safety Analysis (Predictive)",p:"HSSE, Audit & Risk",i:3,f:2,note:"Incident data volume insufficient today."},
-{n:"Root Cause Analysis for H&S Risk",p:"HSSE, Audit & Risk",i:3,f:3,note:"Method plus data structuring."},
-{n:"HSE Knowledge Chatbot (SharePoint Procedures)",p:"HSSE, Audit & Risk",i:2,f:4,note:"Copilot Studio pattern, Nura precedent."},
-{n:"AI-Assisted HSE Awareness Content",p:"HSSE, Audit & Risk",i:2,f:4,note:"Low effort content generation."},
-{n:"Environmental AI Applications",p:"HSSE, Audit & Risk",i:2,f:2,note:"Exploratory follow-up from May."},
-{n:"Audit Intelligence Dashboard",p:"HSSE, Audit & Risk",i:3,f:5,note:"Delivered with Internal Audit (TeamMate exports)."},
-{n:"Proactive Internal Audit Self-Assessment Framework",p:"HSSE, Audit & Risk",i:3,f:3,note:"Framework design phase."},
-{n:"Cyber Security Risk Register & Governance",p:"HSSE, Audit & Risk",i:3,f:4,note:"Register built with HQ cyber (Romesh)."},
-{n:"Regulatory Monitoring & Market Shaping Support",p:"HSSE, Audit & Risk",i:2,f:3,note:"Structured watch; vendor or Copilot based."},
-{n:"Regulatory Watch",p:"HSSE, Audit & Risk",i:2,f:4,note:"Lightweight automated monitoring."},
-// Corporate & Exec
-{n:"AI-Enabled Director's Office",p:"Corporate & Exec",i:3,f:5,note:"POCs launched on Cowork: talking points, stakeholder prioritisation, travel packs. Flagship.",flag:1},
-{n:"CEO / Chairman Talking Points Assistant",p:"Corporate & Exec",i:3,f:5,note:"Component of Director's office POC."},
-{n:"CEO Meetings Lightweight CRM",p:"Corporate & Exec",i:2,f:4,note:"Lists based; low effort."},
-{n:"KPI Tracking Dashboard (Husain)",p:"Corporate & Exec",i:3,f:4,note:"Power BI pattern established."},
-{n:"Monthly SteerCo Live Dashboards",p:"Corporate & Exec",i:3,f:4,note:"Extends existing roadmap dashboard."},
-{n:"Centralised Document Repository",p:"Corporate & Exec",i:3,f:3,note:"Information architecture plus adoption."}
-];
-
-// Quadrant assignment — clean 2.5 split on each axis (scores are integers, so >=3 vs <=2)
-function quad(d){
-  const hiI=d.i>=3, hiF=d.f>=3;
-  if(hiI && hiF) return "A";   // top-right: high impact, high feasibility
-  if(!hiI && hiF) return "B";  // bottom-right: quick win
-  if(hiI && !hiF) return "D";  // top-left: next horizon
-  return "C";                  // bottom-left: deferred
-}
-const QC={A:"#3FB6E8",B:"#4FC98F",D:"#E8A64B",C:"#7E93A8"};
-const QN={A:"Strategic Priority",B:"Quick Win",D:"Next Horizon",C:"Deferred / Monitor"};
-D.forEach((d,ix)=>{d.q=quad(d); d.total=d.i+d.f; d.id=ix;});
-
-// ---- Layout constants
-const W=760,H=640,mL=60,mR=20,mT=30,mB=70;
-const pw=W-mL-mR, ph=H-mT-mB;
-const fx=v=>mL+(v-0.5)/4.5*pw;      // feasibility 0.5..5 → x
-const fy=v=>mT+ph-(v-0.5)/4.5*ph;   // impact → y (inverted)
-
-// jitter overlapping points deterministically in a small ring
-const groups={};
-D.forEach(d=>{const k=d.i+"_"+d.f;(groups[k]=groups[k]||[]).push(d);});
-Object.values(groups).forEach(g=>{
-  if(g.length===1){g[0].x=fx(g[0].f); g[0].y=fy(g[0].i); return;}
-  const R=Math.min(26,8+g.length*2.2);
-  g.forEach((d,i)=>{
-    const a=(i/g.length)*2*Math.PI - Math.PI/2;
-    const r=g.length>6?R*(0.55+0.45*((i%2))):R*0.8;
-    d.x=fx(d.f)+r*Math.cos(a); d.y=fy(d.i)+r*Math.sin(a);
-  });
-});
-
-// ---- Build SVG
-const svg=document.getElementById("chart");
-const NS="http://www.w3.org/2000/svg";
-function el(t,attrs,parent){const e=document.createElementNS(NS,t);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e;}
-
-// quadrant background shading — split at 2.5 on each axis
-const midX=fx(2.5), midY=fy(2.5);
-el("rect",{x:midX,y:mT,width:mL+pw-midX,height:midY-mT,fill:"#123049",opacity:.55,rx:6});   // top-right A
-el("rect",{x:midX,y:midY,width:mL+pw-midX,height:mT+ph-midY,fill:"#12352A",opacity:.45,rx:6}); // bottom-right B
-el("rect",{x:mL,y:mT,width:midX-mL,height:midY-mT,fill:"#33270F",opacity:.45,rx:6});        // top-left D
-el("rect",{x:mL,y:midY,width:midX-mL,height:mT+ph-midY,fill:"#1A2532",opacity:.5,rx:6});    // bottom-left C
-
-// gridlines + axis ticks
-for(let v=1;v<=5;v++){
-  el("line",{x1:fx(v),y1:mT,x2:fx(v),y2:mT+ph,stroke:"#22384E","stroke-width":.6,"stroke-dasharray":"3 4"});
-  el("line",{x1:mL,y1:fy(v),x2:mL+pw,y2:fy(v),stroke:"#22384E","stroke-width":.6,"stroke-dasharray":"3 4"});
-  const tx=el("text",{x:fx(v),y:mT+ph+20,"text-anchor":"middle",class:"axis"});tx.textContent=v;
-  const ty=el("text",{x:mL-14,y:fy(v)+4,"text-anchor":"end",class:"axis"});ty.textContent=v;
-}
-// quadrant labels
-function qlab(x,y,t,s,anchor){
-  const a=el("text",{x:x,y:y,class:"qlabel","text-anchor":anchor});a.textContent=t;
-  const b=el("text",{x:x,y:y+14,class:"qsub","text-anchor":anchor});b.textContent=s;
-}
-qlab(mL+pw-8,mT+20,"A — STRATEGIC PRIORITY","High impact · deliverable now","end");
-qlab(mL+pw-8,mT+ph-24,"B — QUICK WIN","Fast, visible, existing tools","end");
-qlab(mL+8,mT+20,"D — NEXT HORIZON","High upside · blocked near-term","start");
-qlab(mL+8,mT+ph-24,"C — DEFERRED / MONITOR","Low priority today","start");
-// axis names
-const ax=el("text",{x:mL+pw/2,y:H-16,"text-anchor":"middle",class:"axname"});ax.textContent="FEASIBILITY & URGENCY →";
-const ay=el("text",{x:18,y:mT+ph/2,"text-anchor":"middle",class:"axname",transform:`rotate(-90 18 ${mT+ph/2})`});ay.textContent="IMPACT →";
-
-// dots
-const dotEls={};
-let selected=null;
-D.forEach(d=>{
-  if(d.flag) el("circle",{cx:d.x,cy:d.y,r:11,class:"flag-ring","data-ring":d.id});
-  const c=el("circle",{cx:d.x,cy:d.y,r:d.flag?7:5.5,fill:QC[d.q],class:"dot","data-id":d.id,opacity:.92});
-  c.addEventListener("mouseenter",()=>showDetail(d));
-  c.addEventListener("click",()=>{selected=(selected===d.id)?null:d.id; render(); showDetail(d);});
-  dotEls[d.id]=c;
-});
-
-// ---- Detail card
-function showDetail(d){
-  document.getElementById("detail").innerHTML=
-    `<h3>Use case detail</h3>
-     <div class="name">${d.n}${d.flag?'<span class="fstar">&#9733; flagship</span>':''}</div>
-     <div class="meta">
-       <span class="badge" style="background:${QC[d.q]};color:#06202F">${d.q} · ${QN[d.q]}</span>
-       <span class="badge" style="background:var(--panel2);color:var(--muted);border:1px solid var(--line)">${d.p}</span>
-     </div>
-     <div class="scores">
-       <div class="sc"><b>${d.i}</b><span>Impact</span></div>
-       <div class="sc"><b>${d.f}</b><span>Feasibility</span></div>
-       <div class="sc"><b>${d.total}</b><span>Total / 10</span></div>
-     </div>
-     <div class="note">${d.note}</div>`;
+// Page navigation
+function nav(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
 }
 
-// ---- Filters
-const pillars=[...new Set(D.map(d=>d.p))];
-const chipBox=document.getElementById("pillarChips");
-let activePillars=new Set();
-pillars.forEach(p=>{
-  const c=document.createElement("div"); c.className="chip"; c.textContent=p;
-  c.onclick=()=>{c.classList.toggle("on"); c.classList.contains("on")?activePillars.add(p):activePillars.delete(p); render();};
-  chipBox.appendChild(c);
-});
-const searchEl=document.getElementById("search");
-const flagEl=document.getElementById("flagOnly");
-searchEl.addEventListener("input",render);
-flagEl.addEventListener("change",render);
-
-function visible(d){
-  if(flagEl.checked && !d.flag) return false;
-  if(activePillars.size && !activePillars.has(d.p)) return false;
-  const q=searchEl.value.trim().toLowerCase();
-  if(q && !d.n.toLowerCase().includes(q)) return false;
-  return true;
+// Contract drill-through (page 1)
+function toggle(id, btn){
+  var el=document.getElementById(id);
+  var open=el.classList.toggle('open');
+  btn.firstChild.textContent=open?'Close ':'Drill through ';
 }
 
-// ---- Table
-let sortK="total", sortDir=-1;
-document.querySelectorAll("th").forEach(th=>{
-  th.onclick=()=>{const k=th.dataset.k; if(sortK===k)sortDir*=-1; else{sortK=k;sortDir=(k==="name"||k==="pillar"||k==="q")?1:-1;} render();};
-});
-function render(){
-  // dots
-  D.forEach(d=>{
-    const v=visible(d);
-    dotEls[d.id].classList.toggle("dim",!v);
-    dotEls[d.id].classList.toggle("sel",selected===d.id);
-    const ring=svg.querySelector(`[data-ring="${d.id}"]`);
-    if(ring) ring.style.opacity=v?.85:.08;
-  });
-  // counts
-  const vis=D.filter(visible);
-  const cnt={A:0,B:0,C:0,D:0}; vis.forEach(d=>cnt[d.q]++);
-  document.getElementById("counts").innerHTML=
-    ["A","B","D","C"].map(q=>`<div class="count"><span class="dotk" style="background:${QC[q]}"></span>${q} ${QN[q]}: <b style="color:var(--text)">&nbsp;${cnt[q]}</b></div>`).join("")+
-    `<div class="count" style="margin-left:auto">Showing <b style="color:var(--text)">&nbsp;${vis.length}</b>&nbsp;of ${D.length}</div>`;
-  // table
-  const rows=[...vis].sort((a,b)=>{
-    const va=a[sortK], vb=b[sortK];
-    return (typeof va==="string"? va.localeCompare(vb) : va-vb)*sortDir;
-  });
-  document.querySelector("#tbl tbody").innerHTML=rows.map(d=>
-    `<tr data-id="${d.id}">
-      <td>${d.n}${d.flag?'<span class="fstar">&#9733;</span>':''}</td>
-      <td>${d.p}</td><td>${d.i}</td><td>${d.f}</td><td><b style="color:var(--text)">${d.total}</b></td>
-      <td><span class="qtag" style="background:${QC[d.q]}">${d.q}</span></td>
-    </tr>`).join("");
-  document.querySelectorAll("#tbl tbody tr").forEach(tr=>{
-    tr.onclick=()=>{const d=D[+tr.dataset.id]; selected=d.id; render(); showDetail(d); window.scrollTo({top:0,behavior:"smooth"});};
+// Variation filters (page 2)
+var curCt='all', curSt='all';
+function filterVar(ct, btn){
+  curCt=ct; curSt='all';
+  document.querySelectorAll('.vfbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyVarFilter();
+}
+function filterStatus(st, btn){
+  curSt=(curSt===st?'all':st); curCt='all';
+  document.querySelectorAll('.vfbtn').forEach(b=>b.classList.remove('active'));
+  if(curSt!=='all') btn.classList.add('active');
+  else document.querySelector('.vfbtn').classList.add('active');
+  applyVarFilter();
+}
+function applyVarFilter(){
+  document.querySelectorAll('.vtrow').forEach(r=>{
+    var matchCt=(curCt==='all'||r.dataset.ct===curCt);
+    var matchSt=(curSt==='all'||r.dataset.status===curSt);
+    r.classList.toggle('hidden',!(matchCt&&matchSt));
   });
 }
-render();
+
+// Milestone filters (page 3)
+function filterMs(ct, btn){
+  document.querySelectorAll('.ms-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.mtrow').forEach(r=>{
+    r.classList.toggle('hidden',ct!=='all'&&r.dataset.ct!==ct);
+  });
+}
 </script>
 </body>
 </html>
